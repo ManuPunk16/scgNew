@@ -1,0 +1,110 @@
+<!-- Button trigger modal -->
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Insertar Registro Nuevo</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <!-- Inicio de Formulario -->
+      <form [formGroup]="formDocs" (ngSubmit)="registrarDatos()" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">            
+            <div class="row g-3">
+              <div class="col-md-2">
+                <label for="" class="form-label">Num. Oficio</label>
+                <input type="email" class="form-control" formControlName="num_oficio" id="">
+              </div>
+              <div class="col-md-4">
+                  <label for="" class="form-label">Instrumento Jurídico</label>
+                  <select id="" class="form-select" formControlName="ins_juridico">
+                    <option [ngValue]="null" selected disabled>Seleccionar Instrumento</option>
+                    <option *ngFor="let ins of instrumento" [ngValue]="ins.name">
+                      {{ins.name}}
+                    </option>
+                  </select>
+              </div>
+              <div class="col-6">
+                <label for="" class="form-label">Fecha Recepción</label>
+                <input type="date" class="form-control" formControlName="fecha_recepcion" id="">
+              </div>
+              <div class="col-6">
+                <label for="" class="form-label">Remitido</label>
+                <input type="text" class="form-control" id="" formControlName="remitido">
+              </div>
+              <div class="col-6">
+                  <label for="" class="form-label">Origen</label>
+                  <input type="text" class="form-control" id="" formControlName="origen">
+                </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Asunto</label>
+                <input type="text" class="form-control" id="" formControlName="asunto">
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Estatus</label>
+                <select id="" class="form-select" formControlName="estatus">
+                  <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
+                  <option *ngFor="let est of estatus" [ngValue]="est.name">
+                    {{est.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                  <label for="" class="form-label">Observación</label>
+                  <textarea class="form-control" id="" rows="3" formControlName="observacion"></textarea>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-success">Aceptar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+<br>
+
+<!-- Tabla Gestion -->
+<table class="table table-striped table-hover">
+    <thead class="table-light">
+        <tr>
+            <th scope="col"># Oficio</th>
+            <th scope="col">Instrumento Juridico</th>
+            <th scope="col">Fecha Recepción</th>
+            <th scope="col">Remitido</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Director</th>
+            <th scope="col">Asunto</th>
+            <th scope="col">Estatus</th>
+            <th scope="col">Observación</th>
+            <th scope="col">Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- *ngIf="!!contenido.num_oficio" -->
+        <tr *ngFor="let contenido of tablec">
+            <th scope="row">{{contenido.num_oficio}}</th>
+            <td>{{contenido.ins_juridico}}</td>
+            <td>{{contenido.fecha_recepcion}}</td>
+            <td>{{contenido.remitido}}</td>
+            <td>{{contenido.origen}}</td>
+            <td>{{contenido.direccion}}</td>
+            <td>{{contenido.director}}</td>
+            <td>{{contenido.asunto}}</td>
+            <td>{{contenido.estatus}}</td>
+            <td>{{contenido.observacion}}</td>
+            <td>
+                <div class="d-grid gap-2 d-md-flex">
+                    <button class="btn btn-warning" type="button">Editar</button>
+                    <button class="btn btn-danger" type="button">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
