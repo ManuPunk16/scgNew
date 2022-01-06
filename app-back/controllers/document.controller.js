@@ -406,7 +406,7 @@ exports.search = (req, res) => {
                 message: 'Error en la peticion'
             });
         }
-        if (!document || document.lenght <= 0) {
+        if (!document || document.length <= 0) {
             return res.status(404).send({
                 status: 'error',
                 message: 'No hay documentos relacionados con tu busqueda!'
