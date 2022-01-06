@@ -11,7 +11,9 @@ const documentSchema = new Schema({
     director : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
     asunto : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
     estatus : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
-    observacion : { type : String, required : false }
+    observacion : { type : String, required : false },
+    pdf_entrada : { type: String, required : false },
+    pdf_salida : { type: String, required : false }
 });
 
 //moment javascript
