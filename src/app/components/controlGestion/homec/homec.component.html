@@ -7,7 +7,7 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <!-- Inicio de Formulario -->
-      <form [formGroup]="formDocs" (ngSubmit)="registrarDatos()" >
+      <form [formGroup]="formDocs">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro</h5>
@@ -108,3 +108,10 @@
         </tr>
     </tbody>
 </table>
+
+<div>
+  hola
+  <div *ngFor="let cont of documents">
+    <h3>{{cont.num_oficio}}</h3>
+  </div>
+</div>

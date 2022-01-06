@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CrudService } from 'src/app/service/crud.service';
+import { DocumentService } from 'src/app/service/document.service';
+import { Document } from 'src/app/models/document';
 
 @Component({
   selector: 'app-homec',
   templateUrl: './homec.component.html',
-  styleUrls: ['./homec.component.css']
+  styleUrls: ['./homec.component.css'],
+  providers: [DocumentService]
 })
 export class HomecComponent implements OnInit {
 
@@ -13,11 +15,12 @@ export class HomecComponent implements OnInit {
   public tablec: Array<any>;
   public instrumento: Array<any>;
   public estatus: Array<any>;
-  formDocs:FormGroup; 
+  formDocs:FormGroup;
+  documents: Document[] = [];
 
   constructor(
     public formulario:FormBuilder,
-    private crudService:CrudService
+    private _documentService: DocumentService
     ) {
 
     this.title = "Gestor";
@@ -111,12 +114,33 @@ export class HomecComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getDocs();
   }
 
-  registrarDatos():any{
-    console.log("Probando registro...");
-    console.log(this.formDocs.value);
-    this.crudService.AgregarDocumento(this.formDocs.value).subscribe();
-  }
+  getDocs(){
+    // console.log(this._documentService.pruebas());
+    this._documentService.getDocuments().subscribe(
+      // response => {
+      //   console.log(response);
+      //   if (response) {
+      //     this.documents = response;
+      //   }else{
 
+      //   }
+      //   console.log(this.documents);
+      // },
+      // error => {
+      //   console.log(error);
+      // }
+      res => {
+        this.documents = res.document;
+        // console.log(res);
+        let documents = res;
+        let array = [];
+        array.push(documents);
+        console.log(array);
+      },
+      err => console.log(err)
+    );
+  }
 }

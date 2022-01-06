@@ -10,6 +10,7 @@ const exit_upload = multiparty({ uploadDir: './upload/documents/exit' });
 router.post('/datos-documentos', documentController.documents);
 router.get('/prueba-controlador', documentController.test);
 router.post('/save', documentController.save);
+router.get('/documents', documentController.getDocuments);
 router.get('/documents/:last?', documentController.getDocuments);
 router.get('/document/:id', documentController.getDocument);
 router.put('/document/:id', documentController.update);
