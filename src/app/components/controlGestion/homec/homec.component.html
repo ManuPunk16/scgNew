@@ -12,7 +12,7 @@
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <!-- Inicio de Formulario -->
-      <form [formGroup]="formDocs" (ngSubmit)="onSubmit()">
+      <form #docsForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro</h5>
@@ -20,13 +20,17 @@
           </div>
           <div class="modal-body">            
             <div class="row g-3">
-              <div class="col-md-2">
-                <label for="num_oficio" class="form-label">Num. Oficio</label>
-                <input type="text" name="num_oficio" class="form-control" formControlName="num_oficio" id="num_oficio">
+              <div class="col-md-3">
+                <label for="num_folio" class="form-label">Num. Folio</label>
+                <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="doc.num_folio" class="form-control" id="num_folio">
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
+                <label for="num_oficio" class="form-label">Num. Oficio</label>
+                <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="doc.num_oficio" class="form-control" id="num_oficio">
+              </div>
+              <div class="col-md-6">
                   <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
-                  <select id="ins_juridico" class="form-select" formControlName="ins_juridico">
+                  <select id="ins_juridico" class="form-select">
                     <option [ngValue]="null" selected disabled>Seleccionar Instrumento</option>
                     <option *ngFor="let ins of instrumento" [ngValue]="ins.name">
                       {{ins.name}}
@@ -35,31 +39,27 @@
               </div>
               <div class="col-6">
                 <label for="" class="form-label">Fecha Recepción</label>
-                <input type="date" class="form-control" formControlName="fecha_recepcion" id="">
+                <input type="date" class="form-control" id="">
               </div>
               <div class="col-6">
                 <label for="" class="form-label">Remitido</label>
-                <input type="text" class="form-control" id="" formControlName="remitido">
+                <input type="text" class="form-control" id="">
               </div>
               <div class="col-6">
                   <label for="" class="form-label">Origen</label>
-                  <input type="text" class="form-control" id="" formControlName="origen">
+                  <input type="text" class="form-control" id="">
               </div>
               <div class="col-6">
-                <label for="" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="" formControlName="origen">
-              </div>
-              <div class="col-6">
-                <label for="" class="form-label">Director</label>
-                <input type="text" class="form-control" id="" formControlName="origen">
+                <label for="" class="form-label">Asignado</label>
+                <input type="text" class="form-control" id="">
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Asunto</label>
-                <input type="text" class="form-control" id="" formControlName="asunto">
+                <input type="text" class="form-control" id="">
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Estatus</label>
-                <select id="" class="form-select" formControlName="estatus">
+                <select id="" class="form-select">
                   <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
                   <option *ngFor="let est of estatus" [ngValue]="est.name">
                     {{est.name}}
@@ -68,15 +68,15 @@
               </div>
               <div class="mb-3">
                   <label for="" class="form-label">Observación</label>
-                  <textarea class="form-control" id="" rows="3" formControlName="observacion"></textarea>
+                  <textarea class="form-control" id="" rows="3"></textarea>
               </div>
               <div class="mb-3">
                 <label for="formFile" class="form-label">PDF de entrada</label>
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="">
               </div>
               <div class="mb-3">
                 <label for="formFile" class="form-label">PDF de salida</label>
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="">
               </div>
             </div>
           </div>

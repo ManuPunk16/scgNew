@@ -33,8 +33,8 @@ exports.save = (req, res) => {
     
     //Validar datos
     try {
+        var validate_num_folio = !validator.isEmpty(params.num_folio);
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
-        var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
         var validate_asunto = !validator.isEmpty(params.asunto);
         var validate_estatus = !validator.isEmpty(params.estatus);
     } catch (error) {
@@ -44,8 +44,8 @@ exports.save = (req, res) => {
         });
     }
 
-    if (validate_num_oficio && 
-        validate_fecha_recepcion && 
+    if (validate_num_folio &&
+        validate_num_oficio &&
         validate_estatus && 
         validate_asunto) {
 
@@ -53,13 +53,12 @@ exports.save = (req, res) => {
         const document = new Document();
 
         //Asignar valores
+        document.num_folio = params.num_folio;
         document.num_oficio = params.num_oficio;
         document.ins_juridico = params.ins_juridico;
-        document.fecha_recepcion = params.fecha_recepcion;
         document.remitido = params.remitido;
         document.origen = params.origen;
-        document.direccion = params.direccion;
-        document.director = params.director;
+        document.asignado = params.asignado;
         document.asunto = params.asunto;
         document.estatus = params.estatus;
         document.observacion = params.observacion;
@@ -79,6 +78,7 @@ exports.save = (req, res) => {
         //Guardar el documento
         document.save((err, documentStored) => {
             if (err || !documentStored) {
+                console.log(err);
                 return res.status(404).send({
                     status: 'error',
                     message: 'El Documento no se ha guardado!'
@@ -107,7 +107,7 @@ exports.getDocuments = (req, res) => {
     }
 
     //Find
-    query.sort('_id').exec((err, document) => {
+    query.sort('num_folio').exec((err, document) => {
 
         if (err) {
             return res.status(500).send({
@@ -168,13 +168,12 @@ exports.update = (req, res) => {
 
     //Validar datos
     try {
+        var validate_num_folio = !validator.isEmpty(params.num_folio);
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
-        var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
         var validate_remitido = !validator.isEmpty(params.remitido);
         var validate_origen = !validator.isEmpty(params.origen);
-        var validate_direccion = !validator.isEmpty(params.direccion);
-        var validate_director = !validator.isEmpty(params.director);
+        var validate_asignado = !validator.isEmpty(params.asignado);
         var validate_asunto = !validator.isEmpty(params.asunto);
         var validate_estatus = !validator.isEmpty(params.estatus);
         var validate_observacion = !validator.isEmpty(params.observacion);
@@ -392,8 +391,7 @@ exports.search = (req, res) => {
             { "fecha_recepcion": { "$regex": searchString, "$options": "i"}},
             { "remitido": { "$regex": searchString, "$options": "i"}},
             { "origen": { "$regex": searchString, "$options": "i"}},
-            { "direccion": { "$regex": searchString, "$options": "i"}},
-            { "director": { "$regex": searchString, "$options": "i"}},
+            { "asignado": { "$regex": searchString, "$options": "i"}},
             { "asunto": { "$regex": searchString, "$options": "i"}},
             { "estatus": { "$regex": searchString, "$options": "i"}},
             { "observacion": { "$regex": searchString, "$options": "i"}}

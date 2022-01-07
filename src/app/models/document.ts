@@ -2,26 +2,28 @@ export class Document{
     
     constructor(
         _id = "",
+        num_folio = "",
         num_oficio = "",
         ins_juridico = "",
         fecha_recepcion = "",
+        hora_recepcion = "",
         remitido = "",
         origen = "",
-        direccion = "",
-        director = "",
+        asignado = "",
         asunto = "",
         estatus = "",
         observacion = "",
         pdf_entrada = null,
         pdf_salida = null) {
             this._id = _id;
+            this.num_folio = num_folio;
             this.num_oficio = num_oficio;
             this.ins_juridico = ins_juridico;
             this.fecha_recepcion = fecha_recepcion;
+            this.hora_recepcion = hora_recepcion;
             this.remitido = remitido;
             this.origen = origen;
-            this.direccion = direccion;
-            this.director = director;
+            this.asignado = asignado;
             this.asunto = asunto;
             this.estatus = estatus;
             this.observacion = observacion;
@@ -30,16 +32,37 @@ export class Document{
     }
 
     _id: string;
+    num_folio: string;
     num_oficio: string;
     ins_juridico: string;
     fecha_recepcion: string;
+    hora_recepcion: string;
     remitido: string;
     origen: string;
-    direccion: string;
-    director: string;
+    asignado: string;
     asunto: string;
     estatus: string;
     observacion: string;
     pdf_entrada: null;
     pdf_salida: null;
 }
+
+// export class Document{
+    
+//     constructor(
+//         public _id:string,
+//         public num_folio:string,
+//         public num_oficio:string,
+//         public ins_juridico: string,
+//         public fecha_recepcion:any,
+//         public remitido:string,
+//         public origen:string,
+//         public asignado:string,
+//         public asunto:string,
+//         public estatus:string,
+//         public observacion:string,
+//         public pdf_entrada:null,
+//         public pdf_salida:null) {
+            
+//     }
+// }

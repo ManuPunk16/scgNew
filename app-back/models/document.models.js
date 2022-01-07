@@ -1,14 +1,19 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const moment = require('moment-timezone');
 
-const documentSchema = new Schema({
+var meridaDay = moment.tz("America/Merida").format('L');
+var meridaTime = moment.tz("America/Merida").format('LT');
+
+const documentSchema = new Schema({ 
+    num_folio : { type : String, required: true },
     num_oficio : { type : String, required : true },
     ins_juridico : { type : String, required : true},
-    fecha_recepcion : { type : String, default: Date.now.toString('DD-MM-YYYY') },
+    fecha_recepcion : { type : String, default: meridaDay },
+    hora_recepcion : { type : String, default: meridaTime },
     remitido : { type : String, required : true },
     origen : { type : String, required : true },
-    direccion : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
-    director : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
+    asignado : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
     asunto : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
     estatus : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
     observacion : { type : String, required : false },

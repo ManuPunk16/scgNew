@@ -14,7 +14,6 @@ export class HomecComponent implements OnInit {
   public title: string;
   public instrumento: Array<any>;
   public estatus: Array<any>;
-  formDocs:FormGroup;
   documents: Document[] = [];
 
   public doc: Document;
@@ -26,7 +25,7 @@ export class HomecComponent implements OnInit {
 
     this.title = "Gestor";
 
-    this.doc = new Document('','','','','','','','','','','',null,null);
+    this.doc = new Document('','','','','','','','','','','','',null,null);
 
     this.instrumento = [
       {
@@ -65,17 +64,6 @@ export class HomecComponent implements OnInit {
         name: "Para Conocimiento"
       }
     ];
-
-    this.formDocs = this.formulario.group({
-      num_oficio:[''],
-      ins_juridico:[''],
-      fecha_recepcion:[''],
-      remitido:[''],
-      origen:[''],
-      asunto:[''],
-      estatus:[''],
-      observacion:['']
-    });
   }
 
   ngOnInit(): void {
@@ -85,7 +73,7 @@ export class HomecComponent implements OnInit {
   getDocs(){
     this._documentService.getDocuments().subscribe(
       res => {
-        this.documents = res.document;
+        this.doc = res.doc;
       },
       err => console.log(err)
     );

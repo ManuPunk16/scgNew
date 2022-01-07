@@ -3,29 +3,31 @@
     <table class="table table-striped table-hover">
       <thead class="table-light">
           <tr>
-              <th scope="col"># Oficio</th>
-              <th scope="col">Instrumento Juridico</th>
-              <th scope="col">Fecha Recepción</th>
-              <th scope="col">Remitido</th>
-              <th scope="col">Origen</th>
-              <th scope="col">Dirección</th>
-              <th scope="col">Director</th>
-              <th scope="col">Asunto</th>
-              <th scope="col">Estatus</th>
-              <th scope="col">Observación</th>
-              <th scope="col">Acción</th>
+            <th scope="col"># Folio</th>
+            <th scope="col"># Oficio</th>
+            <th scope="col">Instrumento Juridico</th>
+            <th scope="col">Fecha Recepción</th>
+            <th scope="col">Hora Recepción</th>
+            <th scope="col">Remitido</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Asignado</th>
+            <th scope="col">Asunto</th>
+            <th scope="col">Estatus</th>
+            <th scope="col">Observación</th>
+            <th scope="col">Acción</th>
           </tr>
       </thead>
       <tbody>
           <!-- *ngIf="!!contenido.num_oficio" -->
           <tr *ngFor="let contenido of documents">
-              <th scope="row"><a href="{{url + 'get-entry/' + contenido.pdf_entrada}}">{{contenido.num_oficio}}</a></th>
+              <th scope="row"><a href="{{url + 'get-entry/' + contenido.pdf_entrada}}">{{contenido.num_folio}}</a></th>
+              <td>{{contenido.num_oficio}}</td>
               <td>{{contenido.ins_juridico}}</td>
               <td>{{contenido.fecha_recepcion}}</td>
+              <td>{{contenido.hora_recepcion}}</td>
               <td>{{contenido.remitido}}</td>
               <td>{{contenido.origen}}</td>
-              <td>{{contenido.direccion}}</td>
-              <td>{{contenido.director}}</td>
+              <td>{{contenido.asignado}}</td>
               <td>{{contenido.asunto}}</td>
               <td><a href="{{url + 'get-exit/' + contenido.pdf_salida}}">{{contenido.estatus}}</a></td>
               <td>{{contenido.observacion}}</td>
