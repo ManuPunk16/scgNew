@@ -43,23 +43,3 @@ export class Document{
     pdf_entrada: string;
     pdf_salida: string;
 }
-
-// export class Document{
-    
-//     constructor(
-//         public _id:string,
-//         public num_oficio:number,
-//         public ins_juridico: string,
-//         public fecha_recepcion:string,
-//         public remitido:string,
-//         public origen:string,
-//         public direccion:string,
-//         public director:string,
-//         public asunto:string,
-//         public estatus:string,
-//         public observacion:string,
-//         public pdf_entrada:string,
-//         public pdf_salida:string) {
-            
-//     }
-// }

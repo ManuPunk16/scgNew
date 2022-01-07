@@ -12,7 +12,6 @@ import { Document } from 'src/app/models/document';
 export class HomecComponent implements OnInit {
 
   public title: string;
-  public tablec: Array<any>;
   public instrumento: Array<any>;
   public estatus: Array<any>;
   formDocs:FormGroup;
@@ -24,44 +23,6 @@ export class HomecComponent implements OnInit {
     ) {
 
     this.title = "Gestor";
-    this.tablec = [
-      {
-        num_oficio: "1123",
-        ins_juridico: "Decreto",
-        fecha_recepcion: "55/31/5646",
-        remitido: "Jorge",
-        origen: "Direccion suprema",
-        direccion: "Legales",
-        director: "Leon",
-        asunto: "Limitrofe",
-        estatus: "Acvito",
-        observacion: ""
-      },
-      {
-        num_oficio: null,
-        ins_juridico: null,
-        fecha_recepcion: null,
-        remitido: null,
-        origen: null,
-        direccion: null,
-        director: null,
-        asunto: null,
-        estatus: null,
-        observacion: null 
-      },
-      // {
-      //   num_oficio: null,
-      //   inst_juridico: null,
-      //   fecha_recepcion: null,
-      //   remitido: null,
-      //   origen: null,
-      //   direccion: null,
-      //   director: null,
-      //   asunto: null,
-      //   estatus: null,
-      //   observacion: null 
-      // }
-    ];
 
     this.instrumento = [
       {
@@ -118,27 +79,9 @@ export class HomecComponent implements OnInit {
   }
 
   getDocs(){
-    // console.log(this._documentService.pruebas());
     this._documentService.getDocuments().subscribe(
-      // response => {
-      //   console.log(response);
-      //   if (response) {
-      //     this.documents = response;
-      //   }else{
-
-      //   }
-      //   console.log(this.documents);
-      // },
-      // error => {
-      //   console.log(error);
-      // }
       res => {
         this.documents = res.document;
-        // console.log(res);
-        let documents = res;
-        let array = [];
-        array.push(documents);
-        console.log(array);
       },
       err => console.log(err)
     );

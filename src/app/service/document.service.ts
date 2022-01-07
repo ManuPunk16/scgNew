@@ -20,6 +20,6 @@ export class DocumentService{
     }
 
     getDocuments():Observable<any>{
-        return this._http.get(this.url+'documents');
+        return this._http.get<Document[]>(this.url+'documents');
     }
 }

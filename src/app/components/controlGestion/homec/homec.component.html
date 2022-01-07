@@ -70,7 +70,8 @@
 <br>
 
 <!-- Tabla Gestion -->
-<table class="table table-striped table-hover">
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
     <thead class="table-light">
         <tr>
             <th scope="col"># Oficio</th>
@@ -88,8 +89,8 @@
     </thead>
     <tbody>
         <!-- *ngIf="!!contenido.num_oficio" -->
-        <tr *ngFor="let contenido of tablec">
-            <th scope="row">{{contenido.num_oficio}}</th>
+        <tr *ngFor="let contenido of documents">
+            <th scope="row"><a href="{{contenido.pdf_entrada}}">{{contenido.num_oficio}}</a></th>
             <td>{{contenido.ins_juridico}}</td>
             <td>{{contenido.fecha_recepcion}}</td>
             <td>{{contenido.remitido}}</td>
@@ -97,7 +98,7 @@
             <td>{{contenido.direccion}}</td>
             <td>{{contenido.director}}</td>
             <td>{{contenido.asunto}}</td>
-            <td>{{contenido.estatus}}</td>
+            <td><a href="{{contenido.pdf_salida}}">{{contenido.estatus}}</a></td>
             <td>{{contenido.observacion}}</td>
             <td>
                 <div class="d-grid gap-2 d-md-flex">
@@ -107,11 +108,5 @@
             </td>
         </tr>
     </tbody>
-</table>
-
-<div>
-  hola
-  <div *ngFor="let cont of documents">
-    <h3>{{cont.num_oficio}}</h3>
-  </div>
+  </table>
 </div>
