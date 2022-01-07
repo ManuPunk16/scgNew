@@ -17,12 +17,16 @@ export class HomecComponent implements OnInit {
   formDocs:FormGroup;
   documents: Document[] = [];
 
+  public doc: Document;
+
   constructor(
     public formulario:FormBuilder,
     private _documentService: DocumentService
     ) {
 
     this.title = "Gestor";
+
+    this.doc = new Document('','','','','','','','','','','',null,null);
 
     this.instrumento = [
       {
@@ -85,5 +89,9 @@ export class HomecComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  onSubmit(){
+    console.log(this.doc);
   }
 }

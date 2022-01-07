@@ -22,4 +22,8 @@ export class DocumentService{
     getDocuments():Observable<any>{
         return this._http.get<Document[]>(this.url+'documents');
     }
+
+    search(searchString: string):Observable<any>{
+        return this._http.get(this.url+'search/'+searchString);
+    }
 }

@@ -11,6 +11,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { appRoutingProviders, routing } from './app.routing';
 import { LoginComponent } from './components/controlGestion/login/login.component';
 import { HomecComponent } from './components/controlGestion/homec/homec.component';
+import { SearchComponent } from './components/controlGestion/search/search.component';
+import { DocumentsComponent } from './components/controlGestion/documents/documents.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HomecComponent } from './components/controlGestion/homec/homec.componen
     FooterComponent,
     ErrorComponent,
     LoginComponent,
-    HomecComponent
+    HomecComponent,
+    SearchComponent,
+    DocumentsComponent
   ],
   imports: [
     BrowserModule,

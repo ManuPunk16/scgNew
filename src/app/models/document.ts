@@ -12,8 +12,8 @@ export class Document{
         asunto = "",
         estatus = "",
         observacion = "",
-        pdf_entrada = "",
-        pdf_salida = "") {
+        pdf_entrada = null,
+        pdf_salida = null) {
             this._id = _id;
             this.num_oficio = num_oficio;
             this.ins_juridico = ins_juridico;
@@ -40,6 +40,6 @@ export class Document{
     asunto: string;
     estatus: string;
     observacion: string;
-    pdf_entrada: string;
-    pdf_salida: string;
+    pdf_entrada: null;
+    pdf_salida: null;
 }
