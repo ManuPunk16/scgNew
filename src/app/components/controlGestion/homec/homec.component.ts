@@ -13,7 +13,7 @@ export class HomecComponent implements OnInit {
 
   public title: string;
   public instrumento: Array<any>;
-  public estatus: Array<any>;
+  public estat: Array<any>;
   documents: Document[] = [];
 
   public doc: Document;
@@ -25,7 +25,7 @@ export class HomecComponent implements OnInit {
 
     this.title = "Gestor";
 
-    this.doc = new Document('','','','','','','','','','','','',null,null);
+    this.doc = new Document('','','','','','','','','','','',null,null);
 
     this.instrumento = [
       {
@@ -50,7 +50,7 @@ export class HomecComponent implements OnInit {
       }
     ];
 
-    this.estatus = [
+    this.estat = [
       {
         id: 1,
         name: "En Tramite",
@@ -71,9 +71,10 @@ export class HomecComponent implements OnInit {
   }
 
   getDocs(){
+    //Mostrar contenido tabla principal
     this._documentService.getDocuments().subscribe(
       res => {
-        this.doc = res.doc;
+        this.documents = res.document;
       },
       err => console.log(err)
     );

@@ -6,7 +6,6 @@ export class Document{
         num_oficio = "",
         ins_juridico = "",
         fecha_recepcion = "",
-        hora_recepcion = "",
         remitido = "",
         origen = "",
         asignado = "",
@@ -20,7 +19,6 @@ export class Document{
             this.num_oficio = num_oficio;
             this.ins_juridico = ins_juridico;
             this.fecha_recepcion = fecha_recepcion;
-            this.hora_recepcion = hora_recepcion;
             this.remitido = remitido;
             this.origen = origen;
             this.asignado = asignado;
@@ -36,7 +34,6 @@ export class Document{
     num_oficio: string;
     ins_juridico: string;
     fecha_recepcion: string;
-    hora_recepcion: string;
     remitido: string;
     origen: string;
     asignado: string;
