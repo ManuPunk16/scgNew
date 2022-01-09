@@ -56,6 +56,7 @@ exports.save = (req, res) => {
         document.num_folio = params.num_folio;
         document.num_oficio = params.num_oficio;
         document.ins_juridico = params.ins_juridico;
+        document.fecha_recepcion = params.fecha_recepcion;
         document.remitido = params.remitido;
         document.origen = params.origen;
         document.asignado = params.asignado;
@@ -171,6 +172,7 @@ exports.update = (req, res) => {
         var validate_num_folio = !validator.isEmpty(params.num_folio);
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
+        var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
         var validate_remitido = !validator.isEmpty(params.remitido);
         var validate_origen = !validator.isEmpty(params.origen);
         var validate_asignado = !validator.isEmpty(params.asignado);

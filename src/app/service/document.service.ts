@@ -26,4 +26,27 @@ export class DocumentService{
     search(searchString: string):Observable<any>{
         return this._http.get(this.url+'search/'+searchString);
     }
+
+    create(document: any):Observable<any>{
+        let params = JSON.stringify(document);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.post(this.url+'save',params,{headers: headers});
+    }
+
+    uploadEntry(File: any):Observable<any>{
+        let peticion = "subir-entrada/";
+        let json = JSON.stringify(File);
+        console.log(File);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.post(this.url + peticion,{headers: headers});
+    }
+
+    uploadExit(File: any):Observable<any>{
+        let peticion = "subir-salida/";
+        let json = JSON.stringify(File);
+        console.log(File);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.post(this.url + peticion,{headers: headers});
+    }
 }
