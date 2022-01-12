@@ -18,11 +18,11 @@ export class HomecComponent implements OnInit {
   public instrumento: Array<any>;
   public estat: Array<any>;
   documents: Document[] = [];
-  public pdfEntry: any = [];
-  public pdfExit: any = [];
+  public pdfEntry: Array<File> = [];
+  public pdfExit: Array<File> = [];
 
   public doc: Document;
-  public status: string | undefined;
+  public status: string = "";
 
   constructor(
     public formulario: FormBuilder,
@@ -90,26 +90,30 @@ export class HomecComponent implements OnInit {
   }
 
   onSubmit() {
+    // console.log(this._documentService.uploadEntry,"Subir");
     // console.log(this.doc);
     // this._documentService.uploadEntry(this.doc).subscribe(
-    //   response => {},
-    //   error => {}
+    //   response => {
+    //     console.log(response, "Response");
+    //   },
+    //   error => {
+    //     console.log(error, "Error")
+    //   }
     // );
 
     this._documentService.create(this.doc).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.status === 'Success') {
           this.status = 'success';
           this.doc = response.doc;
-          this.zone.runOutsideAngular(() => {
-            location.reload();
-          });
-          // this._router.navigate(['ControlGestion/inicio']);
+          // this.zone.runOutsideAngular(() => {
+          //   location.reload();
+          // });
         } else {
-          // console.log(this.status);
-          this.zone.runOutsideAngular(() => {
-            location.reload();
-          });
+          // console.log(response);
+          // this.zone.runOutsideAngular(() => {
+          //   location.reload();
+          // });
         }
       },
       error => {
@@ -117,19 +121,30 @@ export class HomecComponent implements OnInit {
         this.status = 'error';
       }
     );
+    console.log(this.doc);
   }
 
-  capturarEntrada(event: any):any{
+  capturarEntrada(event: any): any {
+    // this.pdfEntry = event.target.files[0];
+    // console.log(this.pdfEntry);
     const entradaCapturada = event.target.files[0];
     // this.pdfEntry.push(entradaCapturada).then();
     console.log(entradaCapturada);
+    // this._documentService.create(entradaCapturada).subscribe(
+    //   res => {
+    //     console.log(res,"Resultado");
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
   }
 
-  capturarSalida(event: any):any{
+  capturarSalida(event: any): any {
     console.log(event.target.files);
   }
 
-  // extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+  // extraerBase64 = async ($event: any) => new Promise((resolve) => {
   //   try {
   //     const unsafePdf = window.URL.createObjectURL($event);
   //     const pdf = this.sanitizer.bypassSecurityTrustUrl(unsafePdf);
@@ -140,13 +155,38 @@ export class HomecComponent implements OnInit {
   //         base: reader.result
   //       });
   //     }
-  //     reader.onerror = error =>{
+  //     reader.onerror = error => {
   //       resolve({
-  //         base:null
+  //         base: null
   //       });
   //     }
   //   } catch (error) {
   //     return null;
   //   }
   // });
+
+  // private patchItemImages(paths: string[]) {
+  //   this.imagesImporterService.getListBlobImagesFromBackend(paths)
+  //     .pipe(finalize(() => { this.loading--; }))
+  //     .subscribe((images) => {
+  //       const files = images.map((x, i) => this.createFileFromBlob(x, paths[i]));
+
+  //       this.productosService.saveImages(this.productId, files).subscribe(() => {
+  //         this.notifierService.notify('success', 'Producto guardado correctamente.');
+  //         this.getAllItems();
+  //       },
+  //         error => {
+  //           this.notifierService.notify('error', error);
+  //         });
+  //     });
+  // }
+
+  // private createFileFromBlob(blob: Blob, path: string) {
+  //   return new File([blob], this.getFileName(`${path}.jpeg`));
+  // }
+
+  // private getFileName(path: string) {
+  //   return path.split('\\').pop();
+  // }
+
 }

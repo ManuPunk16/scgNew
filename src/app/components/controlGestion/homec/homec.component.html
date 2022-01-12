@@ -5,8 +5,8 @@
 <div *ngIf="documents">
   <!-- Button trigger modal -->
   <div class="d-grid gap-2 col-6 mx-auto">
-    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Insertar
-      Registro Nuevo</button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Insertar Registro Nuevo</button>
   </div>
 
   <!-- Modal -->
@@ -85,12 +85,12 @@
                   id="observacion" rows="3"></textarea>
               </div>
               <div class="mb-3">
-                <label for="formFile" class="form-label">PDF de entrada</label>
-                <input class="form-control" type="file" (change)="capturarEntrada($event)" id="">
+                <label for="pdfEntrada" class="form-label">PDF de entrada</label>
+                <input class="form-control" type="file" (change)="capturarEntrada($event)" id="pdfEntrada">
               </div>
               <div class="mb-3">
-                <label for="formFile" class="form-label">PDF de salida</label>
-                <input class="form-control" type="file" (change)="capturarSalida($event)" id="">
+                <label for="pdfSalida" class="form-label">PDF de salida</label>
+                <input class="form-control" type="file" (change)="capturarSalida($event)" id="pdfSalida">
               </div>
             </div>
           </div>
