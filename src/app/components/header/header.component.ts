@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public searchString: string = "";
+
+  constructor(
+    private _router : Router,
+    private _route : ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
   }
 
+  goSearch(){
+    this._router.navigate(['ControlGestion/buscar/', this.searchString]);
+  }
 }

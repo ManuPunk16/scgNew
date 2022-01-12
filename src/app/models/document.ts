@@ -1,6 +1,7 @@
 export class Document{
     
     constructor(
+        _id = "",
         num_folio = 1,
         num_oficio = "",
         ins_juridico = "",
@@ -13,6 +14,7 @@ export class Document{
         observacion = "",
         pdf_entrada = null,
         pdf_salida = null) {
+            this._id = _id;
             this.num_folio = num_folio;
             this.num_oficio = num_oficio;
             this.ins_juridico = ins_juridico;
@@ -27,6 +29,7 @@ export class Document{
             this.pdf_salida = pdf_salida;
     }
 
+    _id: string;
     num_folio: number;
     num_oficio: string;
     ins_juridico: string;

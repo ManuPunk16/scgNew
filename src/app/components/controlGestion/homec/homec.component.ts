@@ -34,7 +34,7 @@ export class HomecComponent implements OnInit {
 
     this.title = "Gestor";
 
-    this.doc = new Document(1, '', '', '', '', '', '', '', '', '', null, null);
+    this.doc = new Document('',1, '', '', '', '', '', '', '', '', '', null, null);
 
     this.instrumento = [
       {
@@ -106,9 +106,9 @@ export class HomecComponent implements OnInit {
         if (response.status === 'Success') {
           this.status = 'success';
           this.doc = response.doc;
-          // this.zone.runOutsideAngular(() => {
-          //   location.reload();
-          // });
+          this.zone.runOutsideAngular(() => {
+            location.reload();
+          });
         } else {
           // console.log(response);
           // this.zone.runOutsideAngular(() => {

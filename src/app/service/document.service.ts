@@ -23,7 +23,11 @@ export class DocumentService {
         return this._http.get<Document[]>(this.url + 'documents');
     }
 
-    search(searchString: string): Observable<any> {
+    getDocument(documentId: string): Observable<any>{
+        return this._http.get(this.url+'document/'+documentId);
+    }
+
+    search(searchString: any): Observable<any> {
         return this._http.get(this.url + 'search/' + searchString);
     }
 
@@ -31,6 +35,19 @@ export class DocumentService {
         let params = JSON.stringify(document);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.post(this.url + 'save', params, { headers: headers });
+    }
+
+    update(id: string, document: Document): Observable<any> {
+        // let params = JSON.stringify(document);
+        let params = document;
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+        return this._http.put(this.url + 'document/' + id, params, { headers: headers });
+    }
+
+    delete(id: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.delete(this.url + 'document/' + id, { headers: headers });
     }
 
     uploadEntry(File: File): Observable<any> {

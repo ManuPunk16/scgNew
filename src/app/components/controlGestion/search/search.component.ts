@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
   search(){
     this._route.params.subscribe(params => {
       var search = params['search'];
+      console.log(search);
       this._documentService.search(search).subscribe(
         response => {
           console.log(response);

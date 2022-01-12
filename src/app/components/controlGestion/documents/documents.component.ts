@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { Document } from '../../../models/document'
 import { Global } from 'src/app/service/global';
+import { DocumentService } from 'src/app/service/document.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-documents',
@@ -13,11 +15,28 @@ export class DocumentsComponent implements OnInit {
 
   @Input() documents: Document[] = [];
 
-  constructor() {
+  constructor(
+    private _documentService: DocumentService,
+    private zone: NgZone,
+    private _router: Router
+  ) {
     this.url = Global.url;
   }
 
   ngOnInit(): void {
+  }
+
+  delete(id: any){
+    this._documentService.delete(id).subscribe(
+      response => {
+        this.zone.runOutsideAngular(() => {
+          location.reload();
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

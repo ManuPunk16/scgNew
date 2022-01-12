@@ -31,8 +31,8 @@
               <td>{{contenido.observacion}}</td>
               <td>
                   <div class="d-grid gap-2 d-md-flex">
-                      <button class="btn btn-warning" type="button">Editar</button>
-                      <button class="btn btn-danger" type="button">Eliminar</button>
+                      <button class="btn btn-warning" type="button" [routerLink]="['/ControlGestion/Editar/', contenido._id]">Editar</button>
+                      <button class="btn btn-danger" type="button" (click)="delete(contenido._id)">Eliminar</button>
                   </div>
               </td>
           </tr>

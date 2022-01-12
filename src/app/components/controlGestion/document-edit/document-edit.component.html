@@ -1,24 +1,14 @@
-<div class="loading" *ngIf="!documents">
-  Cargando
+<div>
+    <a [routerLink]="['/ControlGestion/inicio']">Regresar...</a>
 </div>
-
-<div *ngIf="documents">
-  <!-- Button trigger modal -->
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      Insertar Registro Nuevo</button>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div>
     <div class="modal-dialog modal-lg">
       <!-- Inicio de Formulario -->
-      <form #docsForm="ngForm" (ngSubmit)="onSubmit()">
+      <form #docsForm="ngForm">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="staticBackdropLabel">Editar Documento</h5>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
           </div>
           <div class="modal-body">
             <div class="row g-3">
@@ -86,23 +76,18 @@
               </div>
               <div class="mb-3">
                 <label for="pdfEntrada" class="form-label">PDF de entrada</label>
-                <input class="form-control" type="file" name="file0" (change)="capturarEntrada($event)" id="pdfEntrada">
+                <input class="form-control" type="file" name="file0" id="pdfEntrada">
               </div>
               <div class="mb-3">
                 <label for="pdfSalida" class="form-label">PDF de salida</label>
-                <input class="form-control" type="file" name="file0" (change)="capturarSalida($event)" id="pdfSalida">
+                <input class="form-control" type="file" name="file0" id="pdfSalida">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" value="Guardar" class="btn btn-success">Aceptar</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" (click)="onSubmit()" value="Guardar" class="btn btn-success">Aceptar</button>
           </div>
         </div>
       </form>
     </div>
-  </div>
-  <br>
-
-  <app-documents [documents]="documents"></app-documents>
 </div>

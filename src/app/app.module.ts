@@ -14,6 +14,7 @@ import { LoginComponent } from './components/controlGestion/login/login.componen
 import { HomecComponent } from './components/controlGestion/homec/homec.component';
 import { SearchComponent } from './components/controlGestion/search/search.component';
 import { DocumentsComponent } from './components/controlGestion/documents/documents.component';
+import { DocumentEditComponent } from './components/controlGestion/document-edit/document-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DocumentsComponent } from './components/controlGestion/documents/docume
     LoginComponent,
     HomecComponent,
     SearchComponent,
-    DocumentsComponent
+    DocumentsComponent,
+    DocumentEditComponent
   ],
   imports: [
     BrowserModule,

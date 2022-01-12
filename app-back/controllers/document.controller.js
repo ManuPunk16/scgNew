@@ -167,6 +167,7 @@ exports.update = (req, res) => {
     //Recoger datos que llegan por put
     var params = req.body;
 
+    console.log(params);
     //Validar datos
     try {
         var validate_num_folio = !validator.isEmpty(params.num_folio);
@@ -180,6 +181,8 @@ exports.update = (req, res) => {
         var validate_estatus = !validator.isEmpty(params.estatus);
         var validate_observacion = !validator.isEmpty(params.observacion);
     } catch (err) {
+        console.log(err);
+        //TypeError: Expected a string but received a number
         return res.status(404).send({
             status: 'error',
             message: 'Faltan datos por enviar!' 
@@ -386,27 +389,30 @@ exports.getPdfExit = (req, res) => {
 exports.search = (req, res) => {
     //sacar el string a buscar
     var searchString = req.params.search;
+    console.log(searchString);
     //find or
     Document.find({ "$or": [
-            { "num_oficio": { "$regex": searchString, "$options": "i"}},
-            { "ins_juridico": { "$regex": searchString, "$options": "i"}},
-            { "fecha_recepcion": { "$regex": searchString, "$options": "i"}},
-            { "remitido": { "$regex": searchString, "$options": "i"}},
-            { "origen": { "$regex": searchString, "$options": "i"}},
-            { "asignado": { "$regex": searchString, "$options": "i"}},
-            { "asunto": { "$regex": searchString, "$options": "i"}},
-            { "estatus": { "$regex": searchString, "$options": "i"}},
-            { "observacion": { "$regex": searchString, "$options": "i"}}
+        { "num_oficio": { "$regex": searchString, "$options": "i"}},
+        { "ins_juridico": { "$regex": searchString, "$options": "i"}},
+        { "fecha_recepcion": { "$regex": searchString, "$options": "i"}},
+        { "remitido": { "$regex": searchString, "$options": "i"}},
+        { "origen": { "$regex": searchString, "$options": "i"}},
+        { "asignado": { "$regex": searchString, "$options": "i"}},
+        { "asunto": { "$regex": searchString, "$options": "i"}},
+        { "estatus": { "$regex": searchString, "$options": "i"}},
+        { "observacion": { "$regex": searchString, "$options": "i"}}
     ]})
-    .sort([['fecha_recepcion', 'descending']])
-    .exec((err, document) => {
+    .sort([['fecha_recepcion', 'ascending']])
+    .exec((err, documents) => {
+        console.log(err);
+        console.log(documents);
         if (err) {
             return res.status(500).send({
                 status: 'error',
                 message: 'Error en la peticion'
             });
         }
-        if (!document || document.length <= 0) {
+        if (!documents || documents.length <= 0) {
             return res.status(404).send({
                 status: 'error',
                 message: 'No hay documentos relacionados con tu busqueda!'
@@ -414,7 +420,7 @@ exports.search = (req, res) => {
         }
         return res.status(200).send({
             status: 'succes',
-            document
+            documents
         });
     });
 }
