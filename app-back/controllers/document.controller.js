@@ -167,10 +167,13 @@ exports.update = (req, res) => {
     //Recoger datos que llegan por put
     var params = req.body;
 
-    console.log(params);
     //Validar datos
     try {
-        var validate_num_folio = !validator.isEmpty(params.num_folio);
+        //https://www.npmjs.com/package/validator < libreria
+        //validator.isEmpty solo admite strings como parámetros
+        //const validate_num_folio = !validator.isInt(`${params.num_folio}`);
+        //convertir a string esta variable en esa misma línea vvvvvvvvv
+        const validate_num_folio = !validator.isEmpty('$params.num_folio');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
         var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);

@@ -99,7 +99,7 @@ export class DocumentEditComponent implements OnInit {
         if (response.status === 'Success') {
           this.status = 'success';
           this.doc = response.documentUpdated;
-          this._router.navigate(['ControlGestion/Inicio']);
+          this._router.navigate(['/ControlGestion/Inicio']);
         } else {
           // console.log(response);
           // this.zone.runOutsideAngular(() => {
