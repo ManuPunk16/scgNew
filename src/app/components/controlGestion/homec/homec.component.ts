@@ -24,6 +24,27 @@ export class HomecComponent implements OnInit {
   public doc: Document;
   public status: string = "";
 
+  afuConfig = {
+    multiple: false,
+    formatsAllowed: ".pdf,.PDF",
+    uploadAPI: {
+      url: Global.url + 'subir-entrada/',
+    },
+    theme: "attachPin",
+    hideProgressBar: false,
+    hideResetBtn: true,
+    hideSelectBtn: false,
+    replaceTexts: {
+      selectFileBtn: 'Select Files',
+      resetBtn: 'Reset',
+      uploadBtn: 'Upload',
+      dragNDropBox: 'Drag N Drop',
+      attachPinBtn: 'Subir pdf de entrada',
+      afterUploadMsg_success: 'Successfully Uploaded !',
+      afterUploadMsg_error: 'Upload Failed !'
+    }
+  };
+
   constructor(
     public formulario: FormBuilder,
     private _documentService: DocumentService,
@@ -31,7 +52,7 @@ export class HomecComponent implements OnInit {
     private zone: NgZone,
     private sanitizer: DomSanitizer
   ) {
-
+    // console.log(_router.url);
     this.title = "Gestor";
 
     this.doc = new Document('',1, '', '', '', '', '', '', '', '', '', null, null);
@@ -73,6 +94,11 @@ export class HomecComponent implements OnInit {
         name: "Para Conocimiento"
       }
     ];
+  }
+
+  pdfUploadEntry(data: any) {
+    let document_data = JSON.parse(data.response);
+    this.doc.pdf_entrada = document_data.pdf_entrada;
   }
 
   ngOnInit(): void {
@@ -142,7 +168,8 @@ export class HomecComponent implements OnInit {
   }
 
   capturarSalida(event: any): any {
-    console.log(event.target.files);
+    const entradaCapturada = event.target.files[0];
+    console.log(entradaCapturada);
   }
 
   // extraerBase64 = async ($event: any) => new Promise((resolve) => {

@@ -20,6 +20,7 @@ export class DocumentEditComponent implements OnInit {
   documents: Document[] = [];
   public pdfEntry: Array<File> = [];
   public pdfExit: Array<File> = [];
+  public url: string;
 
   public doc: Document;
   public status: string = "";
@@ -34,7 +35,7 @@ export class DocumentEditComponent implements OnInit {
   ) {
 
     this.title = "Gestor";
-
+    this.url = Global.url;
     this.doc = new Document('',1, '', '', '', '', '', '', '', '', '', null, null);
 
     this.instrumento = [
@@ -97,12 +98,15 @@ export class DocumentEditComponent implements OnInit {
         if (response.status === 'Success') {
           this.status = 'success';
           this.doc = response.documentUpdated;
-          this._router.navigate(['/ControlGestion/Inicio']);
+          this._router.navigate(['/ControlGestion/inicio']);
+          console.log("Bien", response);
         } else {
           // console.log(response);
           // this.zone.runOutsideAngular(() => {
           //   location.reload();
           // });
+          this._router.navigate(['/ControlGestion/inicio']);
+          console.log("Error", response);
         }
       },
       error => {
@@ -124,14 +128,33 @@ export class DocumentEditComponent implements OnInit {
             this.doc = response.document;
             // console.log(response);
           }else{
-            this._router.navigate(['ControlGestion/Inicio']);
+            this._router.navigate(['ControlGestion/inicio']);
           }
         },
         error => {
           console.log(error);
-          this._router.navigate(['ControlGestion/Inicio']);
+          this._router.navigate(['ControlGestion/inicio']);
         }
       );
     });
+  }
+
+  capturarEntrada(event: any): any {
+    const entradaCapturada = event.target.files[0];
+    console.log(entradaCapturada);
+
+    this._documentService.uploadExit(entradaCapturada, this.doc._id).subscribe(
+      response => {
+        console.log("Lo bueno: ", response);
+      },
+      error => {
+        console.log("Lo malo:", error);
+      }
+    );
+  }
+
+  capturarSalida(event: any): any {
+    const salidaCapturada = event.target.files[0];
+    console.log(salidaCapturada);
   }
 }

@@ -318,7 +318,7 @@ exports.uploadEntry = (req, res) => {
 
 exports.uploadExit = (req, res) => {
     // --- MEJORAR CODIGO ---
-    var file_name = 'Imagen no subida...';
+    var file_name = 'PDF salida no subido...';
 
     if(!req.files){
         return res.status(404).send({
@@ -392,10 +392,11 @@ exports.getPdfExit = (req, res) => {
 exports.search = (req, res) => {
     //sacar el string a buscar
     var searchString = req.params.search;
+    // var searchInt = (isNaN(searchString)) ? -1 : parseInt(searchString);
     console.log(searchString);
     //find or
     Document.find({ "$or": [
-        // { "num_folio": { "$regex": searchString, "$options": "i"}},
+        // { "num_folio": { "$regex": searchInt, "$options": "i"}},
         { "num_oficio": { "$regex": searchString, "$options": "i"}},
         { "ins_juridico": { "$regex": searchString, "$options": "i"}},
         { "fecha_recepcion": { "$regex": searchString, "$options": "i"}},

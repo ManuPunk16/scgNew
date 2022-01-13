@@ -60,12 +60,13 @@ export class DocumentService {
         return this._http.post<File>(`${this.url}subir-entrada/61da229a338d1737d08561ff`, formData);
     }
 
-    uploadExit(File: any): Observable<any> {
-        let peticion = "subir-salida/";
+    uploadExit(File: File, id: string): Observable<any> {
+        let peticion = "subir-salida/" + id;
         let json = JSON.stringify(File);
         console.log(File);
+        console.log(id);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.post(this.url + peticion, { headers: headers });
+        return this._http.post<File>(this.url + peticion, { headers: headers });
     }
 
     private parseArrayFilesIntoFormData(file: File) {
