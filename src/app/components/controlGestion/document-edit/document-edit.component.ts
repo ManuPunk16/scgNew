@@ -92,8 +92,6 @@ export class DocumentEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("hola");
-
     this._documentService.update(this.doc._id,this.doc).subscribe(
       response => {
         if (response.status === 'Success') {

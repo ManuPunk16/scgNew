@@ -33,7 +33,7 @@ exports.save = (req, res) => {
     
     //Validar datos
     try {
-        var validate_num_folio = !validator.isEmpty(params.num_folio);
+        var validate_num_folio = !validator.isInt('$params.num_folio');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_asunto = !validator.isEmpty(params.asunto);
         var validate_estatus = !validator.isEmpty(params.estatus);
@@ -184,7 +184,7 @@ exports.update = (req, res) => {
         var validate_estatus = !validator.isEmpty(params.estatus);
         var validate_observacion = !validator.isEmpty(params.observacion);
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         //TypeError: Expected a string but received a number
         return res.status(404).send({
             status: 'error',
@@ -395,6 +395,7 @@ exports.search = (req, res) => {
     console.log(searchString);
     //find or
     Document.find({ "$or": [
+        // { "num_folio": { "$regex": searchString, "$options": "i"}},
         { "num_oficio": { "$regex": searchString, "$options": "i"}},
         { "ins_juridico": { "$regex": searchString, "$options": "i"}},
         { "fecha_recepcion": { "$regex": searchString, "$options": "i"}},
@@ -405,10 +406,10 @@ exports.search = (req, res) => {
         { "estatus": { "$regex": searchString, "$options": "i"}},
         { "observacion": { "$regex": searchString, "$options": "i"}}
     ]})
-    .sort([['fecha_recepcion', 'ascending']])
+    .sort([['num_folio', 'ascending']])
     .exec((err, documents) => {
-        console.log(err);
-        console.log(documents);
+        // console.log(err);
+        // console.log(documents);
         if (err) {
             return res.status(500).send({
                 status: 'error',

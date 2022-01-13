@@ -12,6 +12,7 @@ import { DocumentService } from 'src/app/service/document.service';
 export class SearchComponent implements OnInit {
 
   public documents: Document[] = [];
+  public title: String = "Contenido relacionado con tu busqueda: ";
 
   constructor(
     private _route: ActivatedRoute,
@@ -29,7 +30,7 @@ export class SearchComponent implements OnInit {
       console.log(search);
       this._documentService.search(search).subscribe(
         response => {
-          console.log(response);
+          // console.log(response);
           this.documents = response.documents;
         },
         error => {

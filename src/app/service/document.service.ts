@@ -38,8 +38,8 @@ export class DocumentService {
     }
 
     update(id: string, document: Document): Observable<any> {
-        // let params = JSON.stringify(document);
-        let params = document;
+        let params = JSON.stringify(document);
+        // let params = document;
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
         return this._http.put(this.url + 'document/' + id, params, { headers: headers });
