@@ -11,7 +11,11 @@ import { Router } from '@angular/router';
 })
 export class DocumentsComponent implements OnInit {
 
+  orderHeader: String = '';
+  isDescOrder: boolean = true;
+  p: number = 1;
   public url: string;
+  public cantidades: Array<any>;
 
   @Input() documents: Document[] = [];
 
@@ -21,9 +25,29 @@ export class DocumentsComponent implements OnInit {
     private _router: Router
   ) {
     this.url = Global.url;
+
+    this.cantidades = [
+      {
+        name: "5",
+      },
+      {
+        name: "15",
+      },
+      {
+        name: "50"
+      },
+      {
+        name: "200"
+      }
+    ];
   }
 
   ngOnInit(): void {
+  }
+
+  sort(headerName:String){
+    this.isDescOrder = !this.isDescOrder;
+    this.orderHeader = headerName;
   }
 
   delete(id: any){

@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -35,7 +37,9 @@ import { DocumentEditComponent } from './components/controlGestion/document-edit
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFileUploaderModule
+    AngularFileUploaderModule,
+    NgxPaginationModule,
+    OrderModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
