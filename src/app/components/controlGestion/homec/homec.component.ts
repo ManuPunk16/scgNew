@@ -129,7 +129,7 @@ export class HomecComponent implements OnInit {
 
     this._documentService.create(this.doc).subscribe(
       response => {
-        console.log(response);
+        // console.log(response);
         if (response.status === 'Success') {
           this.status = 'success';
           this.doc = response.doc;
@@ -144,7 +144,7 @@ export class HomecComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
+        // console.log(error);
         this.status = 'error';
       }
     );
