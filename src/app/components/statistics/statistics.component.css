@@ -1,0 +1,52 @@
+canvas {
+    border: 1px dotted red;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 70vh;
+    width: 70vw;
+}
+
+@media (max-width: 1500px) {
+    .chart-container {
+        height: 55vh;
+    }
+}
+
+@media (max-width: 1250px) {
+    .chart-container {
+        height: 50vh;
+    }
+}
+
+@media (max-width: 1150px) {
+    .chart-container {
+        height: 45vh;
+    }
+}
+
+@media (max-width: 1050px) {
+    .chart-container {
+        height: 40vh;
+    }
+}
+
+@media (max-width: 950px) {
+    .chart-container {
+        height: 35vh;
+    }
+}
+
+@media (max-width: 850px) {
+    .chart-container {
+        height: 30vh;
+    }
+}
+
+@media (max-width: 750px) {
+    .chart-container {
+        height: 25vh;
+    }
+}

@@ -59,24 +59,34 @@ export class HomecComponent implements OnInit {
 
     this.instrumento = [
       {
-        id: 1,
-        name: "instrumento uno"
+        name: "Leyes"
       },
       {
-        id: 2,
-        name: "instrumento dos"
+        name: "Reglamentos"
       },
       {
-        id: 3,
-        name: "instrumento tres"
+        name: "Acuerdos"
       },
       {
-        id: 4,
-        name: "instrumento cuatro"
+        name: "Decretos"
       },
       {
-        id: 5,
-        name: "instrumento cinco"
+        name: "Lineamientos"
+      },
+      {
+        name: "Órdenes"
+      },
+      {
+        name: "Convenios"
+      },
+      {
+        name: "Contratos"
+      },
+      {
+        name: "Actas"
+      },
+      {
+        name: "Otros..."
       }
     ];
 

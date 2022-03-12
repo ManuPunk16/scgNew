@@ -8,10 +8,12 @@ import { LoginComponent } from "./components/controlGestion/login/login.componen
 import { HomecComponent } from "./components/controlGestion/homec/homec.component";
 import { SearchComponent } from "./components/controlGestion/search/search.component";
 import { DocumentEditComponent } from "./components/controlGestion/document-edit/document-edit.component";
+import { StatisticsComponent } from "./components/statistics/statistics.component";
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'inicio', component: HomeComponent },
+    { path: 'Estadisticas', component: StatisticsComponent },
     { path: 'ControlGestion', component: LoginComponent },
     { path: 'ControlGestion/inicio', component: HomecComponent },
     { path: 'ControlGestion/buscar/:search', component: SearchComponent },

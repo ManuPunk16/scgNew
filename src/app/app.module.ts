@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +18,7 @@ import { HomecComponent } from './components/controlGestion/homec/homec.componen
 import { SearchComponent } from './components/controlGestion/search/search.component';
 import { DocumentsComponent } from './components/controlGestion/documents/documents.component';
 import { DocumentEditComponent } from './components/controlGestion/document-edit/document-edit.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { DocumentEditComponent } from './components/controlGestion/document-edit
     HomecComponent,
     SearchComponent,
     DocumentsComponent,
-    DocumentEditComponent
+    DocumentEditComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { DocumentEditComponent } from './components/controlGestion/document-edit
     HttpClientModule,
     AngularFileUploaderModule,
     NgxPaginationModule,
-    OrderModule
+    OrderModule,
+    NgChartsModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
