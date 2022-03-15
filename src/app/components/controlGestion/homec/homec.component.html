@@ -5,7 +5,7 @@
 <div *ngIf="documents">
   <!-- Button trigger modal -->
   <div class="d-grid gap-2 col-6 mx-auto">
-    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <button class="btn btn-primary" style="background-color: #235B4E;" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       Insertar Registro Nuevo</button>
   </div>
 
@@ -51,6 +51,11 @@
                   [(ngModel)]="doc.fecha_recepcion" id="fecha_recepcion">
               </div>
               <div class="col-6">
+                <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
+                <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
+                  [(ngModel)]="doc.fecha_oficio" id="fecha_oficio">
+              </div>
+              <div class="col-6">
                 <label for="remitido" class="form-label">Remitido</label>
                 <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="doc.remitido"
                   id="remitido">
@@ -60,15 +65,15 @@
                 <input type="text" class="form-control" name="origen" #origen="ngModel" [(ngModel)]="doc.origen"
                   id="origen">
               </div>
+              <div class="mb-3">
+                <label for="asunto" class="form-label">Asunto</label>
+                <textarea name="asunto" #asunto="ngModel" [(ngModel)]="doc.asunto" class="form-control"
+                  id="asunto" rows="3"></textarea>
+              </div>
               <div class="col-6">
                 <label for="asignado" class="form-label">Asignado</label>
                 <input type="text" class="form-control" name="asignado" #asignado="ngModel" [(ngModel)]="doc.asignado"
                   id="asignado">
-              </div>
-              <div class="col-md-6">
-                <label for="asunto" class="form-label">Asunto</label>
-                <input type="text" class="form-control" name="asunto" #asunto="ngModel" [(ngModel)]="doc.asunto"
-                  id="asunto">
               </div>
               <div class="col-md-6">
                 <label for="estatus" class="form-label">Estatus</label>

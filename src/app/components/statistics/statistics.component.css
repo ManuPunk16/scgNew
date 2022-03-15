@@ -1,5 +1,6 @@
 canvas {
-    border: 1px dotted red;
+    /* border: 1px dotted red; */
+    background-color: rgb(223, 223, 223);
 }
 
 .chart-container {

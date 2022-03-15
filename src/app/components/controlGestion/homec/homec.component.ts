@@ -55,7 +55,7 @@ export class HomecComponent implements OnInit {
     // console.log(_router.url);
     this.title = "Gestor";
 
-    this.doc = new Document('',1, '', '', '', '', '', '', '', '', '', null, null);
+    this.doc = new Document('',1, '', '', '', '', '', '', '', '', '','', null, null);
 
     this.instrumento = [
       {

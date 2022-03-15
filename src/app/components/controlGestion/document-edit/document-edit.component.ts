@@ -36,7 +36,7 @@ export class DocumentEditComponent implements OnInit {
 
     this.title = "Gestor";
     this.url = Global.url;
-    this.doc = new Document('',1, '', '', '', '', '', '', '', '', '', null, null);
+    this.doc = new Document('',1, '', '', '', '', '', '', '', '', '','', null, null);
 
     this.instrumento = [
       {

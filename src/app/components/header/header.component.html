@@ -1,7 +1,7 @@
 <div>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #9F2241;">
     <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['']">Gestion de Sistemas</a>
+      <a class="navbar-brand text-light" [routerLink]="['']">Gestion de Sistemas</a>
       <div class="spacer"></div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,23 +10,23 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="['']">Inicio</a>
+            <a class="nav-link active text-light" aria-current="page" [routerLink]="['']">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['ControlGestion/inicio']">Control de Gestion</a>
+            <a class="nav-link text-light" [routerLink]="['ControlGestion/inicio']">Control de Gestion</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled text-light" href="#">Prueba 1</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Prueba 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Prueba 2</a>
-          </li>
+            <a class="nav-link disabled text-light">Prueba 2</a>
+          </li> -->
         </ul>
         <!-- *ngIf="route == '/ControlGestion/inicio'" -->
         <form class="d-flex" #searchForm="ngForm" (ngSubmit)="goSearch()">
           <input class="form-control me-2" type="search" placeholder="Busqueda" aria-label="Search"
             [(ngModel)]="searchString" [ngModelOptions]="{standalone: true}">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
+          <button class="btn btn-light" type="submit">Buscar</button>
         </form>
       </div>
     </div>
