@@ -1,31 +1,92 @@
-<div class="chart-container">
-    <div>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+      Grafica 1
+    </button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+      Grafica 2
+    </button>
+    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
+      Grafica 3
+    </button>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent" style="background-color: aliceblue;">
+  <br>
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <p>Presentacion de la Grafica Numero 1.</p>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+      </figcaption>
+    </figure>
+    <div class="chart-container">
       <div>
-        <div style="display: block">
-          Ejemplo Tabla Estadisticas #1
-          <canvas id="chart" baseChart [data]="barChartData" [options]="barChartOptions"
-            [type]="barChartType" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
+        <div>
+          <div style="display: block">
+            <canvas baseChart 
+              [data]="barChartData"
+              [type]="barChartType" 
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+            >
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
-</div>
-
-<br>
-<!-- <hr> -->
-<br><br>
-
-<div class="chart-container">
-    <div>
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <p>Presentacion de la Grafica Numero 2.</p>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+      </figcaption>
+    </figure>
+    <div class="chart-container">
       <div>
-        <div style="display: block">
-          Ejemplo Tabla Estadisticas #2
-          <canvas id="chart" baseChart [data]="barChartData" [options]="barChartOptions"
-            [type]="barChartType" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
+        <div>
+          <div style="display: block">
+            <canvas baseChart 
+              [data]="barChartData2"
+              [type]="barChartType2" 
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+            >
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+    <figure class="text-center">
+      <blockquote class="blockquote">
+        <p>Presentacion de la Grafica Numero 3.</p>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+      </figcaption>
+    </figure>
+    <div class="chart-container">
+      <div>
+        <div>
+          <div style="display: block">
+            <canvas baseChart 
+              [data]="barChartData3"
+              [type]="barChartType3" 
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br><br>
 </div>
-
-<br><br>

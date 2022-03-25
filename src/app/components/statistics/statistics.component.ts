@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartEvent, ChartOptions, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { ChartData, ChartEvent, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-statistics',
@@ -9,23 +8,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class StatisticsComponent {
 
-  public barChartOptions: ChartConfiguration['options'] = {
-    elements: {
-      line: {
-        tension: 0.4
-      }
-    },
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      x: {},
-      y: {
-        min: 10
-      }
-    },
-    plugins: {
-      legend: { display: true },
-    }
-  };
+  //GRAFICA #1
   public barChartLabels: string[] = [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ];
   public barChartType: ChartType = 'bar';
 
@@ -34,6 +17,36 @@ export class StatisticsComponent {
     datasets: [
       { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'Series A' },
       { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
+    ]
+  };
+
+  //GRAFICA #2
+  public barChartLabels2: string[] = [ '2006', '2007', '2008', '2009', '2010', '2011', '2022' ];
+  public barChartType2: ChartType = 'bar';
+
+  public barChartData2: ChartData<'bar'> = {
+    labels: this.barChartLabels2,
+    datasets: [
+      { data: [ 65, 59, 80, 81, 56, 55, 99 ], label: 'Series A' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series C' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series D' }
+    ]
+  };
+
+  //GRAFICA #3
+  public barChartLabels3: string[] = [ '2006', '2007', '2008', '2009', '2010', '2011', '2022' ];
+  public barChartType3: ChartType = 'bar';
+
+  public barChartData3: ChartData<'bar'> = {
+    labels: this.barChartLabels3,
+    datasets: [
+      { data: [ 65, 59, 80, 81, 56, 55, 99 ], label: 'Series A' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series C' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series D' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series E' },
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series F' }
     ]
   };
 
@@ -46,7 +59,4 @@ export class StatisticsComponent {
     console.log(event, active);
   }
 
-  public randomize(): void {
-    this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
-  }
 }
