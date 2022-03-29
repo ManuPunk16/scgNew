@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { TokenStorageService } from '../../service/token-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +12,18 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
   public searchString: string = "";
   public currentItem = "Hola Mundo!";
   public route: any = "";
 
   constructor(
+    private tokenStorageService: TokenStorageService,
     private _router : Router,
     private _route : ActivatedRoute
   ) {
@@ -24,6 +32,19 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+  }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
 
   goSearch(){

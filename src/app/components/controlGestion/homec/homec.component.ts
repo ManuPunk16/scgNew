@@ -5,6 +5,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Document } from 'src/app/models/document';
 import { Global } from 'src/app/service/global';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../../../service/user.service';
+import { TokenStorageService } from '../../../service/token-storage.service';
 
 @Component({
   selector: 'app-homec',
@@ -13,6 +15,12 @@ import { DomSanitizer } from '@angular/platform-browser';
   providers: [DocumentService]
 })
 export class HomecComponent implements OnInit {
+
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
 
   public title: string;
   public instrumento: Array<any>;
@@ -23,6 +31,8 @@ export class HomecComponent implements OnInit {
 
   public doc: Document;
   public status: string = "";
+
+  content?: string;
 
   afuConfig = {
     multiple: false,
@@ -50,7 +60,9 @@ export class HomecComponent implements OnInit {
     private _documentService: DocumentService,
     private _router: Router,
     private zone: NgZone,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private userService: UserService,
+    private tokenStorageService: TokenStorageService
   ) {
     // console.log(_router.url);
     this.title = "Gestor";
@@ -113,6 +125,14 @@ export class HomecComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDocs();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
   }
 
   getDocs() {

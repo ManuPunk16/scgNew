@@ -3,6 +3,7 @@ import { Document } from '../../../models/document'
 import { Global } from 'src/app/service/global';
 import { DocumentService } from 'src/app/service/document.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../../../service/token-storage.service';
 
 @Component({
   selector: 'app-documents',
@@ -10,6 +11,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./documents.component.css']
 })
 export class DocumentsComponent implements OnInit {
+
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
 
   orderHeader: String = '';
   isDescOrder: boolean = true;
@@ -20,6 +27,7 @@ export class DocumentsComponent implements OnInit {
   @Input() documents: Document[] = [];
 
   constructor(
+    private tokenStorageService: TokenStorageService,
     private _documentService: DocumentService,
     private zone: NgZone,
     private _router: Router
@@ -43,6 +51,14 @@ export class DocumentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
   }
 
   sort(headerName:String){

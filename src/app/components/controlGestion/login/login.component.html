@@ -1,29 +1,50 @@
-<div class="container">
-    <div class="row">
-      <h1 class="text-center">Control de Gestion</h1>
-      <div class="login-wrap">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <div class="col-sm-9">
-              <input type="email" class="form-control" id="inputUser" placeholder="Usuario" required>
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <h3 class="mb-5">Iniciar Sesion</h3>
+            <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+              <div>
+                <div class="form-outline mb-4">
+                  <label for="username">Usuario</label>
+                  <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
+                    #username="ngModel" />
+                  <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
+                    Usuario es Requerido!
+                  </div>
+                </div>
+                <div class="form-outline mb-4">
+                  <label for="password">Contraseña</label>
+                  <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
+                    minlength="6" #password="ngModel" />
+                  <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+                    <div *ngIf="password.errors.required">Contraseña es Requerida!</div>
+                    <div *ngIf="password.errors.minlength">
+                      La contrasñea debe de tener al menos 6 caracteres
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <button class="btn btn-primary btn-block">
+                  Ingresar
+                </button>
+              </div>
+              <div class="form-group">
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                  Ingreso Fallido: {{ errorMessage }}
+                </div>
+              </div>
+            </form>
+            <div class="alert alert-success" *ngIf="isLoggedIn">
+              Iniciaste como: {{ roles }}.
             </div>
           </div>
-          <br>
-          <div class="form-group">
-            <div class="col-sm-9">
-              <input type="password" class="form-control" id="inputPsw" placeholder="Contraseña" required>
-            </div>
-          </div>
-          <br>
-          <div class="form-group last">
-            <div class="col-sm-offset-3 col-sm-9">
-              <button type="submit" class="btn btn-success btn-sm">
-                Entrar</button>
-              <button type="reset" class="btn btn-default btn-sm">
-                Resetear</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
+</section>

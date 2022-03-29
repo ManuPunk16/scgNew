@@ -1,8 +1,8 @@
 <div>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #9F2241;">
     <div class="container-fluid">
-      <a class="navbar-brand text-light" [routerLink]="['']">Gestion de Sistemas</a>
-      <div class="spacer"></div>
+      <a class="navbar-brand text-light" [routerLink]="['']">G.S.</a>
+      <!-- <div class="spacer"></div> -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -15,13 +15,44 @@
           <li class="nav-item">
             <a class="nav-link text-light" [routerLink]="['ControlGestion/inicio']">Control de Gestion</a>
           </li>
+          <li class="nav-item" *ngIf="showAdminBoard">
+            <a [routerLink]="['Administrador']" class="nav-link text-light" routerLink="admin">Panel Administrador</a>
+          </li>
+          <li class="nav-item" *ngIf="showModeratorBoard">
+            <a [routerLink]="['Moderador']" class="nav-link text-light" routerLink="mod">Panel Moderador</a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['Usuario']" class="nav-link text-light" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link disabled text-light" href="#">Prueba 1</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled text-light">Prueba 2</a>
           </li> -->
+          
         </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+          <!-- <li class="nav-item">
+            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+          </li> -->
+          <li class="nav-item">
+            <a [routerLink]="['ControlGestion']" class="nav-link text-light" routerLink="login">Iniciar Sesion</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+          <li class="nav-item">
+            <a [routerLink]="['Perfil']" class="nav-link text-light" routerLink="profile">{{ username }}</a>
+          </li>
+          <li class="nav-item">
+            <a href class="nav-link text-light" (click)="logout()">Cerrar Sesion</a>
+          </li>
+        </ul>
+        
+        <ul>
+
+        </ul>
+        
         <!-- *ngIf="route == '/ControlGestion/inicio'" -->
         <form class="d-flex" #searchForm="ngForm" (ngSubmit)="goSearch()">
           <input class="form-control me-2" type="search" placeholder="Busqueda" aria-label="Search"

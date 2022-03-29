@@ -19,6 +19,11 @@ import { SearchComponent } from './components/controlGestion/search/search.compo
 import { DocumentsComponent } from './components/controlGestion/documents/documents.component';
 import { DocumentEditComponent } from './components/controlGestion/document-edit/document-edit.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ProfileComponent } from './components/controlGestion/profile/profile.component';
+import { BoardAdminComponent } from './components/controlGestion/board-admin/board-admin.component';
+import { BoardModeratorComponent } from './components/controlGestion/board-moderator/board-moderator.component';
+import { BoardUserComponent } from './components/controlGestion/board-user/board-user.component';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,11 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     SearchComponent,
     DocumentsComponent,
     DocumentEditComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ProfileComponent,
+    BoardAdminComponent,
+    BoardModeratorComponent,
+    BoardUserComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     OrderModule,
     NgChartsModule
   ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
