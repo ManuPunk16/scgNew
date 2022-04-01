@@ -24,8 +24,8 @@
             <div class="row g-3">
               <div class="col-md-3">
                 <label for="num_folio" class="form-label">Num. Folio</label>
-                <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="doc.num_folio"
-                  class="form-control" id="num_folio" required>
+                <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="doc.num_folio"
+                  class="form-control" id="num_folio" required autocomplete="off">
                 <div class="alert alert-danger" role="alert" *ngIf="!num_folio.valid && num_folio.touched">
                   Campo Obligatorio
                 </div>
@@ -33,9 +33,19 @@
               <div class="col-md-3">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
                 <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="doc.num_oficio"
-                  class="form-control" id="num_oficio">
+                  class="form-control" id="num_oficio" autocomplete="off">
               </div>
-              <div class="col-md-6">
+              <div class="col-6">
+                <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
+                <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
+                  [(ngModel)]="doc.fecha_oficio" id="fecha_oficio">
+              </div>
+              <div class="col-6">
+                <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
+                <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
+                  [(ngModel)]="doc.fecha_recepcion" id="fecha_recepcion">
+              </div>
+              <!-- <div class="col-md-6">
                 <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
                 <select name="ins_juridico" #ins_juridico="ngModel" [(ngModel)]="doc.ins_juridico" id="ins_juridico"
                   class="form-select">
@@ -44,26 +54,27 @@
                     {{ins.name}}
                   </option>
                 </select>
+              </div> -->
+
+              <div class="col-md-6">
+                <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
+                <input list="intrumentos" name="ins_juridico" class="form-control" placeholder="Estatus del Documento" aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off">
+                <datalist id="intrumentos">
+                  <option *ngFor="let ins of instrumento" [ngValue]="ins.name">
+                    {{ins.name}}
+                  </option>
+                </datalist>
               </div>
-              <div class="col-6">
-                <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
-                <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
-                  [(ngModel)]="doc.fecha_recepcion" id="fecha_recepcion">
-              </div>
-              <div class="col-6">
-                <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
-                <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
-                  [(ngModel)]="doc.fecha_oficio" id="fecha_oficio">
-              </div>
+
               <div class="col-6">
                 <label for="remitido" class="form-label">Remitido</label>
                 <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="doc.remitido"
-                  id="remitido">
+                  id="remitido" autocomplete="off">
               </div>
               <div class="col-6">
                 <label for="origen" class="form-label">Origen</label>
                 <input type="text" class="form-control" name="origen" #origen="ngModel" [(ngModel)]="doc.origen"
-                  id="origen">
+                  id="origen" autocomplete="off">
               </div>
               <div class="mb-3">
                 <label for="asunto" class="form-label">Asunto</label>
@@ -72,10 +83,14 @@
               </div>
               <div class="col-6">
                 <label for="asignado" class="form-label">Asignado</label>
-                <input type="text" class="form-control" name="asignado" #asignado="ngModel" [(ngModel)]="doc.asignado"
-                  id="asignado">
+                <input list="asignados" class="form-control" name="asignado" id="asignado" placeholder="Asignación del Documento" aria-label="Asignación del Documento" aria-describedby="basic-addon1" autocomplete="off">
+                  <datalist id="asignados">
+                    <option *ngFor="let asignados of asignado" [ngValue]="asignados.direccion">
+                      {{asignados.direccion}}
+                    </option>
+                  </datalist>
               </div>
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <label for="estatus" class="form-label">Estatus</label>
                 <select name="estatus" #estatus="ngModel" [(ngModel)]="doc.estatus" id="estatus" class="form-select">
                   <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
@@ -83,7 +98,18 @@
                     {{est.name}}
                   </option>
                 </select>
+              </div> -->
+
+              <div class="col-md-6">
+                <label for="browser" class="form-label">Estatus</label>
+                <input list="browsers" name="browser" class="form-control" placeholder="Estatus del Documento" aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off">
+                <datalist id="browsers">
+                  <option *ngFor="let est of estat" [ngValue]="est.name">
+                    {{est.name}}
+                  </option>
+                </datalist>
               </div>
+
               <div class="mb-3">
                 <label for="observacion" class="form-label">Observación</label>
                 <textarea name="observacion" #observacion="ngModel" [(ngModel)]="doc.observacion" class="form-control"

@@ -2,7 +2,7 @@ export class Document{
     
     constructor(
         _id = "",
-        num_folio = 1,
+        num_folio = 0,
         num_oficio = "",
         ins_juridico = "",
         fecha_recepcion = "",
@@ -32,7 +32,7 @@ export class Document{
     }
 
     _id: string;
-    num_folio: number;
+    num_folio: number | null;
     num_oficio: string;
     ins_juridico: string;
     fecha_recepcion: string;

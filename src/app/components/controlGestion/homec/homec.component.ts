@@ -24,6 +24,7 @@ export class HomecComponent implements OnInit {
 
   public title: string;
   public instrumento: Array<any>;
+  public asignado: Array<any>;
   public estat: Array<any>;
   documents: Document[] = [];
   public pdfEntry: Array<File> = [];
@@ -68,6 +69,42 @@ export class HomecComponent implements OnInit {
     this.title = "Gestor";
 
     this.doc = new Document('',1, '', '', '', '', '', '', '', '', '','', null, null);
+
+    this.asignado = [
+      {
+        direccion: "Consejero Jurídico"
+      },
+      {
+        direccion: "Secretaria Partiular y de Comunicación Social"
+      },
+      {
+        direccion: "Dirección de Coordinación y Control de Gestión"
+      },
+      {
+        direccion: "Dirección General Contenciosa"
+      },
+      {
+        direccion: "Dirección de Asistencia Técnica y Combate a la Corrupción"
+      },
+      {
+        direccion: "Dirección de Servicios Legales"
+      },
+      {
+        direccion: "Dirección General Consultiva"
+      },
+      {
+        direccion: "Dirección de Estudios Legislativos"
+      },
+      {
+        direccion: "Dirección de Estudios Jurídicos"
+      },
+      {
+        direccion: "Dirección de Compilación Normativa, Archivo e Igualdad de Género"
+      },
+      {
+        direccion: "Dirección Administrativa"
+      }
+    ];
 
     this.instrumento = [
       {
