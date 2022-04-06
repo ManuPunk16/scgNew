@@ -4,8 +4,9 @@
 
 <div *ngIf="documents">
   <!-- Button trigger modal -->
-  <div class="d-grid gap-2 col-6 mx-auto" *ngIf="isLoggedIn">
-    <button class="btn btn-primary" style="background-color: #235B4E;" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <div class="d-grid gap-2 col-6 mx-auto" *ngIf="showModeratorBoard">
+    <button class="btn btn-primary" style="background-color: #235B4E;" type="button" data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop">
       Insertar Registro Nuevo</button>
   </div>
 
@@ -58,9 +59,11 @@
 
               <div class="col-md-6">
                 <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
-                <input list="intrumentos" name="ins_juridico" class="form-control" placeholder="Estatus del Documento" aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off">
+                <input list="intrumentos" name="ins_juridico" class="form-control" placeholder="Estatus del Documento"
+                  aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off"
+                  #ins_juridico="ngModel" [(ngModel)]="doc.ins_juridico">
                 <datalist id="intrumentos">
-                  <option *ngFor="let ins of instrumento" [ngValue]="ins.name">
+                  <option *ngFor="let ins of instrumento">
                     {{ins.name}}
                   </option>
                 </datalist>
@@ -71,24 +74,41 @@
                 <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="doc.remitido"
                   id="remitido" autocomplete="off">
               </div>
-              <div class="col-6">
+              <!-- <div class="col-6">
                 <label for="origen" class="form-label">Origen</label>
                 <input type="text" class="form-control" name="origen" #origen="ngModel" [(ngModel)]="doc.origen"
                   id="origen" autocomplete="off">
+              </div> -->
+
+              <div class="col-md-6">
+                <label for="origen" class="form-label">Origen</label>
+                <input list="instituciones" name="origen" class="form-control" placeholder="Origen del Documento"
+                  aria-label="Origen del Documento" aria-describedby="basic-addon1" autocomplete="off"
+                  #origen="ngModel" [(ngModel)]="doc.origen">
+                <datalist id="instituciones">
+                  <option *ngFor="let org of variable">
+                    {{org.institucion}}
+                  </option>
+                </datalist>
               </div>
+
               <div class="mb-3">
                 <label for="asunto" class="form-label">Asunto</label>
-                <textarea name="asunto" #asunto="ngModel" [(ngModel)]="doc.asunto" class="form-control"
-                  id="asunto" rows="3"></textarea>
+                <textarea name="asunto" #asunto="ngModel" [(ngModel)]="doc.asunto" class="form-control" id="asunto"
+                  rows="3"></textarea>
               </div>
               <div class="col-6">
                 <label for="asignado" class="form-label">Asignado</label>
-                <input list="asignados" class="form-control" name="asignado" id="asignado" placeholder="Asignación del Documento" aria-label="Asignación del Documento" aria-describedby="basic-addon1" autocomplete="off">
-                  <datalist id="asignados">
-                    <option *ngFor="let asignados of asignado" [ngValue]="asignados.direccion">
-                      {{asignados.direccion}}
-                    </option>
-                  </datalist>
+                <input list="asignados" class="form-control" name="asignado" id="asignado"
+                  placeholder="Asignación del Documento" aria-label="Asignación del Documento"
+                  aria-describedby="basic-addon1" autocomplete="off"
+                  #asignado="ngModel" [(ngModel)]="doc.asignado"
+                  >
+                <datalist id="asignados">
+                  <option *ngFor="let asig of asignacion">
+                    {{asig.direccion}}
+                  </option>
+                </datalist>
               </div>
               <!-- <div class="col-md-6">
                 <label for="estatus" class="form-label">Estatus</label>
@@ -101,8 +121,11 @@
               </div> -->
 
               <div class="col-md-6">
-                <label for="browser" class="form-label">Estatus</label>
-                <input list="browsers" name="browser" class="form-control" placeholder="Estatus del Documento" aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off">
+                <label for="estatus" class="form-label">Estatus</label>
+                <input list="browsers" name="estatus" class="form-control" placeholder="Estatus del Documento"
+                  aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off"
+                  #estatus="ngModel" [(ngModel)]="doc.estatus"
+                  >
                 <datalist id="browsers">
                   <option *ngFor="let est of estat" [ngValue]="est.name">
                     {{est.name}}
@@ -119,11 +142,8 @@
               </angular-file-uploader> -->
               <div class="mb-3">
                 <label for="pdfEntrada" class="form-label">PDF de entrada</label>
-                <input class="form-control" disabled type="file" name="file0" (change)="capturarEntrada($event)" id="pdfEntrada">
-              </div>
-              <div class="mb-3">
-                <label for="pdfSalida" class="form-label">PDF de salida</label>
-                <input class="form-control" disabled type="file" name="file0" (change)="capturarSalida($event)" id="pdfSalida">
+                <input class="form-control" disabled type="file" name="file0" (change)="capturarEntrada($event)"
+                  id="pdfEntrada">
               </div>
             </div>
           </div>

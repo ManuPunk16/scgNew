@@ -48,6 +48,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goSearch(){
-    this._router.navigate(['ControlGestion/buscar/', this.searchString]);
+    this._router.navigate(['Entradas/Buscar/', this.searchString]);
   }
 }

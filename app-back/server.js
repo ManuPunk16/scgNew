@@ -52,9 +52,10 @@ app.get("/", (req, res) => {
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 const document_routes = require('./routes/document.routes');
+const departure_routes = require('./routes/departure.routes');
 // require("./routes/document.routes")(app);
 
-app.use("/api", document_routes);
+app.use("/api", document_routes, departure_routes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8081;

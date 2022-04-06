@@ -1,16 +1,16 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
-import { Document } from '../../../models/document';
+import { Component, OnInit, NgZone, Input } from '@angular/core';
+import { Departure } from '../../../models/departure';
 import { Global } from 'src/app/service/global';
-import { DocumentService } from 'src/app/service/document.service';
+import { DepartureService } from 'src/app/service/departure.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../../../service/token-storage.service';
 
 @Component({
-  selector: 'app-documents',
-  templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.css']
+  selector: 'app-departures',
+  templateUrl: './departures.component.html',
+  styleUrls: ['./departures.component.css']
 })
-export class DocumentsComponent implements OnInit {
+export class DeparturesComponent implements OnInit {
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -24,11 +24,11 @@ export class DocumentsComponent implements OnInit {
   public url: string;
   public cantidades: Array<any>;
 
-  @Input() documents: Document[] = [];
+  @Input() departures: Departure[] = [];
 
   constructor(
     private tokenStorageService: TokenStorageService,
-    private _documentService: DocumentService,
+    private _departureService: DepartureService,
     private zone: NgZone,
     private _router: Router
   ) {
@@ -67,7 +67,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   delete(id: any){
-    this._documentService.delete(id).subscribe(
+    this._departureService.delete(id).subscribe(
       response => {
         this.zone.runOutsideAngular(() => {
           location.reload();

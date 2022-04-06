@@ -1,6 +1,7 @@
 import { ModuleWithProviders } from "@angular/core";
 import { Routes, RouterOutlet, RouterModule } from "@angular/router";
 import { Route } from "@angular/compiler/src/core";
+import { AuthGuard } from "./components/controlGestion/authguard.guard";
 
 import { HomeComponent } from "./components/home/home.component";
 import { ErrorComponent } from "./components/error/error.component";
@@ -13,19 +14,23 @@ import { ProfileComponent } from "./components/controlGestion/profile/profile.co
 import { BoardModeratorComponent } from "./components/controlGestion/board-moderator/board-moderator.component";
 import { BoardAdminComponent } from "./components/controlGestion/board-admin/board-admin.component";
 import { BoardUserComponent } from "./components/controlGestion/board-user/board-user.component";
+import { HomeDepartureComponent } from "./components/controlGestion/home-departure/home-departure.component";
+import { DeparturesEditComponent } from "./components/controlGestion/departures-edit/departures-edit.component";
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'inicio', component: HomeComponent },
+    { path: 'Inicio', component: HomeComponent },
     { path: 'Estadisticas', component: StatisticsComponent },
-    { path: 'ControlGestion', component: LoginComponent },
-    { path: 'Perfil', component: ProfileComponent},
-    { path: 'Usuario', component: BoardUserComponent },
-    { path: 'Moderador', component: BoardModeratorComponent },
-    { path: 'Administrador', component: BoardAdminComponent },
-    { path: 'ControlGestion/inicio', component: HomecComponent },
-    { path: 'ControlGestion/buscar/:search', component: SearchComponent },
-    { path: 'ControlGestion/Editar/:id', component: DocumentEditComponent },
+    { path: 'Login', component: LoginComponent },
+    { path: 'Perfil', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'Usuario', component: BoardUserComponent, canActivate: [AuthGuard] },
+    { path: 'Moderador', component: BoardModeratorComponent, canActivate: [AuthGuard] },
+    { path: 'Administrador', component: BoardAdminComponent, canActivate: [AuthGuard] },
+    { path: 'Salidas', component: HomeDepartureComponent, canActivate: [AuthGuard] },
+    { path: 'Salidas/Editar/:id', component: DeparturesEditComponent, canActivate: [AuthGuard] },
+    { path: 'Entradas', component: HomecComponent, canActivate: [AuthGuard] },
+    { path: 'Entradas/Buscar/:search', component: SearchComponent, canActivate: [AuthGuard] },
+    { path: 'Entradas/Editar/:id', component: DocumentEditComponent, canActivate: [AuthGuard] },
     { path: '**', component: ErrorComponent }
 ];
 

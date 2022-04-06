@@ -13,13 +13,16 @@
             <a class="nav-link active text-light" aria-current="page" [routerLink]="['']">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" [routerLink]="['ControlGestion/inicio']">Control de Gestion</a>
+            <a class="nav-link text-light" [routerLink]="['Entradas']" *ngIf="isLoggedIn">Entradas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['Salidas']" *ngIf="isLoggedIn">Salidas</a>
           </li>
           <li class="nav-item" *ngIf="showAdminBoard">
-            <a [routerLink]="['Administrador']" class="nav-link text-light" routerLink="admin">Panel Administrador</a>
+            <a [routerLink]="['Administrador']" class="nav-link text-light">Panel Administrador</a>
           </li>
           <li class="nav-item" *ngIf="showModeratorBoard">
-            <a [routerLink]="['Moderador']" class="nav-link text-light" routerLink="mod">Panel Moderador</a>
+            <a [routerLink]="['Moderador']" class="nav-link text-light">Panel Moderador</a>
           </li>
           <li class="nav-item">
             <a [routerLink]="['Usuario']" class="nav-link text-light" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
@@ -37,7 +40,7 @@
             <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
           </li> -->
           <li class="nav-item">
-            <a [routerLink]="['ControlGestion']" class="nav-link text-light" routerLink="login">Iniciar Sesion</a>
+            <a class="nav-link text-light" [routerLink]="['Login']">Iniciar Sesion</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">

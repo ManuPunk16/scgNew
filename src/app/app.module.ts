@@ -24,6 +24,10 @@ import { BoardAdminComponent } from './components/controlGestion/board-admin/boa
 import { BoardModeratorComponent } from './components/controlGestion/board-moderator/board-moderator.component';
 import { BoardUserComponent } from './components/controlGestion/board-user/board-user.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { DeparturesComponent } from './components/controlGestion/departures/departures.component';
+import { HomeDepartureComponent } from './components/controlGestion/home-departure/home-departure.component';
+import { AuthGuard } from './components/controlGestion/authguard.guard';
+import { DeparturesEditComponent } from './components/controlGestion/departures-edit/departures-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    DeparturesComponent,
+    HomeDepartureComponent,
+    DeparturesComponent,
+    DeparturesEditComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +62,7 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
     OrderModule,
     NgChartsModule
   ],
-  providers: [appRoutingProviders, authInterceptorProviders],
+  providers: [appRoutingProviders, authInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
