@@ -1,6 +1,6 @@
 export var Global = {
     // url: 'http://172.19.82.16:8081/api/',
-    url: 'http://localhost:8081/api/',
+    url: 'http://172.19.82.16:8081/api/',
     // url: 'http://172.19.82.16:8081/api/'
 };
 
