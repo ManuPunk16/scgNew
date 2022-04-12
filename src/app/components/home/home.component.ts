@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -11,25 +12,28 @@ export class HomeComponent implements OnInit {
   public card: Array<any>;
 
   constructor() {
+
+    let myMoment = moment('2022-04-12 18:35').fromNow(); 
+
     this.title = "Catalogo de Sistemas";
     this.card = [
       {
         titulo: "Contról de Gestión",
         descripcion: "En este sistema podras entrar al control de gestion",
-        acceso: "ControlGestion",
-        actualizacion: "Ultima actualizacion hace: 3 min"
+        acceso: "Login",
+        actualizacion: "Ultima actualizacion: "+ myMoment
       },
       {
         titulo: "Informe Estadistico Lexius",
         descripcion: "Informes",
         acceso: "InformeLexius",
-        actualizacion: "Ultima actualizacion hace: 3 min"
+        actualizacion: "Ultima actualizacion hace: not valid"
       },
       {
         titulo: "Informe Estadistico Pagina Web",
         descripcion: "Informes",
         acceso: "InformeCj",
-        actualizacion: "Ultima actualizacion hace: 3 min"
+        actualizacion: "Ultima actualizacion hace: not valid"
       }
     ];
   }

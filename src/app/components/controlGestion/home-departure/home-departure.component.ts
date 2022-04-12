@@ -172,6 +172,9 @@ export class HomeDepartureComponent implements OnInit {
     this._departureService.getDepartures().subscribe(
       res => {
         this.departures = res.departure;
+        this.departures.sort(
+          (a, b) => (a.num_folio > b.num_folio) ? -1 : 1
+        );
       },
       err => console.log(err)
     );

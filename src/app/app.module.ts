@@ -28,6 +28,8 @@ import { DeparturesComponent } from './components/controlGestion/departures/depa
 import { HomeDepartureComponent } from './components/controlGestion/home-departure/home-departure.component';
 import { AuthGuard } from './components/controlGestion/authguard.guard';
 import { DeparturesEditComponent } from './components/controlGestion/departures-edit/departures-edit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { DeparturesEditComponent } from './components/controlGestion/departures-
     AngularFileUploaderModule,
     NgxPaginationModule,
     OrderModule,
-    NgChartsModule
+    NgChartsModule,
+    NgbModule,
+    Ng2SmartTableModule
   ],
   providers: [appRoutingProviders, authInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]

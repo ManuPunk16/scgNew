@@ -361,6 +361,9 @@ export class HomecComponent implements OnInit {
     this._documentService.getDocuments().subscribe(
       res => {
         this.documents = res.document;
+        this.documents.sort(
+          (a, b) => (a.num_folio > b.num_folio) ? -1 : 1
+        );
       },
       err => console.log(err)
     );

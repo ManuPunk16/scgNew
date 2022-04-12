@@ -4,6 +4,7 @@ import { Global } from 'src/app/service/global';
 import { DocumentService } from 'src/app/service/document.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../../../service/token-storage.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-documents',
@@ -17,6 +18,8 @@ export class DocumentsComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  fileName= 'Entradas.xlsx';
+  public docExcel: Array<any> = [];
 
   orderHeader: String = '';
   isDescOrder: boolean = true;
@@ -77,6 +80,47 @@ export class DocumentsComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  exportexcel(): void{
+
+    let newArray = this.documents.sort(
+      (a, b) => (a.num_folio > b.num_folio) ? 1 : -1
+    ) as Document[];
+
+    let resultado = newArray.map(el => {
+      return[
+        el.num_folio,
+        el.num_oficio,
+        el.fecha_oficio,
+        el.fecha_recepcion,
+        el.remitido,
+        el.origen,
+        el.asignado,
+        el.asunto,
+        el.estatus,
+        el.observacion
+      ];
+    });
+
+    /* pass here the table id */
+    // let element = document.getElementById(docExcel);
+    // const ws: XLSX.WorkSheet =XLSX.utils.table_to_book(resultado);
+
+    // var worksheet = XLSX.utils.aoa_to_sheet([
+    //   [ 3.14159, 2 ], // Row "1"
+    //   [ { t:'n', f:'BESSELJ(A1,B1)' } ] // Row "2" will be calculated on file open
+    // };
+
+    var ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(resultado);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
 }

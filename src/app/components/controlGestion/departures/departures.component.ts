@@ -4,6 +4,7 @@ import { Global } from 'src/app/service/global';
 import { DepartureService } from 'src/app/service/departure.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../../../service/token-storage.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-departures',
@@ -17,6 +18,7 @@ export class DeparturesComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  fileName= 'Salidas.xlsx';
 
   orderHeader: String = '';
   isDescOrder: boolean = true;
@@ -77,6 +79,39 @@ export class DeparturesComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  exportexcel(): void
+  {
+    let newArray = this.departures.sort(
+      (a, b) => (a.num_folio > b.num_folio) ? 1 : -1
+    ) as Departure[];
+
+    let resultado = newArray.map(el => {
+      return[
+        el.num_folio,
+        el.num_oficio,
+        el.fecha_oficio,
+        el.fecha_recepcion,
+        el.remitido,
+        el.asignado,
+        el.asunto,
+        el.estatus,
+        el.observacion
+      ];
+    });
+
+    /* pass here the table id */
+    // let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(resultado);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.fileName);
+ 
   }
 
 }
