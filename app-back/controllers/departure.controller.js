@@ -54,12 +54,14 @@ exports.saveDeparture = (req, res) => {
         //Guardar el documento
         departure.save((err, departureStored) => {
             if (err || !departureStored) {
-                console.log(err);
+                console.log("Problema 404: ",err);
                 return res.status(404).send({
                     status: 'error',
                     message: 'El Documento de salida no se ha guardado!'
                 });
             }
+            console.log("..:Nuevo Registro de Salida Añadido:..");
+            console.log("Numero de Folio: ",document.num_folio, "Numero de Oficio: ",document.num_oficio);
             //Devolver respuesta
             return res.status(200).send({
                 status: 'Success',
@@ -68,7 +70,8 @@ exports.saveDeparture = (req, res) => {
         });
 
     } else {
-        return res.status(200).send({
+        console.log("Tengo un error al guardar una salida: ",err);
+        return res.status(424).send({
             status: 'error',
             message: 'Los datos no son validos!!!' 
         });

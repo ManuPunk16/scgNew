@@ -30,6 +30,7 @@
     "highcharts": "^10.0.0",
     "highcharts-angular": "^3.0.0",
     "moment": "^2.29.2",
+    "moment-timezone": "^0.5.34",
     "ng2-charts": "^3.0.8",
     "ng2-completer": "^9.0.1",
     "ng2-smart-table": "^1.7.2",

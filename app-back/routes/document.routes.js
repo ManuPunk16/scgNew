@@ -7,6 +7,7 @@ const multiparty = require('connect-multiparty');
 const entry_upload = multiparty({ uploadDir: './upload/documents/entry' });
 const exit_upload = multiparty({ uploadDir: './upload/documents/exit' });
 
+router.get('/test', documentController.test);
 router.post('/datos-documentos', documentController.documents);
 router.get('/prueba-controlador', documentController.test);
 router.post('/save', documentController.save);

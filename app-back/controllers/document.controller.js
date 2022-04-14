@@ -80,12 +80,14 @@ exports.save = (req, res) => {
         //Guardar el documento
         document.save((err, documentStored) => {
             if (err || !documentStored) {
-                console.log(err);
+                console.log("Problema 404: ",err);
                 return res.status(404).send({
                     status: 'error',
                     message: 'El Documento no se ha guardado!'
                 });
             }
+            console.log("..:Nuevo Registro de Entrada Añadido:..");
+            console.log("Numero de Folio: ",document.num_folio, "Numero de Oficio: ",document.num_oficio);
             //Devolver respuesta
             return res.status(200).send({
                 status: 'Success',
@@ -94,7 +96,8 @@ exports.save = (req, res) => {
         });
 
     } else {
-        return res.status(200).send({
+        console.log("Tengo un error al guardar una entrada: ",err);
+        return res.status(424).send({
             status: 'error',
             message: 'Los datos no son validos!' 
         });

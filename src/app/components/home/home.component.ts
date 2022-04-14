@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   constructor() {
 
     let myMoment = moment('2022-04-12 18:35').fromNow(); 
+    let now = moment().format('DD/MM/YYYY hh:mm');
 
     this.title = "Catalogo de Sistemas";
     this.card = [
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
         titulo: "Informe Estadistico Lexius",
         descripcion: "Informes",
         acceso: "InformeLexius",
-        actualizacion: "Ultima actualizacion hace: not valid"
+        actualizacion: "Ultima actualizacion hace: not valid :" + now
       },
       {
         titulo: "Informe Estadistico Pagina Web",
