@@ -87,23 +87,23 @@ export class DeparturesComponent implements OnInit {
       (a, b) => (a.num_folio > b.num_folio) ? 1 : -1
     ) as Departure[];
 
-    let resultado = newArray.map(el => {
-      return[
-        el.num_folio,
-        el.num_oficio,
-        el.fecha_oficio,
-        el.fecha_recepcion,
-        el.remitido,
-        el.asignado,
-        el.asunto,
-        el.estatus,
-        el.observacion
-      ];
-    });
+    // let resultado = newArray.map(el => {
+    //   return[
+    //     el.num_folio,
+    //     el.num_oficio,
+    //     el.fecha_oficio,
+    //     el.fecha_recepcion,
+    //     el.remitido,
+    //     el.asignado,
+    //     el.asunto,
+    //     el.estatus,
+    //     el.observacion
+    //   ];
+    // });
 
     /* pass here the table id */
     // let element = document.getElementById('excel-table');
-    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(resultado);
+    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(newArray);
  
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();

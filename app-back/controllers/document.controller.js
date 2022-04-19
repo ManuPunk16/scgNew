@@ -1,5 +1,6 @@
 var validator = require('validator');
 var Document = require('../models/document.models');
+var moment = require('moment');
 var fs = require('fs');
 var path = require('path');
 
@@ -22,6 +23,7 @@ exports.documents = (req, res) => {
 },
 
 exports.test = (req, res) => {
+    console.log(moment().format('DD/MM/YYYY hh:mm'));
     return res.status(200).send({
         message: 'Soy la accion de test de document' 
     });
@@ -87,6 +89,7 @@ exports.save = (req, res) => {
                 });
             }
             console.log("..:Nuevo Registro de Entrada Añadido:..");
+            console.log(moment().format('DD/MM/YYYY hh:mm'));
             console.log("Numero de Folio: ",document.num_folio, "Numero de Oficio: ",document.num_oficio);
             //Devolver respuesta
             return res.status(200).send({
@@ -214,6 +217,9 @@ exports.update = (req, res) => {
                 });
             }
 
+            console.log("..:Nuevo Documento Editado:..");
+            console.log(moment().format('DD/MM/YYYY hh:mm'));
+
             return res.status(200).send({
                 status: 'success',
                 document: documentUpdated 
@@ -246,6 +252,9 @@ exports.delete = (req, res) => {
                 message: 'No se ha guardado el articulo, no existe!' 
             });
         }
+
+        console.log("..:Nuevo Registro Eliminado:..");
+        console.log(moment().format('DD/MM/YYYY hh:mm'));
 
         return res.status(200).send({
             status: 'success',

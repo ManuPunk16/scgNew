@@ -88,31 +88,23 @@ export class DocumentsComponent implements OnInit {
       (a, b) => (a.num_folio > b.num_folio) ? 1 : -1
     ) as Document[];
 
-    let resultado = newArray.map(el => {
-      return[
-        el.num_folio,
-        el.num_oficio,
-        el.fecha_oficio,
-        el.fecha_recepcion,
-        el.remitido,
-        el.origen,
-        el.asignado,
-        el.asunto,
-        el.estatus,
-        el.observacion
-      ];
-    });
+    // let resultado = newArray.map(el => {
+    //   return[
+    //     el.num_folio,
+    //     el.num_oficio,
+    //     el.fecha_oficio,
+    //     el.fecha_recepcion,
+    //     el.remitido,
+    //     el.asignado,
+    //     el.asunto,
+    //     el.estatus,
+    //     el.observacion
+    //   ];
+    // });
 
     /* pass here the table id */
-    // let element = document.getElementById(docExcel);
-    // const ws: XLSX.WorkSheet =XLSX.utils.table_to_book(resultado);
-
-    // var worksheet = XLSX.utils.aoa_to_sheet([
-    //   [ 3.14159, 2 ], // Row "1"
-    //   [ { t:'n', f:'BESSELJ(A1,B1)' } ] // Row "2" will be calculated on file open
-    // };
-
-    var ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(resultado);
+    // let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(newArray);
  
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();

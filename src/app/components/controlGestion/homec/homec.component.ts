@@ -364,6 +364,7 @@ export class HomecComponent implements OnInit {
         this.documents.sort(
           (a, b) => (a.num_folio > b.num_folio) ? -1 : 1
         );
+        console.log(this.documents);
       },
       err => console.log(err)
     );

@@ -1,12 +1,23 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+// var options = [{day: 'numeric'}, {month: 'short'}, {year: 'numeric'}];
+var _date  = new Date();
+var _date2  = new Date().toLocaleString('en-es', { weekday:"long", year:"numeric", month:"short", day:"numeric"});
 
 const documentSchema = new Schema({ 
     num_folio : { type : Number, required: true },
     num_oficio : { type : String, required : true },
     ins_juridico : { type : String, required : true },
-    fecha_recepcion : { type : String, required : true },
-    fecha_oficio : { type : String, required : true },
+    fecha_recepcion : {
+        type : String,
+        required : true,
+        default : _date2
+    },
+    fecha_oficio : {
+        type : String,
+        required : true,
+        default : _date
+    },
     remitido : { type : String, required : true },
     origen : { type : String, required : true },
     asignado : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
