@@ -47,7 +47,7 @@
                 [(ngModel)]="dep.fecha_oficio" id="fecha_oficio">
             </div>
             <div class="col-6">
-              <label for="remitido" class="form-label">Remitido</label>
+              <label for="remitido" class="form-label">Remitente</label>
               <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="dep.remitido"
                 id="remitido">
             </div>
@@ -69,14 +69,12 @@
             </div>
             <div class="col-md-6">
               <label for="estatus" class="form-label">Estatus</label>
-              <input list="browsers" name="estatus" id="estatus" class="form-control"
-                placeholder="Estatus del Documento" aria-label="Estatus del Documento" aria-describedby="basic-addon1"
-                autocomplete="off" #estatus="ngModel" [(ngModel)]="dep.estatus">
-              <datalist id="browsers">
-                <option *ngFor="let est of estat">
+              <select name="estatus" #estatus="ngModel" [(ngModel)]="dep.estatus" id="estatus" class="form-select">
+                <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
+                <option *ngFor="let est of estat" [ngValue]="est.name">
                   {{est.name}}
                 </option>
-              </datalist>
+              </select>
             </div>
             <div class="mb-3">
               <label for="observacion" class="form-label">Observación</label>
@@ -85,11 +83,11 @@
             </div>
             <!-- <angular-file-uploader [config]="afuConfig" (ApiResponse)="pdfUploadEntry($event)">
               </angular-file-uploader> -->
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="pdfSalida" class="form-label">PDF de Salida</label>
               <input class="form-control" disabled type="file" name="file0" (change)="capturarEntrada($event)"
                 id="pdfSalida">
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="modal-footer">

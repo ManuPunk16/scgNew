@@ -74,7 +74,7 @@ export class HomecComponent implements OnInit {
 
     this.asignacion = [
       {
-        direccion: "Consejero Jurídico"
+        direccion: "Oficina del Consejero Jurídico"
       },
       {
         direccion: "Secretaria Partiular y de Comunicación Social"

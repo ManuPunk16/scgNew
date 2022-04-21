@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="col-6">
-                                <label for="remitido" class="form-label">Remitido</label>
+                                <label for="remitido" class="form-label">Remitente</label>
                                 <input type="text" class="form-control" name="remitido" #remitido="ngModel"
                                     [(ngModel)]="dep.remitido" id="remitido" autocomplete="off">
                             </div>
@@ -82,16 +82,13 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="estatus" class="form-label">Estatus</label>
-                                <input list="browsers" name="estatus" id="estatus" class="form-control"
-                                    placeholder="Estatus del Documento" aria-label="Estatus del Documento"
-                                    aria-describedby="basic-addon1" autocomplete="off"
-                                    #estatus="ngModel" [(ngModel)]="dep.estatus">
-                                <datalist id="browsers">
-                                    <option *ngFor="let est of estat">
-                                        {{est.name}}
-                                    </option>
-                                </datalist>
+                              <label for="estatus" class="form-label">Estatus</label>
+                              <select name="estatus" #estatus="ngModel" [(ngModel)]="dep.estatus" id="estatus" class="form-select">
+                                <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
+                                <option *ngFor="let est of estat" [ngValue]="est.name">
+                                  {{est.name}}
+                                </option>
+                              </select>
                             </div>
 
                             <div class="mb-3">
@@ -99,11 +96,11 @@
                                 <textarea name="observacion" #observacion="ngModel" [(ngModel)]="dep.observacion"
                                     class="form-control" id="observacion" rows="3"></textarea>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="pdfSalida" class="form-label">PDF de salida</label>
                                 <input class="form-control" disabled type="file" name="file0"
                                     (change)="capturarSalida($event)" id="pdfSalida">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="modal-footer">

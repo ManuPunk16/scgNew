@@ -105,14 +105,14 @@ export class DocumentsComponent implements OnInit {
     /* pass here the table id */
     // let element = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(newArray);
- 
+
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
-    /* save to file */  
+
+    /* save to file */
     XLSX.writeFile(wb, this.fileName);
- 
+
   }
 
 }

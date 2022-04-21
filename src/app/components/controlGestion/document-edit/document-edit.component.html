@@ -13,7 +13,7 @@
           <div class="modal-body">
             <div class="row g-3">
               <div class="col-md-3">
-                <label for="num_folio" class="form-label">Num. Folio</label>
+                <label for="num_folio" class="form-label">Num. Folio Padre</label>
                 <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="doc.num_folio"
                   class="form-control" id="num_folio" required>
                 <div class="alert alert-danger" role="alert" *ngIf="!num_folio.valid && num_folio.touched">
@@ -21,6 +21,11 @@
                 </div>
               </div>
               <div class="col-md-3">
+                <label for="num_folio" class="form-label">Num. Folio Hijo</label>
+                <input type="text"
+                  class="form-control">
+              </div>
+              <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
                 <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="doc.num_oficio"
                   class="form-control" id="num_oficio">
@@ -47,12 +52,12 @@
                   [(ngModel)]="doc.fecha_oficio" id="fecha_oficio">
               </div>
               <div class="col-6">
-                <label for="remitido" class="form-label">Remitido</label>
+                <label for="remitido" class="form-label">Remitente</label>
                 <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="doc.remitido"
                   id="remitido">
               </div>
               <div class="col-md-6">
-                <label for="origen" class="form-label">Origen</label>
+                <label for="origen" class="form-label">Institución de Origen</label>
                 <input list="instituciones" name="origen" class="form-control" placeholder="Origen del Documento"
                   aria-label="Origen del Documento" aria-describedby="basic-addon1" autocomplete="off"
                   #origen="ngModel" [(ngModel)]="doc.origen">
@@ -82,15 +87,12 @@
               </div>
               <div class="col-md-6">
                 <label for="estatus" class="form-label">Estatus</label>
-                <input list="browsers" name="estatus" class="form-control" placeholder="Estatus del Documento"
-                  aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off"
-                  #estatus="ngModel" [(ngModel)]="doc.estatus"
-                  >
-                <datalist id="browsers">
+                <select name="estatus" #estatus="ngModel" [(ngModel)]="doc.estatus" id="estatus" class="form-select">
+                  <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
                   <option *ngFor="let est of estat" [ngValue]="est.name">
                     {{est.name}}
                   </option>
-                </datalist>
+                </select>
               </div>
               <div class="mb-3">
                 <label for="observacion" class="form-label">Observación</label>
@@ -99,10 +101,10 @@
               </div>
               <!-- <angular-file-uploader [config]="afuConfig" (ApiResponse)="pdfUploadEntry($event)">
               </angular-file-uploader> -->
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="pdfEntrada" class="form-label">PDF de entrada</label>
                 <input class="form-control" disabled type="file" name="file0" (change)="capturarEntrada($event)" id="pdfEntrada">
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="modal-footer">

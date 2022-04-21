@@ -33,14 +33,14 @@
           <li class="nav-item">
             <a class="nav-link disabled text-light">Prueba 2</a>
           </li> -->
-          
+
         </ul>
         <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
           <!-- <li class="nav-item">
             <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link text-light" [routerLink]="['Login']">Iniciar Sesion</a>
+            <a class="nav-link text-light" [routerLink]="['Login']">Iniciar Sesión</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
@@ -48,16 +48,16 @@
             <a [routerLink]="['Perfil']" class="nav-link text-light" routerLink="profile">{{ username }}</a>
           </li>
           <li class="nav-item">
-            <a href class="nav-link text-light" (click)="logout()">Cerrar Sesion</a>
+            <a href class="nav-link text-light" (click)="logout()">Cerrar Sesión</a>
           </li>
         </ul>
-        
+
         <ul>
 
         </ul>
-        
+
         <!-- *ngIf="route == '/ControlGestion/inicio'" -->
-        <form class="d-flex" #searchForm="ngForm" (ngSubmit)="goSearch()">
+        <form class="d-flex" #searchForm="ngForm" (ngSubmit)="goSearch()" *ngIf="isLoggedIn">
           <input class="form-control me-2" type="search" placeholder="Busqueda" aria-label="Search"
             [(ngModel)]="searchString" [ngModelOptions]="{standalone: true}">
           <button class="btn btn-light" type="submit">Buscar</button>

@@ -72,7 +72,7 @@ export class HomeDepartureComponent implements OnInit {
 
     this.asignacion = [
       {
-        direccion: "Consejero Jurídico"
+        direccion: "Oficina del Consejero Jurídico"
       },
       {
         direccion: "Secretaria Partiular y de Comunicación Social"
