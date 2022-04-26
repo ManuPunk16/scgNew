@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 var _date  = new Date();
 var _date2  = new Date().toLocaleString('en-es', { weekday:"long", year:"numeric", month:"short", day:"numeric"});
 
-const documentSchema = new Schema({ 
+const documentSchema = new Schema({
     num_folio : { type : Number, required: true },
+    num_folio_hijo : { type : Number },
     num_oficio : { type : String, required : true },
     ins_juridico : { type : String, required : true },
     fecha_recepcion : {
@@ -27,9 +28,9 @@ const documentSchema = new Schema({
     pdf_entrada : { type: String, required : false }
 },
 {
-    timestamps: { 
-        createdAt: 'createdAt', 
-        updatedAt: 'updatedAt' 
+    timestamps: {
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt'
     },
 });
 
@@ -50,7 +51,7 @@ const documentSchema = new Schema({
 //       asunto: String,
 //       estatus: String,
 //       observacion: String
-//   })  
+//   })
 // );
 
 // module.export = Document;

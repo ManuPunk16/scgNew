@@ -37,7 +37,7 @@ export class DeparturesEditComponent implements OnInit {
 
     this.title = "Gestor";
     this.url = Global.url;
-    this.dep = new Departure('', 1, '', '', '', '', '', '', '', '', '', null);
+    this.dep = new Departure;
 
     this.instrumento = [
       {

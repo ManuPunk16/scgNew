@@ -23,16 +23,16 @@ exports.documents = (req, res) => {
 },
 
 exports.test = (req, res) => {
-    console.log(moment().format('DD/MM/YYYY hh:mm'));
-    return res.status(200).send({
-        message: 'Soy la accion de test de document' 
-    });
+  console.log(moment().format('DD/MM/YYYY hh:mm'));
+  return res.status(200).send({
+      message: 'Soy la accion de test de document'
+  });
 }
 
 exports.save = (req, res) => {
     //Recoger parametros por post
     var params = req.body;
-    
+
     //Validar datos
     try {
         var validate_num_folio = !validator.isInt('$params.num_folio');
@@ -42,13 +42,13 @@ exports.save = (req, res) => {
     } catch (error) {
         return res.status(200).send({
             status: 'error',
-            message: 'Faltan datos por enviar!' 
+            message: 'Faltan datos por enviar!'
         });
     }
 
     if (validate_num_folio &&
         validate_num_oficio &&
-        validate_estatus && 
+        validate_estatus &&
         validate_asunto) {
 
         //Crear el objeto a guardar
@@ -56,6 +56,7 @@ exports.save = (req, res) => {
 
         //Asignar valores
         document.num_folio = params.num_folio;
+        document.num_folio_hijo = params.num_folio_hijo;
         document.num_oficio = params.num_oficio;
         document.ins_juridico = params.ins_juridico;
         document.fecha_recepcion = params.fecha_recepcion;
@@ -102,7 +103,7 @@ exports.save = (req, res) => {
         console.log("Tengo un error al guardar una entrada: ",err);
         return res.status(424).send({
             status: 'error',
-            message: 'Los datos no son validos!' 
+            message: 'Los datos no son validos!'
         });
     }
 },
@@ -120,14 +121,14 @@ exports.getDocuments = (req, res) => {
         if (err) {
             return res.status(500).send({
                 status: 'error',
-                message: 'Error al devolver los documentos!' 
+                message: 'Error al devolver los documentos!'
             });
         }
-    
+
         if (!document) {
             return res.status(404).send({
                 status: 'error',
-                message: 'No hay documentos para mostrar!' 
+                message: 'No hay documentos para mostrar!'
             });
         }
 
@@ -146,7 +147,7 @@ exports.getDocument = (req, res) => {
     if (!documentId || documentId == null) {
         return res.status(404).send({
             status: 'error',
-            message: 'No existe el documento!' 
+            message: 'No existe el documento!'
         });
     }
 
@@ -155,7 +156,7 @@ exports.getDocument = (req, res) => {
         if (err || !document) {
             return res.status(404).send({
                 status: 'error',
-                message: 'No existe el documento!' 
+                message: 'No existe el documento!'
             });
         }
 
@@ -181,6 +182,7 @@ exports.update = (req, res) => {
         //const validate_num_folio = !validator.isInt(`${params.num_folio}`);
         //convertir a string esta variable en esa misma línea vvvvvvvvv
         const validate_num_folio = !validator.isEmpty('$params.num_folio');
+        const validate_num_folio_hijo = !validator.isEmpty('$params.num_folio_hijo');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
         var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
@@ -196,7 +198,7 @@ exports.update = (req, res) => {
         //TypeError: Expected a string but received a number
         return res.status(404).send({
             status: 'error',
-            message: 'Faltan datos por enviar!' 
+            message: 'Faltan datos por enviar!'
         });
     }
 
@@ -206,14 +208,14 @@ exports.update = (req, res) => {
             if (err) {
                 return res.status(500).send({
                     status: 'error',
-                    message: 'Error al actualizar!' 
+                    message: 'Error al actualizar!'
                 });
             }
 
             if (!documentUpdated) {
                 return res.status(404).send({
                     status: 'error',
-                    message: 'No existe el articulo!' 
+                    message: 'No existe el articulo!'
                 });
             }
 
@@ -222,14 +224,14 @@ exports.update = (req, res) => {
 
             return res.status(200).send({
                 status: 'success',
-                document: documentUpdated 
+                document: documentUpdated
             });
         });
     } else {
         //Devolver respuesta
         return res.status(500).send({
             status: 'error',
-            message: 'La validacion no es correcta!' 
+            message: 'La validacion no es correcta!'
         });
     }
 },
@@ -238,18 +240,18 @@ exports.delete = (req, res) => {
     //Recoger el id de la url
     var documentId = req.params.id;
 
-    //Find and delete  
+    //Find and delete
     Document.findByIdAndDelete({_id: documentId}, (err, documentRemoved) => {
         if(err){
             return res.status(500).send({
                 status: 'error',
-                message: 'Error al borrar!' 
+                message: 'Error al borrar!'
             });
         }
         if(!documentRemoved){
             return res.status(404).send({
                 status: 'error',
-                message: 'No se ha guardado el articulo, no existe!' 
+                message: 'No se ha guardado el articulo, no existe!'
             });
         }
 
@@ -258,7 +260,7 @@ exports.delete = (req, res) => {
 
         return res.status(200).send({
             status: 'success',
-            document: documentRemoved 
+            document: documentRemoved
         });
     });
 },
@@ -412,6 +414,7 @@ exports.search = (req, res) => {
     Document.find({ "$or": [
         // { "num_folio": { "$regex": searchInt, "$options": "i"}},
         { "num_oficio": { "$regex": searchString, "$options": "i"}},
+        { "num_folio_hijo": { "$regex": searchString, "$options": "i" }},
         { "ins_juridico": { "$regex": searchString, "$options": "i"}},
         { "fecha_recepcion": { "$regex": searchString, "$options": "i"}},
         { "fecha_oficio": { "$regex": searchString, "$options": "i"}},

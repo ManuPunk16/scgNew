@@ -32,6 +32,11 @@
                 </div>
               </div>
               <div class="col-md-3">
+                <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
+                <input type="number" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="doc.num_folio_hijo"
+                  class="form-control" id="num_folio_hijo" required autocomplete="off">
+              </div>
+              <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
                 <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="doc.num_oficio"
                   class="form-control" id="num_oficio" autocomplete="off">
@@ -80,7 +85,7 @@
                   id="origen" autocomplete="off">
               </div> -->
 
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <label for="origen" class="form-label">Institución de Origen</label>
                 <input list="instituciones" name="origen" class="form-control" placeholder="Origen del Documento"
                   aria-label="Origen del Documento" aria-describedby="basic-addon1" autocomplete="off"

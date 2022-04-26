@@ -68,9 +68,17 @@ export class HomecComponent implements OnInit {
     private tokenStorageService: TokenStorageService
   ) {
     // console.log(_router.url);
+
+    // let arr1=[0, 2, 1, 5, 8];
+    // const getLastArrItem = (arr: string | any[]) => {
+    //   let lastItem=arr[arr.length-1];
+    //   console.log(`Last element is ${lastItem+1}`);
+    // }
+    // getLastArrItem(arr1);
+
     this.title = "Gestor";
 
-    this.doc = new Document('',1, '', '', '', '', '', '', '', '', '','', null, null);
+    this.doc = new Document;
 
     this.asignacion = [
       {
@@ -364,7 +372,7 @@ export class HomecComponent implements OnInit {
         this.documents.sort(
           (a, b) => (a.num_folio > b.num_folio) ? -1 : 1
         );
-        console.log(this.documents);
+        // console.log(this.documents);
       },
       err => console.log(err)
     );

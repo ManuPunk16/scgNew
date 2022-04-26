@@ -68,7 +68,7 @@ export class HomeDepartureComponent implements OnInit {
     // console.log(_router.url);
     this.title = "Gestor";
 
-    this.dep = new Departure('',1, '', '', '', '', '', '', '', '', '', null);
+    this.dep = new Departure;
 
     this.asignacion = [
       {

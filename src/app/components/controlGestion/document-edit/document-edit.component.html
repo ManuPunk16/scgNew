@@ -21,9 +21,9 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <label for="num_folio" class="form-label">Num. Folio Hijo</label>
-                <input type="text"
-                  class="form-control">
+                <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
+                <input type="text" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="doc.num_folio_hijo"
+                  class="form-control" id="num_folio_hijo" required>
               </div>
               <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>

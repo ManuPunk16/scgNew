@@ -3,14 +3,14 @@ var Departure = require('../models/departure.models');
 
 exports.test = (req, res) => {
     return res.status(200).send({
-        message: 'Soy la accion de test de salidas!!!' 
+        message: 'Soy la accion de test de salidas!!!'
     });
 }
 
 exports.saveDeparture = (req, res) => {
     //Recoger parametros por post
     var params = req.body;
-    
+
     //Validar datos
     try {
         var validate_num_folio = !validator.isInt('$params.num_folio');
@@ -20,13 +20,13 @@ exports.saveDeparture = (req, res) => {
     } catch (error) {
         return res.status(200).send({
             status: 'error',
-            message: 'Faltan datos por enviar!' 
+            message: 'Faltan datos por enviar!'
         });
     }
 
     if (validate_num_folio &&
         validate_num_oficio &&
-        validate_estatus && 
+        validate_estatus &&
         validate_asunto) {
 
         //Crear el objeto a guardar
@@ -61,7 +61,7 @@ exports.saveDeparture = (req, res) => {
                 });
             }
             console.log("..:Nuevo Registro de Salida Añadido:..");
-            console.log("Numero de Folio: ",document.num_folio, "Numero de Oficio: ",document.num_oficio);
+            console.log("Numero de Folio: ",departure.num_folio, "Numero de Oficio: ",departure.num_oficio);
             //Devolver respuesta
             return res.status(200).send({
                 status: 'Success',
@@ -73,7 +73,7 @@ exports.saveDeparture = (req, res) => {
         console.log("Tengo un error al guardar una salida: ",err);
         return res.status(424).send({
             status: 'error',
-            message: 'Los datos no son validos!!!' 
+            message: 'Los datos no son validos!!!'
         });
     }
 },
@@ -91,14 +91,14 @@ exports.getDepartures = (req, res) => {
         if (err) {
             return res.status(500).send({
                 status: 'error',
-                message: 'Error al devolver los documentos de salida!' 
+                message: 'Error al devolver los documentos de salida!'
             });
         }
-    
+
         if (!departure) {
             return res.status(404).send({
                 status: 'error',
-                message: 'No hay documentos de salida para mostrar!' 
+                message: 'No hay documentos de salida para mostrar!'
             });
         }
 
@@ -117,7 +117,7 @@ exports.getDeparture = (req, res) => {
     if (!departureId || departureId == null) {
         return res.status(404).send({
             status: 'error',
-            message: 'No existe el documento!' 
+            message: 'No existe el documento!'
         });
     }
 
@@ -126,7 +126,7 @@ exports.getDeparture = (req, res) => {
         if (err || !departure) {
             return res.status(404).send({
                 status: 'error',
-                message: 'No existe el documento!' 
+                message: 'No existe el documento!'
             });
         }
 
@@ -167,7 +167,7 @@ exports.updateDeparture = (req, res) => {
         //TypeError: Expected a string but received a number
         return res.status(404).send({
             status: 'error',
-            message: 'Faltan datos por enviar!' 
+            message: 'Faltan datos por enviar!'
         });
     }
 
@@ -177,27 +177,27 @@ exports.updateDeparture = (req, res) => {
             if (err) {
                 return res.status(500).send({
                     status: 'error',
-                    message: 'Error al actualizar!' 
+                    message: 'Error al actualizar!'
                 });
             }
 
             if (!departureUpdated) {
                 return res.status(404).send({
                     status: 'error',
-                    message: 'No existe el articulo!' 
+                    message: 'No existe el articulo!'
                 });
             }
 
             return res.status(200).send({
                 status: 'success',
-                departure: departureUpdated 
+                departure: departureUpdated
             });
         });
     } else {
         //Devolver respuesta
         return res.status(500).send({
             status: 'error',
-            message: 'La validacion no es correcta!' 
+            message: 'La validacion no es correcta!'
         });
     }
 },
@@ -206,24 +206,24 @@ exports.deleteDeparture = (req, res) => {
     //Recoger el id de la url
     var departureId = req.params.id;
 
-    //Find and delete  
+    //Find and delete
     Departure.findByIdAndDelete({_id: departureId}, (err, departureRemoved) => {
         if(err){
             return res.status(500).send({
                 status: 'error',
-                message: 'Error al borrar!' 
+                message: 'Error al borrar!'
             });
         }
         if(!departureRemoved){
             return res.status(404).send({
                 status: 'error',
-                message: 'No se ha guardado el articulo, no existe!' 
+                message: 'No se ha guardado el articulo, no existe!'
             });
         }
 
         return res.status(200).send({
             status: 'success',
-            departure: departureRemoved 
+            departure: departureRemoved
         });
     });
 },
