@@ -2,6 +2,10 @@
   Cargando
 </div>
 
+<h1 class="display-3">
+  Entradas de Documentos
+</h1>
+
 <div *ngIf="documents">
   <!-- Button trigger modal -->
   <div class="d-grid gap-2 col-2 mx-auto" *ngIf="showModeratorBoard">
@@ -27,9 +31,6 @@
                 <label for="num_folio" class="form-label">Num. Folio</label>
                 <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="doc.num_folio"
                   class="form-control" id="num_folio" required autocomplete="off">
-                <div class="alert alert-danger" role="alert" *ngIf="!num_folio.valid && num_folio.touched">
-                  Campo Obligatorio
-                </div>
               </div>
               <div class="col-md-3">
                 <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>

@@ -4,8 +4,8 @@
   <table class="table table-striped table-hover" style="font-size: 0.85rem;">
     <thead class="table-light">
       <tr>
-        <th scope="col" (click)="sort('num_folio')" title="Num. de Folio" class="col-md-1">
-          N.F.P
+        <th scope="col" (click)="sort('num_folio')" title="Numero de Folio" class="col-md-1">
+          # Folio
           <svg *ngIf="isDescOrder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
             class="bi bi-sort-numeric-down-alt" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -22,7 +22,7 @@
               d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
           </svg>
         </th>
-        <th scope="col" (click)="sort('num_oficio')" title="Num. de Oficio" class="col-md-1">
+        <th scope="col" (click)="sort('num_oficio')" title="Numero de Oficio" class="col-md-1">
           # Oficio
           <svg *ngIf="isDescOrder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
             class="bi bi-sort-numeric-down-alt" viewBox="0 0 16 16">
@@ -40,7 +40,7 @@
               d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
           </svg>
         </th>
-        <th scope="col" (click)="sort('fecha_recepcion')" title="Fecha de Recepción del Documento" class="col-md-1">
+        <th scope="col" (click)="sort('fecha_recepcion')" title="Fecha del Oficio" class="col-md-1">
           Fecha Oficio
           <svg *ngIf="isDescOrder" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
             class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
