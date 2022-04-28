@@ -38,6 +38,7 @@ exports.saveDeparture = (req, res) => {
         departure.ins_juridico = params.ins_juridico;
         departure.fecha_recepcion = params.fecha_recepcion;
         departure.fecha_oficio = params.fecha_oficio;
+        departure.fecha_vencimiento = params.fecha_vencimiento;
         departure.remitido = params.remitido;
         // departure.origen = params.origen;
         departure.asignado = params.asignado;
@@ -155,6 +156,7 @@ exports.updateDeparture = (req, res) => {
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_fecha_oficio = !validator.isEmpty(params.fecha_oficio);
         var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
+        var validate_fecha_vencimiento = !validator.isEmpty(params.fecha_vencimiento);
         var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
         var validate_remitido = !validator.isEmpty(params.remitido);
         // var validate_origen = !validator.isEmpty(params.origen);

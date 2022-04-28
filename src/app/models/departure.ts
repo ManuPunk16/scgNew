@@ -5,6 +5,7 @@ export class Departure{
   public ins_juridico?: string;
   public fecha_recepcion: any;
   public fecha_oficio: any;
+  public fecha_vencimiento: any;
   public remitido!: string;
   public asignado!: string;
   public asunto!: string;

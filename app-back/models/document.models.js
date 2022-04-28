@@ -16,9 +16,12 @@ const documentSchema = new Schema({
     },
     fecha_oficio : {
         type : String,
-        required : true,
-        default : _date
+        required : true
     },
+    fecha_vencimiento : {
+      type : String,
+      required : true
+  },
     remitido : { type : String, required : true },
     origen : { type : String, required : true },
     asignado : { type : String, required : true, max : [127, "Max Length is 127 characters"] },

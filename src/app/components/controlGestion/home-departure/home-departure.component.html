@@ -14,28 +14,65 @@
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <!-- Inicio de Formulario -->
-      <form #deps="ngForm" (ngSubmit)="onSubmit()">
+      <form #deps="ngForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+
+            <!-- <div class="form-group has-success">
+              <label class="form-control-label" for="inputSuccess1">Input with success</label>
+              <input type="text" class="form-control form-control-success" id="inputSuccess1">
+              <div class="form-control-feedback">Success! You've done it.</div>
+              <small class="form-text text-muted">Example help text that remains unchanged.</small>
+            </div>
+            <div class="form-group has-warning">
+              <label class="form-control-label" for="inputWarning1">Input with warning</label>
+              <input type="text" class="form-control form-control-warning" id="inputWarning1">
+              <div class="form-control-feedback">Shucks, check the formatting of that and try again.</div>
+              <small class="form-text text-muted">Example help text that remains unchanged.</small>
+            </div>
+            <div class="form-group has-danger">
+              <label class="form-control-label" for="inputDanger1">Input with danger</label>
+              <input type="text" class="form-control form-control-danger" id="inputDanger1">
+              <div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
+              <small class="form-text text-muted">Example help text that remains unchanged.</small>
+            </div> -->
+
+
             <div class="row g-3">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="num_folio" class="form-label">Num. Folio</label>
                 <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="dep.num_folio"
                   class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
+                  <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)" class="alert alert-danger">
+                    <div *ngIf="num_folio.errors?.['required']">
+                      Name is required.
+                    </div>
+                    <div *ngIf="num_folio.errors?.['minlength']">
+                      Name must be at least 4 characters long.
+                    </div>
+                    <div *ngIf="num_folio.errors?.['forbiddenName']">
+                      Name cannot be Bob.
+                    </div>
+                  </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
                 <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="dep.num_oficio"
                   class="form-control" id="num_oficio" autocomplete="off" placeholder="Numero de Oficio">
               </div>
-              <div class="col-4">
+              <div class="col-3">
                 <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
                 <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
                   [(ngModel)]="dep.fecha_oficio" id="fecha_oficio">
+              </div>
+              <div class="col-3">
+                <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
+                <input type="date" class="form-control" name="fecha_vencimiento" #fecha_vencimiento="ngModel"
+                  [(ngModel)]="dep.fecha_vencimiento" id="fecha_vencimiento">
               </div>
               <div class="col-6">
                 <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
@@ -90,7 +127,7 @@
               <div class="mb-3">
                 <label for="observacion" class="form-label">Observación</label>
                 <textarea name="observacion" #observacion="ngModel" [(ngModel)]="dep.observacion" class="form-control"
-                  id="observacion" rows="3"></textarea>
+                  id="observacion" rows="3" placeholder="Observaciones del Documento"></textarea>
               </div>
               <!-- <div class="mb-3">
                                 <label for="pdfSalida" class="form-label">PDF de salida</label>
@@ -100,7 +137,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" value="Guardar" class="btn btn-success">Aceptar</button>
+            <button type="submit" class="btn btn-success">Aceptar</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>

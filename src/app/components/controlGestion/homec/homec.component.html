@@ -28,24 +28,29 @@
           <div class="modal-body">
             <div class="row g-3">
               <div class="col-md-3">
-                <label for="num_folio" class="form-label">Num. Folio</label>
+                <label for="num_folio" class="form-label">Num. Folio Padre</label>
                 <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="doc.num_folio"
-                  class="form-control" id="num_folio" required autocomplete="off">
+                  class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Padre del Documento">
               </div>
               <div class="col-md-3">
                 <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
                 <input type="number" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="doc.num_folio_hijo"
-                  class="form-control" id="num_folio_hijo" required autocomplete="off">
+                  class="form-control" id="num_folio_hijo" required autocomplete="off" placeholder="Num. de Folio Relacionado">
               </div>
               <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
                 <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="doc.num_oficio"
-                  class="form-control" id="num_oficio" autocomplete="off">
+                  class="form-control" id="num_oficio" autocomplete="off" placeholder="Numero de Oficio">
               </div>
-              <div class="col-6">
+              <div class="col-3">
                 <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
                 <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
                   [(ngModel)]="doc.fecha_oficio" id="fecha_oficio">
+              </div>
+              <div class="col-3">
+                <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
+                <input type="date" class="form-control" name="fecha_vencimiento" #fecha_vencimiento="ngModel"
+                  [(ngModel)]="doc.fecha_vencimiento" id="fecha_vencimiento">
               </div>
               <div class="col-6">
                 <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
@@ -78,7 +83,7 @@
               <div class="col-6">
                 <label for="remitido" class="form-label">Remitente</label>
                 <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="doc.remitido"
-                  id="remitido" autocomplete="off">
+                  id="remitido" autocomplete="off" placeholder="Remitente del Documento">
               </div>
               <!-- <div class="col-6">
                 <label for="origen" class="form-label">Origen</label>
@@ -101,7 +106,7 @@
               <div class="mb-3">
                 <label for="asunto" class="form-label">Asunto</label>
                 <textarea name="asunto" #asunto="ngModel" [(ngModel)]="doc.asunto" class="form-control" id="asunto"
-                  rows="3"></textarea>
+                  rows="3" autocomplete="off" placeholder="Asunto del Documento"></textarea>
               </div>
               <div class="col-6">
                 <label for="asignado" class="form-label">Asignado</label>
@@ -139,7 +144,7 @@
               <div class="mb-3">
                 <label for="observacion" class="form-label">Observación</label>
                 <textarea name="observacion" #observacion="ngModel" [(ngModel)]="doc.observacion" class="form-control"
-                  id="observacion" rows="3"></textarea>
+                  id="observacion" rows="3" autocomplete="off" placeholder="Observaciones del Documento"></textarea>
               </div>
               <!-- <angular-file-uploader [config]="afuConfig" (ApiResponse)="pdfUploadEntry($event)">
               </angular-file-uploader> -->

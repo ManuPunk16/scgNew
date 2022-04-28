@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const departureSchema = new Schema({ 
+const departureSchema = new Schema({
     num_folio : { type : Number, required: true },
     num_oficio : { type : String, required : true },
     fecha_oficio : { type : String, required : true },
+    fecha_vencimiento : { type : String, required : true },
     fecha_recepcion : { type : String, required : true },
     ins_juridico : { type : String, required : true },
     remitido : { type : String, required : true },
@@ -16,9 +17,9 @@ const departureSchema = new Schema({
     pdf_salida : { type: String, required : false }
 },
 {
-    timestamps: { 
-        createdAt: 'createdAt', 
-        updatedAt: 'updatedAt' 
+    timestamps: {
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt'
     },
 });
 

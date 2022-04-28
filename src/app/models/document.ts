@@ -6,6 +6,7 @@ export class Document{
         public ins_juridico?: string;
         public fecha_recepcion: any;
         public fecha_oficio: any;
+        public fecha_vencimiento: any;
         public remitido?: string;
         public origen?: string;
         public asignado?: string;
