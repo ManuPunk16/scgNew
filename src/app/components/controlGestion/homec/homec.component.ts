@@ -1,12 +1,17 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DocumentService } from 'src/app/service/document.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { Document } from 'src/app/models/document';
 import { Global } from 'src/app/service/global';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from '../../../service/user.service';
 import { TokenStorageService } from '../../../service/token-storage.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+//Telerik
+import { DataBindingDirective, GridComponent } from "@progress/kendo-angular-grid";
+import { PageChangeEvent, PageSizeItem } from "@progress/kendo-angular-grid";
 
 @Component({
   selector: 'app-homec',
@@ -15,6 +20,22 @@ import { TokenStorageService } from '../../../service/token-storage.service';
   providers: [DocumentService]
 })
 export class HomecComponent implements OnInit {
+
+  @ViewChild(DataBindingDirective) dataBinding!: DataBindingDirective;
+
+  public pageSize = 10;
+  public skip = 0;
+  public pageSizes: (PageSizeItem | number)[] = [
+    10,
+    50,
+    100,
+    {
+      text: "All",
+      value: "all",
+    },
+  ];
+
+  public formGroup!: FormGroup;
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -28,12 +49,16 @@ export class HomecComponent implements OnInit {
   public variable: Array<any>;
   public ubicacion: Array<any>;
   public estat: Array<any>;
-  documents: Document[] = [];
+  public documents: Document[] = [];
+  public gridView: Document[] = [];
   public pdfEntry: Array<File> = [];
   public pdfExit: Array<File> = [];
 
   public doc: Document;
+  public docEdit: Document;
+  public docDelete: Document;
   public status: string = "";
+  public selectedId: any;
 
   content?: string;
 
@@ -58,6 +83,9 @@ export class HomecComponent implements OnInit {
     }
   };
 
+  closeResult!: string;
+  getDismissReason: any;
+
   constructor(
     public formulario: FormBuilder,
     private _documentService: DocumentService,
@@ -65,20 +93,15 @@ export class HomecComponent implements OnInit {
     private zone: NgZone,
     private sanitizer: DomSanitizer,
     private userService: UserService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    public modal: NgbModal
   ) {
-    // console.log(_router.url);
-
-    // let arr1=[0, 2, 1, 5, 8];
-    // const getLastArrItem = (arr: string | any[]) => {
-    //   let lastItem=arr[arr.length-1];
-    //   console.log(`Last element is ${lastItem+1}`);
-    // }
-    // getLastArrItem(arr1);
 
     this.title = "Gestor";
 
     this.doc = new Document;
+    this.docEdit = new Document;
+    this.docDelete = new Document;
 
     this.asignacion = [
       {
@@ -353,6 +376,7 @@ export class HomecComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.gridView = this.documents;
     this.getDocs();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -379,16 +403,6 @@ export class HomecComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this._documentService.uploadEntry,"Subir");
-    // console.log(this.doc);
-    // this._documentService.uploadEntry(this.doc).subscribe(
-    //   response => {
-    //     console.log(response, "Response");
-    //   },
-    //   error => {
-    //     console.log(error, "Error")
-    //   }
-    // );
     console.log(this.doc);
     this._documentService.create(this.doc).subscribe(
       response => {
@@ -415,19 +429,8 @@ export class HomecComponent implements OnInit {
   }
 
   capturarEntrada(event: any): any {
-    // this.pdfEntry = event.target.files[0];
-    // console.log(this.pdfEntry);
     const entradaCapturada = event.target.files[0];
-    // this.pdfEntry.push(entradaCapturada).then();
     console.log(entradaCapturada);
-    // this._documentService.create(entradaCapturada).subscribe(
-    //   res => {
-    //     console.log(res,"Resultado");
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
   }
 
   capturarSalida(event: any): any {
@@ -435,49 +438,69 @@ export class HomecComponent implements OnInit {
     console.log(entradaCapturada);
   }
 
-  // extraerBase64 = async ($event: any) => new Promise((resolve) => {
-  //   try {
-  //     const unsafePdf = window.URL.createObjectURL($event);
-  //     const pdf = this.sanitizer.bypassSecurityTrustUrl(unsafePdf);
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL($event);
-  //     reader.onload = () => {
-  //       resolve({
-  //         base: reader.result
-  //       });
-  //     }
-  //     reader.onerror = error => {
-  //       resolve({
-  //         base: null
-  //       });
-  //     }
-  //   } catch (error) {
-  //     return null;
-  //   }
-  // });
+  public opened = false;
 
-  // private patchItemImages(paths: string[]) {
-  //   this.imagesImporterService.getListBlobImagesFromBackend(paths)
-  //     .pipe(finalize(() => { this.loading--; }))
-  //     .subscribe((images) => {
-  //       const files = images.map((x, i) => this.createFileFromBlob(x, paths[i]));
+  public close(): void {
+    this.opened = false;
+  }
 
-  //       this.productosService.saveImages(this.productId, files).subscribe(() => {
-  //         this.notifierService.notify('success', 'Producto guardado correctamente.');
-  //         this.getAllItems();
-  //       },
-  //         error => {
-  //           this.notifierService.notify('error', error);
-  //         });
-  //     });
-  // }
+  public open(): void {
+    this.opened = true;
+  }
 
-  // private createFileFromBlob(blob: Blob, path: string) {
-  //   return new File([blob], this.getFileName(`${path}.jpeg`));
-  // }
+  public sliderChange(pageIndex: number): void {
+    this.skip = (pageIndex - 1) * this.pageSize;
+  }
 
-  // private getFileName(path: string) {
-  //   return path.split('\\').pop();
-  // }
+  public onPageChange(state: PageChangeEvent): void {
+    this.pageSize = state.take;
+  }
+
+  openEdit(content: any) {
+    this.modal.open(content, { size: 'lg' }).result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  getDocumentById(dataItem: any): void {
+    let documentEdit = dataItem;
+    this.docEdit = documentEdit;
+    console.log(this.docEdit);
+  }
+
+  deleteDocumentById(dataItem: any): void{
+    this.docDelete = dataItem;
+    this._documentService.delete(this.docDelete._id).subscribe(
+      response => {
+        console.log(response);
+        this.zone.runOutsideAngular(() => {
+          location.reload();
+        });
+      },
+      error => {
+        console.log(error);
+        this.zone.runOutsideAngular(() => {
+          location.reload();
+        });
+      }
+    );
+  }
+
+  onEdit(){
+    this._documentService.update(this.docEdit._id, this.docEdit).subscribe(
+      res => {
+        console.log(res);
+        this.modal.dismissAll();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
 }

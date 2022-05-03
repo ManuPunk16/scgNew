@@ -4,7 +4,6 @@ import { DepartureService } from 'src/app/service/departure.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Departure } from 'src/app/models/departure';
 import { Global } from 'src/app/service/global';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-departures-edit',
@@ -31,8 +30,6 @@ export class DeparturesEditComponent implements OnInit {
     private _departureService: DepartureService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private zone: NgZone,
-    private sanitizer: DomSanitizer
   ) {
 
     this.title = "Gestor";
@@ -125,18 +122,7 @@ export class DeparturesEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getDeps();
     this.getDep();
-  }
-
-  getDeps() {
-    //Mostrar contenido tabla principal
-    this._departureService.getDepartures().subscribe(
-      res => {
-        this.departures = res.departure;
-      },
-      err => console.log(err)
-    );
   }
 
   onSubmit() {

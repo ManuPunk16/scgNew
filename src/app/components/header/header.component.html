@@ -27,13 +27,6 @@
           <li class="nav-item">
             <a [routerLink]="['Usuario']" class="nav-link text-light" *ngIf="isLoggedIn" routerLink="user">Usuario</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link disabled text-light" href="#">Prueba 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled text-light">Prueba 2</a>
-          </li> -->
-
         </ul>
         <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
           <!-- <li class="nav-item">
@@ -51,19 +44,7 @@
             <a href class="nav-link text-light" (click)="logout()">Cerrar Sesión</a>
           </li>
         </ul>
-
-        <ul>
-
-        </ul>
-
-        <!-- *ngIf="route == '/ControlGestion/inicio'" -->
-        <form class="d-flex" #searchForm="ngForm" (ngSubmit)="goSearch()" *ngIf="isLoggedIn">
-          <input class="form-control me-2" type="search" placeholder="Busqueda" aria-label="Search"
-            [(ngModel)]="searchString" [ngModelOptions]="{standalone: true}">
-          <button class="btn btn-light" type="submit">Buscar</button>
-        </form>
       </div>
     </div>
   </nav>
 </div>
-<!-- <app-search [item]="currentItem"></app-search> -->

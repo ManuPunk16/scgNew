@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
@@ -30,6 +30,14 @@ import { AuthGuard } from './components/controlGestion/authguard.guard';
 import { DeparturesEditComponent } from './components/controlGestion/departures-edit/departures-edit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { GridModule, PDFModule, ExcelModule } from '@progress/kendo-angular-grid';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import 'hammerjs';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { LabelModule } from "@progress/kendo-angular-label";
+import { IconsModule } from "@progress/kendo-angular-icons";
+import { DialogsModule } from '@progress/kendo-angular-dialog';
 
 @NgModule({
   declarations: [
@@ -64,9 +72,19 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     OrderModule,
     NgChartsModule,
     NgbModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    GridModule,
+    BrowserAnimationsModule,
+    ChartsModule,
+    InputsModule,
+    PDFModule,
+    ExcelModule,
+    LabelModule,
+    IconsModule,
+    HttpClientJsonpModule,
+    DialogsModule
   ],
-  providers: [appRoutingProviders, authInterceptorProviders, AuthGuard],
+  providers: [appRoutingProviders, authInterceptorProviders, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

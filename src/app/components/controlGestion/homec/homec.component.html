@@ -5,14 +5,289 @@
 <h1 class="display-3">
   Entradas de Documentos
 </h1>
+<br>
+<kendo-grid
+  [kendoGridBinding]="documents"
+  [pageSize]="pageSize"
+  [pageable]="true"
+  [sortable]="true"
+  [reorderable]="true"
+  [resizable]="true"
+  [height]="700"
+  [columnMenu]="{ filter: true }"
+>
+<ng-template kendoGridToolbarTemplate>
+  <button kendoGridAddCommand data-bs-toggle="modal" data-bs-target="#staticBackdrop">Añadir nuevo registro</button>
+  <kendo-grid-spacer></kendo-grid-spacer>
+  <button kendoGridExcelCommand type="button" icon="file-excel">
+    Exportar a Excel
+  </button>
+  <button kendoGridPDFCommand icon="file-pdf">
+    Exportar a PDF
+  </button>
+</ng-template>
+
+  <kendo-grid-command-column
+    title="Acciones"
+    [width]="100"
+    [columnMenu]="false"
+    [resizable]="false"
+  >
+  <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+    <button kendoGridEditCommand [primary]="true" (click)="openEdit(contenido)" (click)="getDocumentById(dataItem)">
+      <kendo-icon name="pencil"></kendo-icon>
+    </button>
+    <button kendoGridRemoveCommand (click)="deleteDocumentById(dataItem)">
+      <kendo-icon name="delete"></kendo-icon>
+    </button>
+  </ng-template>
+  </kendo-grid-command-column>
+
+  <kendo-grid-column-group title="Folios del Documento" [columnMenu]="false">
+    <kendo-grid-column
+      field="num_folio"
+      title="Num. Folio Padre"
+      [width]="120"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="num_folio_hijo"
+      title="Num. Folio Hijo"
+      [width]="120"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="num_oficio"
+      title="Num. Oficio"
+      [width]="130"
+    ></kendo-grid-column>
+  </kendo-grid-column-group>
+
+  <kendo-grid-column-group title="Fechas del Documento" [columnMenu]="false">
+    <kendo-grid-column
+      field="fecha_oficio"
+      title="Fecha del Oficio"
+      [width]="150"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="fecha_recepcion"
+      title="Fecha Recepción"
+      [width]="150"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="fecha_vencimiento"
+      title="Fecha Vencimiento"
+      [width]="150"
+    ></kendo-grid-column>
+  </kendo-grid-column-group>
+
+  <kendo-grid-column-group title="Información del Documento" [columnMenu]="false">
+    <kendo-grid-column
+      field="ins_juridico"
+      title="Instrumento Jurídico"
+      [width]="150"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="remitido"
+      title="Remitente"
+      [width]="150"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="origen"
+      title="Institución de Origen"
+      [width]="200"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="asignado"
+      title="Asignado"
+      [width]="150"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="asunto"
+      title="Asunto"
+      [width]="230"
+    ></kendo-grid-column>
+
+    <kendo-grid-column
+      field="estatus"
+      title="Estatus"
+      [width]="140"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <span
+          *ngIf="dataItem.estatus === 'Concluido'"
+          class="bg-success text-white"
+          >Concluido</span>
+        <span
+          *ngIf="dataItem.estatus === 'En Tramite'"
+          class="bg-danger text-white"
+          >En Tramite</span>
+        <span
+          *ngIf="dataItem.estatus === 'Para Conocimiento'"
+          class="bg-primary text-white"
+          >Para Conocimiento</span>
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column
+      field="observacion"
+      title="Observaciones"
+      [width]="150"
+    ></kendo-grid-column>
+  </kendo-grid-column-group>
+
+  <ng-template
+    kendoPagerTemplate
+    let-totalPages="totalPages"
+    let-currentPage="currentPage"
+  >
+    <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+    <kendo-pager-numeric-buttons
+      [buttonCount]="10"
+    ></kendo-pager-numeric-buttons>
+    <kendo-pager-info></kendo-pager-info>
+    <kendo-pager-next-buttons></kendo-pager-next-buttons>
+    <kendo-pager-page-sizes
+      [pageSizes]="pageSizes"
+    ></kendo-pager-page-sizes>
+  </ng-template>
+
+  <kendo-grid-pdf
+    fileName="Entradas.pdf"
+    [repeatHeaders]="true"
+  ></kendo-grid-pdf>
+  <kendo-grid-excel
+    fileName="Entradas.xlsx"
+  ></kendo-grid-excel>
+</kendo-grid>
+
+<br><br><br>
+
+<ng-template #contenido let-modal>
+  <!-- Inicio de Formulario -->
+  <form #docsForm="ngForm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Documento</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label for="num_folio" class="form-label">Num. Folio Padre</label>
+            <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="docEdit.num_folio"
+              class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio del Documento">
+            <div class="alert alert-danger" role="alert" *ngIf="!num_folio.valid && num_folio.touched">
+              Campo Obligatorio
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
+            <input type="text" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="docEdit.num_folio_hijo"
+              class="form-control" id="num_folio_hijo" required autocomplete="off" placeholder="Num. de Folio Relacionado">
+          </div>
+          <div class="col-md-6">
+            <label for="num_oficio" class="form-label">Num. Oficio</label>
+            <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="docEdit.num_oficio"
+              class="form-control" id="num_oficio" autocomplete="off" placeholder="Numero de Oficio">
+          </div>
+          <div class="col-3">
+            <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
+            <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
+              [(ngModel)]="docEdit.fecha_oficio" id="fecha_oficio">
+          </div>
+          <div class="col-3">
+            <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
+            <input type="date" class="form-control" name="fecha_vencimiento" #fecha_vencimiento="ngModel"
+              [(ngModel)]="docEdit.fecha_vencimiento" id="fecha_vencimiento">
+          </div>
+          <div class="col-6">
+            <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
+            <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
+              [(ngModel)]="docEdit.fecha_recepcion" id="fecha_recepcion">
+          </div>
+          <div class="col-md-6">
+            <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
+            <input list="intrumentos" name="ins_juridico" class="form-control" placeholder="Estatus del Documento"
+              aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off"
+              #ins_juridico="ngModel" [(ngModel)]="docEdit.ins_juridico">
+            <datalist id="intrumentos">
+              <option *ngFor="let ins of instrumento">
+                {{ins.name}}
+              </option>
+            </datalist>
+          </div>
+          <div class="col-6">
+            <label for="remitido" class="form-label">Remitente</label>
+            <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="docEdit.remitido"
+              id="remitido" autocomplete="off" placeholder="Remitente del Documento">
+          </div>
+          <div class="col-md-12">
+            <label for="origen" class="form-label">Institución de Origen</label>
+            <input list="instituciones" name="origen" class="form-control" placeholder="Origen del Documento"
+              aria-label="Origen del Documento" aria-describedby="basic-addon1" autocomplete="off"
+              #origen="ngModel" [(ngModel)]="docEdit.origen">
+            <datalist id="instituciones">
+              <option *ngFor="let org of variable">
+                {{org.institucion}}
+              </option>
+            </datalist>
+          </div>
+          <div class="mb-3">
+            <label for="asunto" class="form-label">Asunto</label>
+            <textarea name="asunto" #asunto="ngModel" [(ngModel)]="docEdit.asunto" class="form-control"
+              id="asunto" rows="3" autocomplete="off" placeholder="Asunto del Documento"></textarea>
+          </div>
+          <div class="col-6">
+            <label for="asignado" class="form-label">Asignado</label>
+            <input list="asignados" class="form-control" name="asignado" id="asignado"
+              placeholder="Asignación del Documento" aria-label="Asignación del Documento"
+              aria-describedby="basic-addon1" autocomplete="off"
+              #asignado="ngModel" [(ngModel)]="docEdit.asignado"
+              >
+            <datalist id="asignados">
+              <option *ngFor="let asig of asignacion">
+                {{asig.direccion}}
+              </option>
+            </datalist>
+          </div>
+          <div class="col-md-6">
+            <label for="estatus" class="form-label">Estatus</label>
+            <select name="estatus" #estatus="ngModel" [(ngModel)]="docEdit.estatus" id="estatus" class="form-select">
+              <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
+              <option *ngFor="let est of estat" [ngValue]="est.name">
+                {{est.name}}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="observacion" class="form-label">Observación</label>
+            <textarea name="observacion" #observacion="ngModel" [(ngModel)]="docEdit.observacion" class="form-control"
+              id="observacion" rows="3" autocomplete="off" placeholder="Observaciones del Documento"></textarea>
+          </div>
+          <!-- <angular-file-uploader [config]="afuConfig" (ApiResponse)="pdfUploadEntry($event)">
+          </angular-file-uploader> -->
+          <!-- <div class="mb-3">
+            <label for="pdfEntrada" class="form-label">PDF de entrada</label>
+            <input class="form-control" disabled type="file" name="file0" (change)="capturarEntrada($event)" id="pdfEntrada">
+          </div> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" (click)="onEdit()" value="Guardar" class="btn btn-success">Aceptar</button>
+        <button type="button" class="btn btn-succes" (click)="modal.close()">Cerrar</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
 
 <div *ngIf="documents">
-  <!-- Button trigger modal -->
-  <div class="d-grid gap-2 col-2 mx-auto" *ngIf="showModeratorBoard">
-    <button type="button" class="btn btn-light" data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop">
-      Insertar Registro Nuevo</button>
-  </div>
 
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -163,7 +438,4 @@
       </form>
     </div>
   </div>
-  <br>
-
-  <app-documents [documents]="documents"></app-documents>
 </div>
