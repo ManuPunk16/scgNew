@@ -111,7 +111,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'OFICINA DEL CONSEJERO JURÍDICO'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
         this.tramite[0] = result;
       },
       err => {
@@ -124,7 +124,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'OFICINA DEL CONSEJERO JURÍDICO'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
         this.concluido[0] = result;
       },
       err => {
@@ -137,7 +137,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'OFICINA DEL CONSEJERO JURÍDICO'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
         this.conocimiento[0] = result;
       },
       err => {
@@ -150,7 +150,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN GENERAL CONSULTIVA'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
         this.conocimiento[1] = result;
       },
       err => {
@@ -163,7 +163,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN GENERAL CONSULTIVA'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
         this.tramite[1] = result;
       },
       err => {
@@ -176,7 +176,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN GENERAL CONSULTIVA'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
         this.concluido[1] = result;
       },
       err => {
@@ -189,7 +189,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN GENERAL DE LO CONTENCIOSO'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
         this.concluido[2] = result;
       },
       err => {
@@ -202,7 +202,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN GENERAL DE LO CONTENCIOSO'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
         this.tramite[2] = result;
       },
       err => {
@@ -215,7 +215,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN GENERAL DE LO CONTENCIOSO'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
         this.conocimiento[2] = result;
       },
       err => {
@@ -228,7 +228,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ESTUDIOS LEGISLATIVOS'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
         this.conocimiento[3] = result;
       },
       err => {
@@ -241,7 +241,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ESTUDIOS LEGISLATIVOS'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
         this.tramite[3] = result;
       },
       err => {
@@ -254,7 +254,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ESTUDIOS LEGISLATIVOS'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
         this.concluido[3] = result;
       },
       err => {
@@ -267,7 +267,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ESTUDIOS JURÍDICOS'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
         this.concluido[4] = result;
       },
       err => {
@@ -280,7 +280,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ESTUDIOS JURÍDICOS'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
         this.tramite[4] = result;
       },
       err => {
@@ -293,7 +293,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ESTUDIOS JURÍDICOS'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
         this.conocimiento[4] = result;
       },
       err => {
@@ -306,9 +306,8 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE SERVICIOS LEGALES'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
         this.tramite[5] = result;
-        console.log(this.tramite[5], "En Tramite");
       },
       err => {
         console.log(err);
@@ -320,9 +319,8 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE SERVICIOS LEGALES'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
         this.concluido[5] = result;
-        console.log(this.concluido[5]);
       },
       err => {
         console.log(err);
@@ -334,9 +332,8 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE SERVICIOS LEGALES'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
           this.conocimiento[5] = result;
-        console.log(this.conocimiento[5]);
       },
       err => {
         console.log(err);
@@ -348,7 +345,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ASISTENCIA TÉCNICA Y COMBATE A LA CORRUPCIÓN'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
           this.conocimiento[6] = result;
       },
       err => {
@@ -361,7 +358,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ASISTENCIA TÉCNICA Y COMBATE A LA CORRUPCIÓN'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
           this.tramite[6] = result;
       },
       err => {
@@ -374,7 +371,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE ASISTENCIA TÉCNICA Y COMBATE A LA CORRUPCIÓN'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
           this.concluido[6] = result;
       },
       err => {
@@ -387,7 +384,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE COMPILACIÓN NORMATIVA, ARCHIVO E IGUALDAD DE GÉNERO'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
           this.concluido[7] = result;
       },
       err => {
@@ -400,7 +397,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE COMPILACIÓN NORMATIVA, ARCHIVO E IGUALDAD DE GÉNERO'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
           this.tramite[7] = result;
       },
       err => {
@@ -413,7 +410,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE COMPILACIÓN NORMATIVA, ARCHIVO E IGUALDAD DE GÉNERO'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
           this.conocimiento[7] = result;
       },
       err => {
@@ -426,7 +423,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE COORDINACIÓN Y CONTROL DE GESTIÓN'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
           this.conocimiento[8] = result;
       },
       err => {
@@ -439,7 +436,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE COORDINACIÓN Y CONTROL DE GESTIÓN'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
           this.tramite[8] = result;
       },
       err => {
@@ -452,7 +449,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN DE COORDINACIÓN Y CONTROL DE GESTIÓN'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
           this.concluido[8] = result;
       },
       err => {
@@ -465,7 +462,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN ADMINISTRATIVA'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
           this.concluido[9] = result;
       },
       err => {
@@ -478,7 +475,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN ADMINISTRATIVA'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
           this.tramite[9] = result;
       },
       err => {
@@ -491,7 +488,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'DIRECCIÓN ADMINISTRATIVA'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
           this.conocimiento[9] = result;
       },
       err => {
@@ -504,7 +501,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'UNIDAD DE TRANSPARENCIA'
-          ).filter(({estatus}) => estatus === 'Para Conocimiento').length;
+          ).filter(({estatus}) => estatus === 'PARA CONOCIMIENTO').length;
           this.conocimiento[10] = result;
       },
       err => {
@@ -517,7 +514,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'UNIDAD DE TRANSPARENCIA'
-          ).filter(({estatus}) => estatus === 'En Tramite').length;
+          ).filter(({estatus}) => estatus === 'EN TRAMITE').length;
           this.tramite[10] = result;
       },
       err => {
@@ -530,7 +527,7 @@ export class StatisticsComponent implements OnInit {
         this.documents = res.document;
         const result = this.documents.filter(
           ({asignado}) => asignado === 'UNIDAD DE TRANSPARENCIA'
-          ).filter(({estatus}) => estatus === 'Concluido').length;
+          ).filter(({estatus}) => estatus === 'CONCLUIDO').length;
           this.concluido[10] = result;
       },
       err => {

@@ -25,7 +25,7 @@
 
   <kendo-grid-command-column
     title="Acciones"
-    [width]="100"
+    [width]="110"
     [columnMenu]="false"
     [resizable]="false"
     [sticky]="true"
@@ -107,19 +107,19 @@
     >
       <ng-template kendoGridCellTemplate let-dataItem>
         <span
-          *ngIf="dataItem.estatus === 'Concluido'"
+          *ngIf="dataItem.estatus === 'CONCLUIDO'"
           class="bg-success text-white"
-          >Concluido</span
+          >CONCLUIDO</span
         >
         <span
-          *ngIf="dataItem.estatus === 'En Tramite'"
+          *ngIf="dataItem.estatus === 'EN TRAMITE'"
           class="bg-danger text-white"
-          >En Tramite</span
+          >EN TRAMITE</span
         >
         <span
-          *ngIf="dataItem.estatus === 'Para Conocimiento'"
+          *ngIf="dataItem.estatus === 'PARA CONOCIMIENTO'"
           class="bg-primary text-white"
-          >Para Conocimiento</span
+          >PARA CONOCIMIENTO</span
         >
       </ng-template>
     </kendo-grid-column>
