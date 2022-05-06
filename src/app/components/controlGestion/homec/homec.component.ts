@@ -8,6 +8,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from '../../../service/user.service';
 import { TokenStorageService } from '../../../service/token-storage.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Instrumentos } from 'src/app/models/instrumento';
+import { Asignacion } from 'src/app/models/areas';
+import { Estatus } from 'src/app/models/estatus';
+import { InstitucionOrigen } from 'src/app/models/institucion';
 
 //Telerik
 import { DataBindingDirective, GridComponent } from "@progress/kendo-angular-grid";
@@ -44,11 +48,11 @@ export class HomecComponent implements OnInit {
   username?: string;
 
   public title: string;
-  public instrumento: Array<any>;
-  public asignacion: Array<any>;
+  public instrumento = Instrumentos.instrumentos;
+  public asignacion = Asignacion.asignacion;
+  public estat = Estatus.estatus;
   public variable: Array<any>;
-  public ubicacion: Array<any>;
-  public estat: Array<any>;
+  public ubicacion = InstitucionOrigen.institucion;
   public documents: Document[] = [];
   public gridView: Document[] = [];
   public pdfEntry: Array<File> = [];
@@ -103,271 +107,12 @@ export class HomecComponent implements OnInit {
     this.docEdit = new Document;
     this.docDelete = new Document;
 
-    this.asignacion = [
-      {
-        direccion: "Oficina del Consejero Jurídico"
-      },
-      {
-        direccion: "Secretaria Partiular y de Comunicación Social"
-      },
-      {
-        direccion: "Dirección de Coordinación y Control de Gestión"
-      },
-      {
-        direccion: "Dirección General Contenciosa"
-      },
-      {
-        direccion: "Dirección de Asistencia Técnica y Combate a la Corrupción"
-      },
-      {
-        direccion: "Dirección de Servicios Legales"
-      },
-      {
-        direccion: "Dirección General Consultiva"
-      },
-      {
-        direccion: "Dirección de Estudios Legislativos"
-      },
-      {
-        direccion: "Dirección de Estudios Jurídicos"
-      },
-      {
-        direccion: "Dirección de Compilación Normativa, Archivo e Igualdad de Género"
-      },
-      {
-        direccion: "Dirección Administrativa"
-      }
-    ];
-
-    this.ubicacion = [
-      {
-        institucion: "Secretaría de Gobierno"
-      },
-      {
-        institucion: "Secretaría de Administración y Finanzas"
-      },
-      {
-        institucion: "Secretaría de Modernización Administración e Innovación Gubernamental"
-      },
-      {
-        institucion: "Secretaría de Educación"
-      },
-      {
-        institucion: "Secretaría de Salud"
-      },
-      {
-        institucion: "Secretaría de Desarrollo Territorial, Urbano y Obras Públicas"
-      },
-      {
-        institucion: "Secretaría de Desarrollo Económico"
-      },
-      {
-        institucion: "Secretaría de Desarrollo Agropecuario"
-      },
-      {
-        institucion: "Secretaría de Bienestar"
-      },
-      {
-        institucion: "Secretaría de Medio Ambiente, Biodiversidad, Cambio Climático y Energía"
-      },
-      {
-        institucion: "Secretaría de Turismo"
-      },
-      {
-        institucion: "Secretaría de Protección y Seguridad Ciudadana."
-      },
-      {
-        institucion: "Secretaría de Protección Civil"
-      },
-      {
-        institucion: "Secretaria de Contraloría"
-      },
-      {
-        institucion: "Fiscalía General del Estado de Campeche"
-      },
-      {
-        institucion: "Autoridad del Patrimonio Cultural del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de Pesca y Acuacultura del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de Cultura y Artes del Estado de Campeche"
-      },
-      {
-        institucion: "Sistema de Televisión y Radio de Campeche"
-      },
-      {
-        institucion: "Instituto de Información Estadística,Geografíca y Catastral del Estado"
-      },
-      {
-        institucion: "Universidad Tecnológica de Campeche"
-      },
-      {
-        institucion: "Universidad Tecnológica de Calakmul"
-      },
-      {
-        institucion: "Universidad Tecnológica de Candelaria"
-      },
-      {
-        institucion: "Instituto Tecnológico Superior de Calkiní"
-      },
-      {
-        institucion: "Instituto Tecnológico Superior de Escárcega"
-      },
-      {
-        institucion: "Instituto Tecnológico Superior de Champotón"
-      },
-      {
-        institucion: "Instituto Tecnológico Superior de Hopelchén"
-      },
-      {
-        institucion: "Instituto Estatal de la Educación para los Adultos"
-      },
-      {
-        institucion: "Instituto de Capacitación para el Trabajo del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de la Infraestructura Física Educativa del Estado de Campeche"
-      },
-      {
-        institucion: "Colegio de Bachilleres del Estado de Campeche"
-      },
-      {
-        institucion: "Colegio de Estudios Científicos y Técnologicos del Estado de Campeche"
-      },
-      {
-        institucion: "Colegio de Educación Profesional Técnica del Estado de Campeche"
-      },
-      {
-        institucion: "Consejo Estatal de Investigación Científica y Desarrollo Tecnólogico"
-      },
-      {
-        institucion: "Fundación Pablo García"
-      },
-      {
-        institucion: "Hospital 'Dr. Manuel Campos'"
-      },
-      {
-        institucion: "Hospital Psiquiátrico de Campeche"
-      },
-      {
-        institucion: "Sistema de Atención de Niños, Niñas y Adolescentes Farmacodependientes de Campeche 'Vida Nueva'"
-      },
-      {
-        institucion: "Sistema para el Desarrollo Integral de la Familia del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de la Mujer del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de la Juventud del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto del Deporte del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de Desarrollo y Formación Social del Estado de Campeche"
-      },
-      {
-        institucion: "Comisión Estatal de Desarrollo de Suelo y Vivienda"
-      },
-      {
-        institucion: "Instituto Estatal para el Fomento de las Actividades Artesanales en Campeche"
-      },
-      {
-        institucion: "Comisión de Agua Potable y Alcantarillado del Estado de Campeche"
-      },
-      {
-        institucion: "Promotora de Eventos Artísticos, Culturales y de Convenciones del Estado de Campeche"
-      },
-      {
-        institucion: "Agencia de Energía del Estado Campeche"
-      },
-      {
-        institucion: "Instituto Campechano"
-      },
-      {
-        institucion: "Secretaría Ejecutiva del Sistema Anticorrupción"
-      },
-      {
-        institucion: "Administración Portuaria Integral de Campeche, S.A. de C.V."
-      },
-      {
-        institucion: "Fideicomiso Fondo Campeche"
-      },
-      {
-        institucion: "Fideicomiso de Inversión del Impuesto del 2% sobre Nómina"
-      },
-      {
-        institucion: "Fondo Estatal de Fomento Industrial del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de Servicios Descentralizados de Salud"
-      },
-      {
-        institucion: "Régimen Estatal de Protección Social en Salud de Campeche"
-      },
-      {
-        institucion: "Promotora para la Conservación y Desarrollo Sustentable del Estado de Campeche "
-      },
-      {
-        institucion: "Centro de Conciliación laboral del Estado de Campeche"
-      },
-      {
-        institucion: "Instituto de Lenguas Indígenas del Estado de Campeche"
-      },
-      {
-        institucion: "Fideicomiso para el Desarrollo de Parques Industriales en el Estado de Campeche"
-      }
-    ];
+    this.asignacion;
+    this.instrumento;
+    this.estat;
+    this.ubicacion;
 
     this.variable = this.ubicacion.sort((a, b) => (a.institucion > b.institucion) ? 1 : -1);
-
-    this.instrumento = [
-      {
-        name: "Leyes"
-      },
-      {
-        name: "Reglamentos"
-      },
-      {
-        name: "Acuerdos"
-      },
-      {
-        name: "Decretos"
-      },
-      {
-        name: "Lineamientos"
-      },
-      {
-        name: "Órdenes"
-      },
-      {
-        name: "Convenios"
-      },
-      {
-        name: "Contratos"
-      },
-      {
-        name: "Actas"
-      }
-    ];
-
-    this.estat = [
-      {
-        id: 1,
-        name: "En Tramite",
-      },
-      {
-        id: 2,
-        name: "Concluido"
-      },
-      {
-        id: 3,
-        name: "Para Conocimiento"
-      }
-    ];
   }
 
   pdfUploadEntry(data: any) {

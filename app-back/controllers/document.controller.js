@@ -23,11 +23,37 @@ exports.documents = (req, res) => {
 },
 
 exports.test = (req, res) => {
-  console.log(moment().format('DD/MM/YYYY hh:mm'));
-  return res.status(200).send({
-      message: 'Soy la accion de test de document'
+  let query = Document.find(
+    {
+      asignado: "Dirección de Servicios Legales",
+      fecha_recepcion: {
+        $gt: ("2022-01-01"), $lt: ("2022-03-31")
+      }
+    });
+
+  //Find
+  query.count().exec((err, document) => {
+
+      if (err) {
+          return res.status(500).send({
+              status: 'error',
+              message: 'Error al devolver los documentos!'
+          });
+      }
+
+      if (!document) {
+          return res.status(404).send({
+              status: 'error',
+              message: 'No hay documentos para mostrar!'
+          });
+      }
+
+      return res.status(200).send({
+          status: 'success',
+          document
+      });
   });
-}
+},
 
 exports.save = (req, res) => {
     //Recoger parametros por post
@@ -449,4 +475,192 @@ exports.search = (req, res) => {
             documents
         });
     });
+},
+
+// INFORMACION GRAFICAS
+
+exports.exportCountConcluidoDSL = (req, res) => {
+  let query = Document.find(
+    {
+      asignado: "Dirección de Servicios Legales",
+      estatus: "Concluido"
+    });
+
+  //Find
+  query.count().exec((err, document) => {
+
+      if (err) {
+          return res.status(500).send({
+              status: 'error',
+              message: 'Error al devolver los documentos!'
+          });
+      }
+
+      if (!document) {
+          return res.status(404).send({
+              status: 'error',
+              message: 'No hay documentos para mostrar!'
+          });
+      }
+
+      return res.status(200).send({
+          status: 'success',
+          document
+      });
+  });
+},
+
+exports.exportCountTramiteDSL = (req, res) => {
+  let query = Document.find(
+    {
+      asignado: "Dirección de Servicios Legales",
+      estatus: "En Tramite"
+    });
+
+  //Find
+  query.count().exec((err, document) => {
+
+      if (err) {
+          return res.status(500).send({
+              status: 'error',
+              message: 'Error al devolver los documentos!'
+          });
+      }
+
+      if (!document) {
+          return res.status(404).send({
+              status: 'error',
+              message: 'No hay documentos para mostrar!'
+          });
+      }
+
+      return res.status(200).send({
+          status: 'success',
+          document
+      });
+  });
+},
+
+exports.exportCountConocimientoDSL = (req, res) => {
+  let query = Document.find(
+    {
+      asignado: "Dirección de Servicios Legales",
+      estatus: "Para Conocimiento"
+    });
+
+  //Find
+  query.count().exec((err, document) => {
+
+      if (err) {
+          return res.status(500).send({
+              status: 'error',
+              message: 'Error al devolver los documentos!'
+          });
+      }
+
+      if (!document) {
+          return res.status(404).send({
+              status: 'error',
+              message: 'No hay documentos para mostrar!'
+          });
+      }
+
+      return res.status(200).send({
+          status: 'success',
+          document
+      });
+  });
+},
+
+exports.exportCountConcluidoCJ = (req, res) => {
+  let query = Document.find(
+    {
+      asignado: "Oficina del Consejero Jurídico",
+      estatus: "Concluido"
+    });
+
+  //Find
+  query.count().exec((err, document) => {
+
+      if (err) {
+          return res.status(500).send({
+              status: 'error',
+              message: 'Error al devolver los documentos!'
+          });
+      }
+
+      if (!document) {
+          return res.status(404).send({
+              status: 'error',
+              message: 'No hay documentos para mostrar!'
+          });
+      }
+
+      return res.status(200).send({
+          status: 'success',
+          document
+      });
+  });
+},
+
+exports.exportCountTramiteCJ = (req, res) => {
+  let query = Document.find(
+    {
+      asignado: "Oficina del Consejero Jurídico",
+      estatus: "En Tramite"
+    });
+
+  //Find
+  query.count().exec((err, document) => {
+
+      if (err) {
+          return res.status(500).send({
+              status: 'error',
+              message: 'Error al devolver los documentos!'
+          });
+      }
+
+      if (!document) {
+          return res.status(404).send({
+              status: 'error',
+              message: 'No hay documentos para mostrar!'
+          });
+      }
+
+      return res.status(200).send({
+          status: 'success',
+          document
+      });
+  });
+},
+
+exports.exportCountConocimientoCJ = (req, res) => {
+  let query = Document.find(
+    {
+      asignado: "Oficina del Consejero Jurídico",
+      estatus: "Conocimiento"
+    });
+
+  //Find
+  query.count().exec((err, document) => {
+
+      if (err) {
+          return res.status(500).send({
+              status: 'error',
+              message: 'Error al devolver los documentos!'
+          });
+      }
+
+      if (!document) {
+          return res.status(404).send({
+              status: 'error',
+              message: 'No hay documentos para mostrar!'
+          });
+      }
+
+      return res.status(200).send({
+          status: 'success',
+          document
+      });
+  });
 }

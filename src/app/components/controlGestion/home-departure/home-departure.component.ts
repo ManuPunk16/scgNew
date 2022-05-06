@@ -6,6 +6,9 @@ import { Departure } from 'src/app/models/departure';
 import { Global } from 'src/app/service/global';
 import { TokenStorageService } from '../../../service/token-storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Instrumentos } from 'src/app/models/instrumento';
+import { Asignacion } from 'src/app/models/areas';
+import { Estatus } from 'src/app/models/estatus';
 
 //Telerik
 import { DataBindingDirective, GridComponent } from "@progress/kendo-angular-grid";
@@ -42,9 +45,9 @@ export class HomeDepartureComponent implements OnInit {
   username?: string;
 
   public title: string;
-  public instrumento: Array<any>;
-  public asignacion: Array<any>;
-  public estat: Array<any>;
+  public instrumento = Instrumentos.instrumentos;
+  public asignacion = Asignacion.asignacion;
+  public estat = Estatus.estatus;
   public departures: Departure[] = [];
   public gridView: Departure[] = [];
   public pdfEntry: Array<File> = [];
@@ -97,113 +100,10 @@ export class HomeDepartureComponent implements OnInit {
     this.depEdit = new Departure;
     this.depDelete = new Departure;
 
-    this.asignacion = [
-      {
-        direccion: "Oficina del Consejero Jurídico"
-      },
-      {
-        direccion: "Secretaria Partiular y de Comunicación Social"
-      },
-      {
-        direccion: "Dirección de Coordinación y Control de Gestión"
-      },
-      {
-        direccion: "Dirección General Contenciosa"
-      },
-      {
-        direccion: "Dirección de Asistencia Técnica y Combate a la Corrupción"
-      },
-      {
-        direccion: "Dirección de Servicios Legales"
-      },
-      {
-        direccion: "Dirección General Consultiva"
-      },
-      {
-        direccion: "Dirección de Estudios Legislativos"
-      },
-      {
-        direccion: "Dirección de Estudios Jurídicos"
-      },
-      {
-        direccion: "Dirección de Compilación Normativa, Archivo e Igualdad de Género"
-      },
-      {
-        direccion: "Dirección Administrativa"
-      }
-    ];
-
-    this.instrumento = [
-      {
-        name: "Leyes"
-      },
-      {
-        name: "Reglamentos"
-      },
-      {
-        name: "Acuerdos"
-      },
-      {
-        name: "Decretos"
-      },
-      {
-        name: "Lineamientos"
-      },
-      {
-        name: "Órdenes"
-      },
-      {
-        name: "Convenios"
-      },
-      {
-        name: "Contratos"
-      },
-      {
-        name: "Actas"
-      },
-      {
-        name: "Otros..."
-      }
-    ];
-
-    this.estat = [
-      {
-        id: 1,
-        name: "En Tramite",
-      },
-      {
-        id: 2,
-        name: "Concluido"
-      },
-      {
-        id: 3,
-        name: "Para Conocimiento"
-      }
-    ];
+    this.asignacion;
+    this.instrumento;
+    this.estat;
   }
-
-  // public result: any;
-
-  // public showConfirmation(): void {
-  //   const dialog: DialogRef = this.dialogService.open({
-  //     title: "Please confirm",
-  //     content: "Are you sure?",
-  //     actions: [{ text: "No" }, { text: "Yes", themeColor: "primary" }],
-  //     width: 450,
-  //     height: 200,
-  //     minWidth: 250,
-  //   });
-
-  //   dialog.result.subscribe((result) => {
-  //     if (result instanceof DialogCloseResult) {
-  //       console.log("close");
-  //     } else {
-  //       console.log("action", result);
-  //     }
-
-  //     this.result = JSON.stringify(result);
-  //   });
-  // }
 
   ngOnInit(): void {
     this.gridView = this.departures;

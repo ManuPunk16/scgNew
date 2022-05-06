@@ -22,4 +22,12 @@ router.get('/get-entry/:entry', documentController.getPdfEntry);
 router.get('/get-exit/:exit', documentController.getPdfExit);
 router.get('/search/:search', documentController.search);
 
+// INFORMACION GRAFICAS
+router.get('/ConcluidoDSL', documentController.exportCountConcluidoDSL);
+router.get('/TramiteDSL', documentController.exportCountTramiteDSL);
+router.get('/ConocimientoDSL', documentController.exportCountConocimientoDSL);
+router.get('/ConcluidoCJ', documentController.exportCountConcluidoCJ);
+router.get('/TramiteCJ', documentController.exportCountTramiteCJ);
+router.get('/ConocimientoCJ', documentController.exportCountConocimientoCJ);
+
 module.exports = router;

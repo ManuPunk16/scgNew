@@ -28,6 +28,7 @@
     [width]="100"
     [columnMenu]="false"
     [resizable]="false"
+    [sticky]="true"
   >
   <ng-template kendoGridCellTemplate let-dataItem="dataItem">
     <button kendoGridEditCommand [primary]="true" (click)="openEdit(contenido)" (click)="getDepartureById(dataItem)">
@@ -44,6 +45,7 @@
       field="num_folio"
       title="Num. Folio"
       [width]="120"
+      [sticky]="true"
     ></kendo-grid-column>
 
     <kendo-grid-column
@@ -95,7 +97,7 @@
     <kendo-grid-column
       field="asunto"
       title="Asunto"
-      [width]="230"
+      [width]="730"
     ></kendo-grid-column>
 
     <kendo-grid-column
@@ -125,7 +127,7 @@
     <kendo-grid-column
       field="observacion"
       title="Observaciones"
-      [width]="150"
+      [width]="300"
     ></kendo-grid-column>
   </kendo-grid-column-group>
 

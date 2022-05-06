@@ -1,4 +1,53 @@
-<nav>
+<h3>
+Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes graficas.
+</h3>
+<kendo-grid [data]="gridData">
+  <kendo-grid-column field="cabecera" title="Nomenclatura"></kendo-grid-column>
+  <kendo-grid-column field="descripcion" title="Descripcion"></kendo-grid-column>
+</kendo-grid>
+<br><br>
+<button kendoButton (click)="exportChart()">Exporar como imagen</button>
+<kendo-chart #chart
+  renderAs="canvas"
+>
+  <kendo-chart-legend position="top" orientation="horizontal">
+  </kendo-chart-legend>
+  <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE SEP 2021 HASTA LA FECHA" font="19pt sans-serif"></kendo-chart-title>
+  <kendo-chart-category-axis>
+    <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+    </kendo-chart-category-axis-item>
+  </kendo-chart-category-axis>
+  <kendo-chart-series>
+    <kendo-chart-series-item
+      name="Concluido"
+      [labels]="seriesLabels"
+      [gap]="2"
+      [spacing]="0.50"
+      [data]="concluido"
+    >
+    </kendo-chart-series-item>
+    <kendo-chart-series-item
+      name="En Tramite"
+      [labels]="seriesLabels"
+      [gap]="2"
+      [spacing]="0.50"
+      [data]="tramite"
+    >
+    </kendo-chart-series-item>
+    <kendo-chart-series-item
+      name="Para Conocimiento"
+      [labels]="seriesLabels"
+      [gap]="2"
+      [spacing]="0.50"
+      [data]="conocimiento"
+    >
+    </kendo-chart-series-item>
+  </kendo-chart-series>
+</kendo-chart>
+
+<br><br>
+
+<!-- <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
       Grafica 1
@@ -13,80 +62,10 @@
 </nav>
 <div class="tab-content" id="nav-tabContent" style="background-color: aliceblue;">
   <br>
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-    <figure class="text-center">
-      <blockquote class="blockquote">
-        <p>Presentacion de la Grafica Numero 1.</p>
-      </blockquote>
-      <figcaption class="blockquote-footer">
-        Someone famous in <cite title="Source Title">Source Title</cite>
-      </figcaption>
-    </figure>
-    <div class="chart-container">
-      <div>
-        <div>
-          <div style="display: block">
-            <canvas baseChart 
-              [data]="barChartData"
-              [type]="barChartType" 
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"
-            >
-            </canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    <figure class="text-center">
-      <blockquote class="blockquote">
-        <p>Presentacion de la Grafica Numero 2.</p>
-      </blockquote>
-      <figcaption class="blockquote-footer">
-        Someone famous in <cite title="Source Title">Source Title</cite>
-      </figcaption>
-    </figure>
-    <div class="chart-container">
-      <div>
-        <div>
-          <div style="display: block">
-            <canvas baseChart 
-              [data]="barChartData2"
-              [type]="barChartType2" 
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"
-            >
-            </canvas>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-    <figure class="text-center">
-      <blockquote class="blockquote">
-        <p>Presentacion de la Grafica Numero 3.</p>
-      </blockquote>
-      <figcaption class="blockquote-footer">
-        Someone famous in <cite title="Source Title">Source Title</cite>
-      </figcaption>
-    </figure>
-    <div class="chart-container">
-      <div>
-        <div>
-          <div style="display: block">
-            <canvas baseChart 
-              [data]="barChartData3"
-              [type]="barChartType3" 
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"
-            >
-            </canvas>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
-  <br><br><br>
-</div>
+</div> -->
