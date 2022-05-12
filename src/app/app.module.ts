@@ -38,6 +38,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from "@progress/kendo-angular-label";
 import { IconsModule } from "@progress/kendo-angular-icons";
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { NotificationModule } from '@progress/kendo-angular-notification';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     LabelModule,
     IconsModule,
     HttpClientJsonpModule,
-    DialogsModule
+    DialogsModule,
+    NotificationModule
   ],
   providers: [appRoutingProviders, authInterceptorProviders, AuthGuard ],
   bootstrap: [AppComponent]

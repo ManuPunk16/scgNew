@@ -85,13 +85,13 @@
     <kendo-grid-column
       field="remitido"
       title="Remitente"
-      [width]="150"
+      [width]="200"
     ></kendo-grid-column>
 
     <kendo-grid-column
       field="asignado"
       title="Asignado"
-      [width]="150"
+      [width]="200"
     ></kendo-grid-column>
 
     <kendo-grid-column
@@ -267,7 +267,7 @@
               <div class="col-md-6">
                 <label for="num_folio" class="form-label">Num. Folio</label>
                 <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="dep.num_folio"
-                  class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
+                  class="form-control ng-untouched ng-pristine ng-valid" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
                   <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)" class="alert alert-danger">
                     <div *ngIf="num_folio.errors?.['required']">
                       Name is required.

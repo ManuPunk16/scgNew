@@ -2,70 +2,209 @@
 Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes graficas.
 </h3>
 <kendo-grid [data]="gridData">
-  <kendo-grid-column field="cabecera" title="Nomenclatura"></kendo-grid-column>
-  <kendo-grid-column field="descripcion" title="Descripcion"></kendo-grid-column>
+  <kendo-grid-column field="cabecera" title="NOMENCLATURA"></kendo-grid-column>
+  <kendo-grid-column field="descripcion" title="DESCRIPCIÓN"></kendo-grid-column>
 </kendo-grid>
 <br><br>
-<button kendoButton (click)="exportChart()">Exporar como imagen</button>
-<kendo-chart #chart
-  renderAs="canvas"
->
-  <kendo-chart-legend position="top" orientation="horizontal">
-  </kendo-chart-legend>
-  <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE SEP 2021 HASTA LA FECHA" font="19pt sans-serif"></kendo-chart-title>
-  <kendo-chart-category-axis>
-    <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
-    </kendo-chart-category-axis-item>
-  </kendo-chart-category-axis>
-  <kendo-chart-series>
-    <kendo-chart-series-item
-      name="Concluido"
-      [labels]="seriesLabels"
-      [gap]="2"
-      [spacing]="0.50"
-      [data]="concluido"
-    >
-    </kendo-chart-series-item>
-    <kendo-chart-series-item
-      name="En Tramite"
-      [labels]="seriesLabels"
-      [gap]="2"
-      [spacing]="0.50"
-      [data]="tramite"
-    >
-    </kendo-chart-series-item>
-    <kendo-chart-series-item
-      name="Para Conocimiento"
-      [labels]="seriesLabels"
-      [gap]="2"
-      [spacing]="0.50"
-      [data]="conocimiento"
-    >
-    </kendo-chart-series-item>
-  </kendo-chart-series>
-</kendo-chart>
+
+<div class="alert alert-warning d-flex align-items-center" role="alert">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </svg>
+    Para exportar las gráficas en formato de imagen, dar clic derecho sobre la gráfica y <strong>Guardar imagen como...</strong>
+  </div>
+</div>
+
+<div class="alert alert-warning d-flex align-items-center" role="alert">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </svg>
+    Si no se visualizan las barras, dar clic a una de las 3 opciones <strong>Concluido, En Tramite y Para Conocimiento</strong> para que cargue adecuadamente.
+  </div>
+</div>
 
 <br><br>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Ver Todo</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="primera-tab" data-bs-toggle="tab" data-bs-target="#primera" type="button" role="tab" aria-controls="primera" aria-selected="false">1er Trim 2022</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="segunda-tab" data-bs-toggle="tab" data-bs-target="#segunda" type="button" role="tab" aria-controls="segunda" aria-selected="false">2do Trim 2022</button>
+  </li>
+  <!-- <li class="nav-item" role="presentation">
+    <button class="nav-link" id="tercera-tab" data-bs-toggle="tab" data-bs-target="#tercera" type="button" role="tab" aria-controls="tercera" aria-selected="false">3er Trim 2022</button>
+  </li> -->
+</ul>
 
-<!-- <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-      Grafica 1
-    </button>
-    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
-      Grafica 2
-    </button>
-    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
-      Grafica 3
-    </button>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent" style="background-color: aliceblue;">
-  <br>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <kendo-chart #chart
+      renderAs="canvas"
+    >
+      <kendo-chart-legend position="top" orientation="horizontal">
+      </kendo-chart-legend>
+      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE SEP 2021 HASTA LA FECHA" font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+        </kendo-chart-category-axis-item>
+      </kendo-chart-category-axis>
+      <kendo-chart-series>
+        <kendo-chart-series-item
+          name="Concluido"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="concluido"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="En Tramite"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="tramite"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="Para Conocimiento"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="conocimiento"
+        >
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
 
+    <!-- <kendo-grid [data]="gridData">
+      <kendo-grid-column field="descripcion" title="ÁREAS DE LA CONSEJERIA JURÍDICA"></kendo-grid-column>
+      <kendo-grid-column field="total" title="TOTAL DE OFICIOS RECIBIDOS Y TURNADOS"></kendo-grid-column>
+    </kendo-grid> -->
   </div>
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+  <div class="tab-pane" id="primera" role="tabpanel" aria-labelledby="primera-tab">
+    <kendo-chart #chart
+      renderAs="canvas"
+    >
+      <kendo-chart-legend position="top" orientation="horizontal">
+      </kendo-chart-legend>
+      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE ENE 2022 A MARZO 2022" font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+        </kendo-chart-category-axis-item>
+      </kendo-chart-category-axis>
+      <kendo-chart-series>
+        <kendo-chart-series-item
+          name="Concluido"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="concluidoTrim122"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="En Tramite"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="tramiteTrim122"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="Para Conocimiento"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="conocimientoTrim122"
+        >
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </div>
+  <div class="tab-pane" id="segunda" role="tabpanel" aria-labelledby="segunda-tab">
+    <kendo-chart #chart
+      renderAs="canvas"
+    >
+      <kendo-chart-legend position="top" orientation="horizontal">
+      </kendo-chart-legend>
+      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE ABRIL 2022 A JUNIO 2022" font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+        </kendo-chart-category-axis-item>
+      </kendo-chart-category-axis>
+      <kendo-chart-series>
+        <kendo-chart-series-item
+          name="Concluido"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="concluidoTrim222"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="En Tramite"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="tramiteTrim222"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="Para Conocimiento"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="conocimientoTrim222"
+        >
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </div>
+  <!-- <div class="tab-pane" id="tercera" role="tabpanel" aria-labelledby="tercera-tab">
+    <kendo-chart #chart
+      renderAs="canvas"
+    >
+      <kendo-chart-legend position="top" orientation="horizontal">
+      </kendo-chart-legend>
+      <kendo-chart-title text="aaGRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE SEP 2021 HASTA LA FECHA" font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+        </kendo-chart-category-axis-item>
+      </kendo-chart-category-axis>
+      <kendo-chart-series>
+        <kendo-chart-series-item
+          name="Concluido"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="concluido"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="En Tramite"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="tramite"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="Para Conocimiento"
+          [labels]="seriesLabels"
+          [gap]="2"
+          [spacing]="0.50"
+          [data]="conocimiento"
+        >
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </div> -->
+</div>
 
-  </div>
-</div> -->
+<br><br>

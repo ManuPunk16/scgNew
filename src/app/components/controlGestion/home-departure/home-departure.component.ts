@@ -13,6 +13,7 @@ import { Estatus } from 'src/app/models/estatus';
 //Telerik
 import { DataBindingDirective, GridComponent } from "@progress/kendo-angular-grid";
 import { PageChangeEvent, PageSizeItem } from "@progress/kendo-angular-grid";
+import { NotificationService } from "@progress/kendo-angular-notification";
 
 @Component({
   selector: 'app-home-departure',
@@ -91,7 +92,8 @@ export class HomeDepartureComponent implements OnInit {
     private _router: Router,
     private zone: NgZone,
     private tokenStorageService: TokenStorageService,
-    public modal: NgbModal
+    public modal: NgbModal,
+    private notificationService: NotificationService
   ) {
     // console.log(_router.url);
     this.title = "Gestor";
@@ -265,10 +267,11 @@ export class HomeDepartureComponent implements OnInit {
   onEdit(){
     this._departureService.updateDeparture(this.depEdit._id, this.depEdit).subscribe(
       res => {
-        console.log(res);
+        this.showEditSuccess();
         this.modal.dismissAll();
       },
       error => {
+        this.showEditError();
         console.log(error);
       }
     );
@@ -285,6 +288,7 @@ export class HomeDepartureComponent implements OnInit {
             location.reload();
           });
         } else {
+          this.showSubmitError();
         }
       },
       error => {
@@ -296,5 +300,35 @@ export class HomeDepartureComponent implements OnInit {
   capturarSalida(event: any): any {
     const entradaCapturada = event.target.files[0];
     console.log(entradaCapturada);
+  }
+
+  public showSubmitError(): void {
+    this.notificationService.show({
+      content: "Verifica que tu información que insertas sea la correcta!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "warning", icon: true, },
+    });
+  }
+
+  public showEditSuccess(): void {
+    this.notificationService.show({
+      content: "Documento Editado con Exito!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "success", icon: true },
+    });
+  }
+
+  public showEditError(): void {
+    this.notificationService.show({
+      content: "Hay un error!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "error", icon: true },
+    });
   }
 }

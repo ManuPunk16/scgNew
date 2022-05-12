@@ -16,6 +16,7 @@ import { InstitucionOrigen } from 'src/app/models/institucion';
 //Telerik
 import { DataBindingDirective, GridComponent } from "@progress/kendo-angular-grid";
 import { PageChangeEvent, PageSizeItem } from "@progress/kendo-angular-grid";
+import { NotificationService } from "@progress/kendo-angular-notification";
 
 @Component({
   selector: 'app-homec',
@@ -98,7 +99,8 @@ export class HomecComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private userService: UserService,
     private tokenStorageService: TokenStorageService,
-    public modal: NgbModal
+    public modal: NgbModal,
+    private notificationService: NotificationService
   ) {
 
     this.title = "Gestor";
@@ -159,6 +161,7 @@ export class HomecComponent implements OnInit {
             location.reload();
           });
         } else {
+          this.showSubmitError();
           // console.log(response);
           // this.zone.runOutsideAngular(() => {
           //   location.reload();
@@ -239,13 +242,43 @@ export class HomecComponent implements OnInit {
   onEdit(){
     this._documentService.update(this.docEdit._id, this.docEdit).subscribe(
       res => {
-        console.log(res);
+        this.showEditSuccess();
         this.modal.dismissAll();
       },
       error => {
-        console.log(error);
+        this.showEditError();
       }
     );
+  }
+
+  public showSubmitError(): void {
+    this.notificationService.show({
+      content: "Verifica que tu información que insertas sea la correcta!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "warning", icon: true, },
+    });
+  }
+
+  public showEditSuccess(): void {
+    this.notificationService.show({
+      content: "Documento Editado con Exito!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "success", icon: true },
+    });
+  }
+
+  public showEditError(): void {
+    this.notificationService.show({
+      content: "Hay un error!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "error", icon: true },
+    });
   }
 
 }
