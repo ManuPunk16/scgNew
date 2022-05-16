@@ -5,6 +5,10 @@ import { saveAs } from "@progress/kendo-file-saver";
 import { SeriesLabels } from "@progress/kendo-angular-charts";
 import { Document } from 'src/app/models/document';
 import { Category } from 'src/app/models/model.chart';
+import { FormGroup, FormControl } from '@angular/forms';
+import { FormatSettings } from "@progress/kendo-angular-dateinputs";
+import { Asignacion } from 'src/app/models/areas';
+import { NotificationService } from "@progress/kendo-angular-notification";
 
 @Component({
   selector: 'app-statistics',
@@ -17,6 +21,29 @@ export class StatisticsComponent implements OnInit {
 
   @ViewChild("chart")
   private chart!: ChartComponent;
+
+  public doc: Document;
+  public minRange1!: string;
+  public maxRange1!: string;
+  public asignacion = Asignacion.asignacion;
+
+  public range = { start: null, end: null };
+
+  public format: FormatSettings = {
+    displayFormat: "yyyy/MM/dd",
+    inputFormat: "yyyy/MM/dd",
+  };
+
+  dateForm = new FormGroup({
+    minDate1: new FormControl(''),
+    maxDate1: new FormControl(''),
+    optionMenu: new FormControl('')
+  });
+
+  public concluidoPrueba: number[] = [];
+  public tramitePrueba: number[] = [];
+  public conocimientoPrueba: number[] = [];
+  public isShown: boolean = false ;
 
   public concluido: number[] = []; //Concluido
   public tramite: number[] = []; //En Tramite
@@ -88,6 +115,7 @@ export class StatisticsComponent implements OnInit {
 
   public categories: string[] = [
     'CJ',
+    'SPCS',
     'DGC',
     'DGdC',
     'DEL',
@@ -100,14 +128,90 @@ export class StatisticsComponent implements OnInit {
     'UT'
   ];
 
-  constructor(private _documentService: DocumentService){
-
+  constructor(
+    private _documentService: DocumentService,
+    private notificationService: NotificationService
+    ){
+    this.doc = new Document;
+    this.minRange1;
+    this.asignacion;
   }
 
   ngOnInit(): void {
     this.getTest();
     this.getTrim122();
     this.getTrim222();
+  }
+
+  textBoxDisabled = true;
+
+  toggle(){
+    this.textBoxDisabled = !this.textBoxDisabled;
+  }
+
+  onSubmit(){
+    if (
+        this.dateForm.value.minDate1 &&
+        this.dateForm.value.maxDate1 &&
+        this.dateForm.value.optionMenu != '') {
+      this.isShown = true;
+      console.log(this.dateForm.value);
+      this._documentService.getDocuments().subscribe(
+        res => {
+          this.documents = res.document;
+          const result = this.documents.filter(
+            ({estatus}) => estatus === 'EN TRAMITE'
+            ).filter(({fecha_recepcion}) => fecha_recepcion >= this.dateForm.value.minDate1 && fecha_recepcion <= this.dateForm.value.maxDate1
+          ).length;
+          console.log(result);
+          this.tramitePrueba[0] = result;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      this._documentService.getDocuments().subscribe(
+        res => {
+          this.documents = res.document;
+          const result = this.documents.filter(
+            ({estatus}) => estatus === 'CONCLUIDO'
+            ).filter(({fecha_recepcion}) => fecha_recepcion >= this.dateForm.value.minDate1 && fecha_recepcion <= this.dateForm.value.maxDate1
+          ).length;
+          console.log(result);
+          this.concluidoPrueba[0] = result;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
+      this._documentService.getDocuments().subscribe(
+        res => {
+          this.documents = res.document;
+          const result = this.documents.filter(
+            ({estatus}) => estatus === 'PARA CONOCIMIENTO'
+            ).filter(({fecha_recepcion}) => fecha_recepcion >= this.dateForm.value.minDate1 && fecha_recepcion <= this.dateForm.value.maxDate1
+          ).length;
+          console.log(result);
+          this.conocimientoPrueba[0] = result;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.showSubmitError();
+    }
+  }
+
+  public showSubmitError(): void {
+    this.notificationService.show({
+      content: "Verifica que tu información que insertas sea la correcta!",
+      hideAfter: 1500,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "warning", icon: true, },
+    });
   }
 
   public exportChart(): void {

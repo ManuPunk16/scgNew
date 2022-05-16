@@ -1,5 +1,63 @@
+<!-- PRUEBAS INICIO -->
+
+<br>
+
+<div class="card">
+  <div class="card-body">
+    <form class="row g-3" [formGroup]="dateForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="col-12">
+        <label for="optionMenu">SELECCIONA TU OPCIÓN: </label>
+        <select class="form-select" aria-label="Default select example" required formControlName="optionMenu"
+          name="optionMenu" id="optionMenu">
+          <option value="CONSEJERIA JURÍDICA">CONSEJERIA JURÍDICA</option>
+          <option *ngFor="let items of asignacion" value="{{items.direccion}}">{{items.direccion}}</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="minDate1" class="form-label">De: </label>
+        <input type="date" formControlName="minDate1"
+          required name="minDate1" class="form-control" id="minDate1">
+      </div>
+      <div class="col-md-6">
+        <label for="maxDate1" class="form-label">A: </label>
+        <input type="date" formControlName="maxDate1" required
+        class="form-control" name="maxDate1" id="maxDate1">
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Genrar gráfica</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card-body" *ngIf="isShown">
+    <kendo-chart #chart renderAs="canvas">
+      <kendo-chart-legend position="top" orientation="horizontal">
+      </kendo-chart-legend>
+      <kendo-chart-title text="CONSEJERIA JURÍDICA"
+        font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item [labels]="{ rotation: 'auto' }"
+          [title]="{ text: 'CONSEJERIA JURÍDICA' }">
+        </kendo-chart-category-axis-item>
+      </kendo-chart-category-axis>
+      <kendo-chart-series>
+        <kendo-chart-series-item name="Concluido" [labels]="seriesLabels" [gap]="2" [spacing]="0.50" [data]="concluidoPrueba">
+        </kendo-chart-series-item>
+        <kendo-chart-series-item name="En Tramite" [labels]="seriesLabels" [gap]="2" [spacing]="0.50" [data]="tramitePrueba">
+        </kendo-chart-series-item>
+        <kendo-chart-series-item name="Para Conocimiento" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="conocimientoPrueba">
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </div>
+</div>
+
+<!-- PRUEBAS FIN -->
+
+<br><br>
 <h3>
-Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes graficas.
+  Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes graficas.
 </h3>
 <kendo-grid [data]="gridData">
   <kendo-grid-column field="cabecera" title="NOMENCLATURA"></kendo-grid-column>
@@ -9,19 +67,37 @@ Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes
 
 <div class="alert alert-warning d-flex align-items-center" role="alert">
   <div>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+      <path
+        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </svg>
-    Para exportar las gráficas en formato de imagen, dar clic derecho sobre la gráfica y <strong>Guardar imagen como...</strong>
+    Para exportar las gráficas en formato de imagen, dar clic derecho sobre la gráfica y <strong>Guardar imagen
+      como...</strong>
   </div>
 </div>
 
 <div class="alert alert-warning d-flex align-items-center" role="alert">
   <div>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+      <path
+        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </svg>
-    Si no se visualizan las barras, dar clic a una de las 3 opciones <strong>Concluido, En Tramite y Para Conocimiento</strong> para que cargue adecuadamente.
+    Si no se visualizan las barras, dar clic a una de las 3 opciones <strong>Concluido, En Tramite y Para
+      Conocimiento</strong> para que cargue adecuadamente.
+  </div>
+</div>
+
+<div class="alert alert-primary d-flex align-items-center" role="alert">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+      <path
+        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+    </svg>
+    La visualización de las gráficas se consulta en el momento que cargas la pagina, los filtros que ocupan son
+    <strong>Asignado y Estatus</strong>, los filtros solo se leerán en mayúsculas.
   </div>
 </div>
 
@@ -29,13 +105,16 @@ Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Ver Todo</button>
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+      aria-controls="home" aria-selected="true">Ver Todo</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="primera-tab" data-bs-toggle="tab" data-bs-target="#primera" type="button" role="tab" aria-controls="primera" aria-selected="false">1er Trim 2022</button>
+    <button class="nav-link" id="primera-tab" data-bs-toggle="tab" data-bs-target="#primera" type="button" role="tab"
+      aria-controls="primera" aria-selected="false">1er Trim 2022</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="segunda-tab" data-bs-toggle="tab" data-bs-target="#segunda" type="button" role="tab" aria-controls="segunda" aria-selected="false">2do Trim 2022</button>
+    <button class="nav-link" id="segunda-tab" data-bs-toggle="tab" data-bs-target="#segunda" type="button" role="tab"
+      aria-controls="segunda" aria-selected="false">2do Trim 2022</button>
   </li>
   <!-- <li class="nav-item" role="presentation">
     <button class="nav-link" id="tercera-tab" data-bs-toggle="tab" data-bs-target="#tercera" type="button" role="tab" aria-controls="tercera" aria-selected="false">3er Trim 2022</button>
@@ -45,40 +124,23 @@ Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <kendo-chart #chart
-      renderAs="canvas"
-    >
+    <kendo-chart #chart renderAs="canvas">
       <kendo-chart-legend position="top" orientation="horizontal">
       </kendo-chart-legend>
-      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE SEP 2021 HASTA LA FECHA" font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE SEP 2021 HASTA LA FECHA"
+        font="19pt sans-serif"></kendo-chart-title>
       <kendo-chart-category-axis>
-        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }"
+          [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
         </kendo-chart-category-axis-item>
       </kendo-chart-category-axis>
       <kendo-chart-series>
-        <kendo-chart-series-item
-          name="Concluido"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="concluido"
-        >
+        <kendo-chart-series-item name="Concluido" [labels]="seriesLabels" [gap]="2" [spacing]="0.50" [data]="concluido">
         </kendo-chart-series-item>
-        <kendo-chart-series-item
-          name="En Tramite"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="tramite"
-        >
+        <kendo-chart-series-item name="En Tramite" [labels]="seriesLabels" [gap]="2" [spacing]="0.50" [data]="tramite">
         </kendo-chart-series-item>
-        <kendo-chart-series-item
-          name="Para Conocimiento"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="conocimiento"
-        >
+        <kendo-chart-series-item name="Para Conocimiento" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="conocimiento">
         </kendo-chart-series-item>
       </kendo-chart-series>
     </kendo-chart>
@@ -89,79 +151,49 @@ Las siguientes nomenclaturas representan las áreas abreviadas de las siguientes
     </kendo-grid> -->
   </div>
   <div class="tab-pane" id="primera" role="tabpanel" aria-labelledby="primera-tab">
-    <kendo-chart #chart
-      renderAs="canvas"
-    >
+    <kendo-chart #chart renderAs="canvas">
       <kendo-chart-legend position="top" orientation="horizontal">
       </kendo-chart-legend>
-      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE ENE 2022 A MARZO 2022" font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE ENE 2022 A MARZO 2022"
+        font="19pt sans-serif"></kendo-chart-title>
       <kendo-chart-category-axis>
-        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }"
+          [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
         </kendo-chart-category-axis-item>
       </kendo-chart-category-axis>
       <kendo-chart-series>
-        <kendo-chart-series-item
-          name="Concluido"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="concluidoTrim122"
-        >
+        <kendo-chart-series-item name="Concluido" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="concluidoTrim122">
         </kendo-chart-series-item>
-        <kendo-chart-series-item
-          name="En Tramite"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="tramiteTrim122"
-        >
+        <kendo-chart-series-item name="En Tramite" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="tramiteTrim122">
         </kendo-chart-series-item>
-        <kendo-chart-series-item
-          name="Para Conocimiento"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="conocimientoTrim122"
-        >
+        <kendo-chart-series-item name="Para Conocimiento" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="conocimientoTrim122">
         </kendo-chart-series-item>
       </kendo-chart-series>
     </kendo-chart>
   </div>
   <div class="tab-pane" id="segunda" role="tabpanel" aria-labelledby="segunda-tab">
-    <kendo-chart #chart
-      renderAs="canvas"
-    >
+    <kendo-chart #chart renderAs="canvas">
       <kendo-chart-legend position="top" orientation="horizontal">
       </kendo-chart-legend>
-      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE ABRIL 2022 A JUNIO 2022" font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-title text="GRÁFICA REPRESENTATIVA DE LOS DOCUMENTOS DE ENTRADAS DESDE ABRIL 2022 A JUNIO 2022"
+        font="19pt sans-serif"></kendo-chart-title>
       <kendo-chart-category-axis>
-        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }" [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
+        <kendo-chart-category-axis-item [categories]="categories" [labels]="{ rotation: 'auto' }"
+          [title]="{ text: 'ÁREAS DE LA CONSEJERIA JURÍDICA' }">
         </kendo-chart-category-axis-item>
       </kendo-chart-category-axis>
       <kendo-chart-series>
-        <kendo-chart-series-item
-          name="Concluido"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="concluidoTrim222"
-        >
+        <kendo-chart-series-item name="Concluido" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="concluidoTrim222">
         </kendo-chart-series-item>
-        <kendo-chart-series-item
-          name="En Tramite"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="tramiteTrim222"
-        >
+        <kendo-chart-series-item name="En Tramite" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="tramiteTrim222">
         </kendo-chart-series-item>
-        <kendo-chart-series-item
-          name="Para Conocimiento"
-          [labels]="seriesLabels"
-          [gap]="2"
-          [spacing]="0.50"
-          [data]="conocimientoTrim222"
-        >
+        <kendo-chart-series-item name="Para Conocimiento" [labels]="seriesLabels" [gap]="2" [spacing]="0.50"
+          [data]="conocimientoTrim222">
         </kendo-chart-series-item>
       </kendo-chart-series>
     </kendo-chart>
