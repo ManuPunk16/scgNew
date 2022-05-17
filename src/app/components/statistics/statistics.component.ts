@@ -26,6 +26,7 @@ export class StatisticsComponent implements OnInit {
   public minRange1!: string;
   public maxRange1!: string;
   public asignacion = Asignacion.asignacion;
+  public loading!: boolean;
 
   public range = { start: null, end: null };
 
@@ -154,7 +155,7 @@ export class StatisticsComponent implements OnInit {
         this.dateForm.value.minDate1 &&
         this.dateForm.value.maxDate1 &&
         this.dateForm.value.optionMenu != '') {
-      this.isShown = true;
+      this.loading = true;
       console.log(this.dateForm.value);
       this._documentService.getDocuments().subscribe(
         res => {
@@ -194,6 +195,8 @@ export class StatisticsComponent implements OnInit {
           ).length;
           console.log(result);
           this.conocimientoPrueba[0] = result;
+          this.loading = false;
+          this.isShown = true;
         },
         err => {
           console.log(err);

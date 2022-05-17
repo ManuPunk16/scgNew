@@ -28,7 +28,7 @@
       </div>
     </form>
   </div>
-
+  <div *ngIf="loading" class="k-i-loading"></div>
   <div class="card-body" *ngIf="isShown">
     <kendo-chart #chart renderAs="canvas">
       <kendo-chart-legend position="top" orientation="horizontal">
