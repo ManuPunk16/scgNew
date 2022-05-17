@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   constructor() {
 
-    let myMoment = moment('2022-05-12 13:09').fromNow();
+    let myMoment = moment('2022-05-17 15:22').fromNow();
     let now = moment().format('DD/MM/YYYY hh:mm');
 
     this.title = "Catalogo de Sistemas";
