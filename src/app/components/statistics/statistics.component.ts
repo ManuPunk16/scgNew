@@ -145,6 +145,7 @@ export class StatisticsComponent implements OnInit {
             this.categorieArea[0] = this.dateForm.value.optionMenu;
             this.conocimientoPrueba[0] = result;
             this.isShown = true;
+            console.log("Consultando grafica general CJ");
           },
           err => {
             console.log(err);
@@ -207,7 +208,7 @@ export class StatisticsComponent implements OnInit {
             this.documents = res.document;
             const result = this.documents
               .filter(({estatus}) => estatus === 'EN TRAMITE'
-              ).filter(({asignado}) => asignado === 'SECRETARIA PARTIULAR Y DE COMUNICACIÓN SOCIAL'
+              ).filter(({asignado}) => asignado === 'SECRETARIA PARTICULAR Y DE COMUNICACIÓN SOCIAL'
               ).filter(({fecha_recepcion}) => fecha_recepcion >= this.dateForm.value.minDate1 && fecha_recepcion <= this.dateForm.value.maxDate1
             ).length;
             // console.log(result);
@@ -223,7 +224,7 @@ export class StatisticsComponent implements OnInit {
             this.documents = res.document;
             const result = this.documents
               .filter(({estatus}) => estatus === 'CONCLUIDO'
-              ).filter(({asignado}) => asignado === 'SECRETARIA PARTIULAR Y DE COMUNICACIÓN SOCIAL'
+              ).filter(({asignado}) => asignado === 'SECRETARIA PARTICULAR Y DE COMUNICACIÓN SOCIAL'
               ).filter(({fecha_recepcion}) => fecha_recepcion >= this.dateForm.value.minDate1 && fecha_recepcion <= this.dateForm.value.maxDate1
             ).length;
             // console.log(result);
@@ -239,7 +240,7 @@ export class StatisticsComponent implements OnInit {
             this.documents = res.document;
             const result = this.documents
               .filter(({estatus}) => estatus === 'PARA CONOCIMIENTO'
-              ).filter(({asignado}) => asignado === 'SECRETARIA PARTIULAR Y DE COMUNICACIÓN SOCIAL'
+              ).filter(({asignado}) => asignado === 'SECRETARIA PARTICULAR Y DE COMUNICACIÓN SOCIAL'
               ).filter(({fecha_recepcion}) => fecha_recepcion >= this.dateForm.value.minDate1 && fecha_recepcion <= this.dateForm.value.maxDate1
             ).length;
             // console.log(result);
@@ -727,6 +728,7 @@ export class StatisticsComponent implements OnInit {
             this.isShown2 = true;
             this.loading = false;
             this.textTwo = "ENTRADA DE DOCUMENTOS POR AREA DESDE: " + this.dateForm.value.minDate1 + " HASTA: " + this.dateForm.value.maxDate1;
+            console.log("Consultando grafica general CJ por areas");
           },
           err => {
             console.log(err);
@@ -783,6 +785,7 @@ export class StatisticsComponent implements OnInit {
             this.textOne = "ENTRADAS DE DOCUMENTOS DEL AREA DESDE: " + this.dateForm.value.minDate1 + " HASTA: " + this.dateForm.value.maxDate1;
             this.loading = false;
             this.isShown = true;
+            console.log("Consultando grafica de una sola area");
           },
           err => {
             console.log(err);

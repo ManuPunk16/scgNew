@@ -1,162 +1,166 @@
-<h1 class="display-3">
-  Salidas de Documentos
-</h1>
-<br>
-<kendo-grid
-  [kendoGridBinding]="departures"
-  [pageSize]="pageSize"
-  [pageable]="true"
-  [sortable]="true"
-  [reorderable]="true"
-  [resizable]="true"
-  [height]="700"
-  [columnMenu]="{ filter: true }"
->
-<ng-template kendoGridToolbarTemplate>
-  <button kendoGridAddCommand data-bs-toggle="modal" data-bs-target="#staticBackdrop">Añadir nuevo registro</button>
-  <kendo-grid-spacer></kendo-grid-spacer>
-  <button kendoGridExcelCommand type="button" icon="file-excel">
-    Exportar a Excel
-  </button>
-  <button kendoGridPDFCommand icon="file-pdf">
-    Exportar a PDF
-  </button>
-</ng-template>
-
-  <kendo-grid-command-column
-    title="Acciones"
-    [width]="110"
-    [columnMenu]="false"
-    [resizable]="false"
-    [sticky]="true"
-  >
-  <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-    <button kendoGridEditCommand [primary]="true" (click)="openEdit(contenido)" (click)="getDepartureById(dataItem)">
-      <kendo-icon name="pencil"></kendo-icon>
-    </button>
-    <button kendoGridRemoveCommand (click)="deleteDepartureById(dataItem)">
-      <kendo-icon name="delete"></kendo-icon>
-    </button>
-  </ng-template>
-  </kendo-grid-command-column>
-
-  <kendo-grid-column-group title="Folios del Documento" [columnMenu]="false">
-    <kendo-grid-column
-      field="num_folio"
-      title="Num. Folio"
-      [width]="120"
-      [sticky]="true"
-    ></kendo-grid-column>
-
-    <kendo-grid-column
-      field="num_oficio"
-      title="Num. Oficio"
-      [width]="130"
-    ></kendo-grid-column>
-  </kendo-grid-column-group>
-
-  <kendo-grid-column-group title="Fechas del Documento" [columnMenu]="false">
-    <kendo-grid-column
-      field="fecha_oficio"
-      title="Fecha del Oficio"
-      [width]="150"
-    ></kendo-grid-column>
-
-    <kendo-grid-column
-      field="fecha_recepcion"
-      title="Fecha Recepción"
-      [width]="150"
-    ></kendo-grid-column>
-
-    <kendo-grid-column
-      field="fecha_vencimiento"
-      title="Fecha Vencimiento"
-      [width]="150"
-    ></kendo-grid-column>
-  </kendo-grid-column-group>
-
-  <kendo-grid-column-group title="Información del Documento" [columnMenu]="false">
-    <kendo-grid-column
-      field="ins_juridico"
-      title="Instrumento Jurídico"
-      [width]="150"
-    ></kendo-grid-column>
-
-    <kendo-grid-column
-      field="remitido"
-      title="Remitente"
-      [width]="200"
-    ></kendo-grid-column>
-
-    <kendo-grid-column
-      field="asignado"
-      title="Asignado"
-      [width]="200"
-    ></kendo-grid-column>
-
-    <kendo-grid-column
-      field="asunto"
-      title="Asunto"
-      [width]="730"
-    ></kendo-grid-column>
-
-    <kendo-grid-column
-      field="estatus"
-      title="Estatus"
-      [width]="140"
+<div class="card">
+  <div class="card-body">
+    <h1 class="display-3">
+      Salidas de Documentos
+    </h1>
+    <br>
+    <kendo-grid
+      [kendoGridBinding]="departures"
+      [pageSize]="pageSize"
+      [pageable]="true"
+      [sortable]="true"
+      [reorderable]="true"
+      [resizable]="true"
+      [height]="700"
+      [columnMenu]="{ filter: true }"
     >
-      <ng-template kendoGridCellTemplate let-dataItem>
-        <span
-          *ngIf="dataItem.estatus === 'CONCLUIDO'"
-          class="bg-success text-white"
-          >CONCLUIDO</span
-        >
-        <span
-          *ngIf="dataItem.estatus === 'EN TRAMITE'"
-          class="bg-danger text-white"
-          >EN TRAMITE</span
-        >
-        <span
-          *ngIf="dataItem.estatus === 'PARA CONOCIMIENTO'"
-          class="bg-primary text-white"
-          >PARA CONOCIMIENTO</span
-        >
+    <ng-template kendoGridToolbarTemplate>
+      <button kendoGridAddCommand data-bs-toggle="modal" data-bs-target="#staticBackdrop" *ngIf="showModeratorBoard">Añadir nuevo registro</button>
+      <kendo-grid-spacer></kendo-grid-spacer>
+      <button kendoGridExcelCommand type="button" icon="file-excel">
+        Exportar a Excel
+      </button>
+      <button kendoGridPDFCommand icon="file-pdf">
+        Exportar a PDF
+      </button>
+    </ng-template>
+
+      <kendo-grid-command-column
+        title="Acciones"
+        [width]="110"
+        [columnMenu]="false"
+        [resizable]="false"
+        [sticky]="true"
+        *ngIf="showModeratorBoard"
+      >
+      <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+        <button kendoGridEditCommand [primary]="true" (click)="openEdit(contenido)" (click)="getDepartureById(dataItem)">
+          <kendo-icon name="pencil"></kendo-icon>
+        </button>
+        <button kendoGridRemoveCommand (click)="deleteDepartureById(dataItem)">
+          <kendo-icon name="delete"></kendo-icon>
+        </button>
       </ng-template>
-    </kendo-grid-column>
+      </kendo-grid-command-column>
 
-    <kendo-grid-column
-      field="observacion"
-      title="Observaciones"
-      [width]="300"
-    ></kendo-grid-column>
-  </kendo-grid-column-group>
+      <kendo-grid-column-group title="Folios del Documento" [columnMenu]="false">
+        <kendo-grid-column
+          field="num_folio"
+          title="Num. Folio"
+          [width]="120"
+        ></kendo-grid-column>
 
-  <ng-template
-    kendoPagerTemplate
-    let-totalPages="totalPages"
-    let-currentPage="currentPage"
-  >
-    <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
-    <kendo-pager-numeric-buttons
-      [buttonCount]="10"
-    ></kendo-pager-numeric-buttons>
-    <kendo-pager-info></kendo-pager-info>
-    <kendo-pager-next-buttons></kendo-pager-next-buttons>
-    <kendo-pager-page-sizes
-      [pageSizes]="pageSizes"
-    ></kendo-pager-page-sizes>
-  </ng-template>
+        <kendo-grid-column
+          field="num_oficio"
+          title="Num. Oficio"
+          [width]="130"
+        ></kendo-grid-column>
+      </kendo-grid-column-group>
 
-  <kendo-grid-pdf
-    fileName="Salidas.pdf"
-    [repeatHeaders]="true"
-  ></kendo-grid-pdf>
-  <kendo-grid-excel
-    fileName="Salidas.xlsx"
-  ></kendo-grid-excel>
-</kendo-grid>
+      <kendo-grid-column-group title="Fechas del Documento" [columnMenu]="false">
+        <kendo-grid-column
+          field="fecha_oficio"
+          title="Fecha del Oficio"
+          [width]="150"
+        ></kendo-grid-column>
 
-<br><br><br>
+        <kendo-grid-column
+          field="fecha_recepcion"
+          title="Fecha Recepción"
+          [width]="150"
+        ></kendo-grid-column>
+
+        <kendo-grid-column
+          field="fecha_vencimiento"
+          title="Fecha Vencimiento"
+          [width]="150"
+        ></kendo-grid-column>
+      </kendo-grid-column-group>
+
+      <kendo-grid-column-group title="Información del Documento" [columnMenu]="false">
+        <kendo-grid-column
+          field="ins_juridico"
+          title="Instrumento Jurídico"
+          [width]="150"
+        ></kendo-grid-column>
+
+        <kendo-grid-column
+          field="remitido"
+          title="Remitente"
+          [width]="200"
+        ></kendo-grid-column>
+
+        <kendo-grid-column
+          field="asignado"
+          title="Asignado"
+          [width]="200"
+        ></kendo-grid-column>
+
+        <kendo-grid-column
+          field="asunto"
+          title="Asunto"
+          [width]="730"
+        ></kendo-grid-column>
+
+        <kendo-grid-column
+          field="estatus"
+          title="Estatus"
+          [width]="140"
+        >
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <span
+              *ngIf="dataItem.estatus === 'CONCLUIDO'"
+              class="bg-success text-white"
+              >CONCLUIDO</span
+            >
+            <span
+              *ngIf="dataItem.estatus === 'EN TRAMITE'"
+              class="bg-danger text-white"
+              >EN TRAMITE</span
+            >
+            <span
+              *ngIf="dataItem.estatus === 'PARA CONOCIMIENTO'"
+              class="bg-primary text-white"
+              >PARA CONOCIMIENTO</span
+            >
+          </ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-column
+          field="observacion"
+          title="Observaciones"
+          [width]="300"
+        ></kendo-grid-column>
+      </kendo-grid-column-group>
+
+      <ng-template
+        kendoPagerTemplate
+        let-totalPages="totalPages"
+        let-currentPage="currentPage"
+      >
+        <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+        <kendo-pager-numeric-buttons
+          [buttonCount]="10"
+        ></kendo-pager-numeric-buttons>
+        <kendo-pager-info></kendo-pager-info>
+        <kendo-pager-next-buttons></kendo-pager-next-buttons>
+        <kendo-pager-page-sizes
+          [pageSizes]="pageSizes"
+        ></kendo-pager-page-sizes>
+      </ng-template>
+
+      <kendo-grid-pdf
+        fileName="Salidas.pdf"
+        [repeatHeaders]="true"
+      ></kendo-grid-pdf>
+      <kendo-grid-excel
+        fileName="Salidas.xlsx"
+      ></kendo-grid-excel>
+    </kendo-grid>
+  </div>
+</div>
+
+<br>
 
 <ng-template #contenido let-modal>
   <!-- Inicio de Formulario -->

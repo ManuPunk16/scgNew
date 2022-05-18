@@ -6,7 +6,7 @@ export class Asignacion {
     },
     {
       cabecera: "SPCS",
-      direccion: "SECRETARIA PARTIULAR Y DE COMUNICACIÓN SOCIAL"
+      direccion: "SECRETARIA PARTICULAR Y DE COMUNICACIÓN SOCIAL"
     },
     {
       cabecera: "DCCG",
