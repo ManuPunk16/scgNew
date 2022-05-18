@@ -727,8 +727,7 @@ export class StatisticsComponent implements OnInit {
             this.conocimientoPrueba2[11] = result;
             this.isShown2 = true;
             this.loading = false;
-            this.textTwo = "ENTRADA DE DOCUMENTOS POR AREA DESDE: " + this.dateForm.value.minDate1 + " HASTA: " + this.dateForm.value.maxDate1;
-            console.log("Consultando grafica general CJ por areas");
+            this.textTwo = "ENTRADA DE DOCUMENTOS POR ÁREA DESDE: " + this.dateForm.value.minDate1 + " HASTA: " + this.dateForm.value.maxDate1;
           },
           err => {
             console.log(err);
@@ -782,10 +781,9 @@ export class StatisticsComponent implements OnInit {
             // console.log(this.dateForm.value.optionMenu);
             this.categorieArea[0] = this.dateForm.value.optionMenu;
             this.conocimientoPrueba[0] = result;
-            this.textOne = "ENTRADAS DE DOCUMENTOS DEL AREA DESDE: " + this.dateForm.value.minDate1 + " HASTA: " + this.dateForm.value.maxDate1;
+            this.textOne = "ENTRADAS DE DOCUMENTOS DEL ÁREA DESDE: " + this.dateForm.value.minDate1 + " HASTA: " + this.dateForm.value.maxDate1;
             this.loading = false;
             this.isShown = true;
-            console.log("Consultando grafica de una sola area");
           },
           err => {
             console.log(err);

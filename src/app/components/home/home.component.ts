@@ -13,28 +13,28 @@ export class HomeComponent implements OnInit {
 
   constructor() {
 
-    let myMoment = moment('2022-05-17 18:30').fromNow();
+    let myMoment = moment('2022-05-18 13:00').fromNow();
     let now = moment().format('DD/MM/YYYY hh:mm');
 
     this.title = "Catalogo de Sistemas";
     this.card = [
       {
-        titulo: "Sistema de Contról de Gestión",
-        descripcion: "En este apartado podras entrar al control de gestión",
+        titulo: "Sistema de Control de Gestión",
+        descripcion: "En este apartado podrás entrar al control de gestión",
         acceso: "Login",
-        actualizacion: "Última actualizacion: "+ myMoment
+        actualizacion: "Última actualización: "+ myMoment
       },
       {
-        titulo: "Informe Estadistico Lexius",
+        titulo: "Informe Estadístico Lexius",
         descripcion: "Informes",
         acceso: "InformeLexius",
-        actualizacion: "Última actualizacion hace: not valid :" + now
+        actualizacion: "Última actualización hace: not valid :" + now
       },
       {
-        titulo: "Informe Estadistico Pagina Web",
+        titulo: "Informe Estadístico Página Web",
         descripcion: "Informes",
         acceso: "InformeCj",
-        actualizacion: "Última actualizacion hace: not valid"
+        actualizacion: "Última actualización hace: not valid"
       }
     ];
   }
