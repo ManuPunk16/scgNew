@@ -41,6 +41,8 @@
           [categories]="categorieArea">
         </kendo-chart-category-axis-item>
       </kendo-chart-category-axis>
+      <kendo-chart-series-defaults [highlight]="{ inactiveOpacity: 0.3 }">
+      </kendo-chart-series-defaults>
       <kendo-chart-series>
         <kendo-chart-series-item name="Concluido" [labels]="seriesLabels" [gap]="2" [spacing]="0.50" [data]="concluidoPrueba">
         </kendo-chart-series-item>
@@ -63,6 +65,8 @@
             [categories]="categories">
           </kendo-chart-category-axis-item>
         </kendo-chart-category-axis>
+        <kendo-chart-series-defaults [highlight]="{ inactiveOpacity: 0.3 }">
+        </kendo-chart-series-defaults>
         <kendo-chart-series>
           <kendo-chart-series-item name="Concluido" [labels]="seriesLabels" [gap]="2" [spacing]="0.50" [data]="concluidoPrueba2">
           </kendo-chart-series-item>

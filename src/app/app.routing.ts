@@ -14,11 +14,15 @@ import { BoardAdminComponent } from "./components/controlGestion/board-admin/boa
 import { BoardUserComponent } from "./components/controlGestion/board-user/board-user.component";
 import { HomeDepartureComponent } from "./components/controlGestion/home-departure/home-departure.component";
 import { DeparturesEditComponent } from "./components/controlGestion/departures-edit/departures-edit.component";
+import { InfoLexiusComponent } from "./components/info-lexius/info-lexius.component";
+import { InfoWebPageComponent } from "./components/info-web-page/info-web-page.component";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'Inicio', component: HomeComponent },
   { path: 'Estadisticas', component: StatisticsComponent },
+  { path: 'InformeLexius', component: InfoLexiusComponent },
+  { path: 'InformePaginaOficial', component: InfoWebPageComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Perfil', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'Usuario', component: BoardUserComponent, canActivate: [AuthGuard] },

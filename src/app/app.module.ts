@@ -41,6 +41,8 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { IntlModule } from "@progress/kendo-angular-intl";
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
+import { InfoLexiusComponent } from './components/info-lexius/info-lexius.component';
+import { InfoWebPageComponent } from './components/info-web-page/info-web-page.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
     DeparturesComponent,
     HomeDepartureComponent,
     DeparturesComponent,
-    DeparturesEditComponent
+    DeparturesEditComponent,
+    InfoLexiusComponent,
+    InfoWebPageComponent
   ],
   imports: [
     BrowserModule,
