@@ -24,6 +24,13 @@ export class InfoLexiusComponent implements OnInit {
     0
   ];
 
+  public diferenceTotal: number[] = [
+    1875,
+    2551,
+    2012,
+    2090
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

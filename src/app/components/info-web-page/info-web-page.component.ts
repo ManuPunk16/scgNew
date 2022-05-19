@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeriesLabels } from '@progress/kendo-angular-charts';
 
 @Component({
   selector: 'app-info-web-page',
@@ -7,9 +8,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoWebPageComponent implements OnInit {
 
+  public initCount: number[] = [
+    29452,
+    29894,
+    30549,
+    31114,
+    31591
+  ];
+
+  public finalCount: number[] = [
+    29894,
+    30549,
+    31114,
+    31591,
+    0
+  ];
+
+  public diferenceTotal: number[] = [
+    442,
+    655,
+    565,
+    477
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  public seriesLabels: SeriesLabels = {
+    visible: true, // Note that visible defaults to false
+    padding: 3,
+    font: "bold 12px Arial, sans-serif",
+  };
 
 }

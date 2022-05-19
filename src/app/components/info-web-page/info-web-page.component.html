@@ -1,1 +1,42 @@
-<p>info-web-page works!</p>
+<div class="card">
+  <div class="card-body">
+    <h3 class="text-center">
+      Informes estadisticos de visitas en el portal oficial de la Consejeria Jurídica.
+    </h3>
+    <kendo-chart #chart renderAs="canvas">
+      <kendo-chart-title text="Informe de visitas del portal web oficial 2022"
+        font="19pt sans-serif"></kendo-chart-title>
+      <kendo-chart-legend position="top" orientation="horizontal">
+      </kendo-chart-legend>
+      <kendo-chart-category-axis>
+        <kendo-chart-category-axis-item
+          [categories]="['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL']"
+          [title]="{ text: 'Meses' }"
+        >
+        </kendo-chart-category-axis-item>
+      </kendo-chart-category-axis>
+      <kendo-chart-series-defaults [highlight]="{ inactiveOpacity: 0.3 }">
+      </kendo-chart-series-defaults>
+      <kendo-chart-series>
+        <kendo-chart-series-item
+          name="Contador Inicial"
+          [data]="initCount"
+          [labels]="seriesLabels"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="Contador Final"
+          [data]="finalCount"
+          [labels]="seriesLabels"
+        >
+        </kendo-chart-series-item>
+        <kendo-chart-series-item
+          name="Total Vistas"
+          [data]="diferenceTotal"
+          [labels]="seriesLabels"
+        >
+        </kendo-chart-series-item>
+      </kendo-chart-series>
+    </kendo-chart>
+  </div>
+</div>

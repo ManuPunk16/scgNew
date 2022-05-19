@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
 
   constructor() {
 
-    let myMoment = moment('2022-05-18 18:02').fromNow();
+    let myMoment = moment('2022-05-19 14:25').fromNow();
+    let myMomentCG = moment('2022-05-18 18:02').fromNow();
     let now = moment().format('DD/MM/YYYY hh:mm');
 
     this.title = "Catalogo de Sistemas";
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
         titulo: "Sistema de Control de Gestión",
         descripcion: "En este apartado podrás entrar al control de gestión",
         acceso: "Login",
-        actualizacion: "Última actualización: "+ myMoment
+        actualizacion: "Última actualización: "+ myMomentCG
       },
       {
         titulo: "Informe Estadístico Lexius",
@@ -34,7 +35,13 @@ export class HomeComponent implements OnInit {
         titulo: "Informe Estadístico Página Web",
         descripcion: "Informes",
         acceso: "InformePaginaOficial",
-        actualizacion: "Última actualización hace: not valid"
+        actualizacion: "Última actualización hace: " + myMoment
+      },
+      {
+        titulo: "Informes Estadísticos Control Gestión",
+        descripcion: "Podras consultar con gráficas el contenido de entradas.",
+        acceso: "Estadisticas",
+        actualizacion: "Última actualización hace: " + myMomentCG
       }
     ];
   }
