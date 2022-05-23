@@ -246,6 +246,7 @@ export class HomecComponent implements OnInit {
         this.modal.dismissAll();
       },
       error => {
+        console.log(error);
         this.showEditError();
       }
     );

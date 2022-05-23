@@ -1,7 +1,7 @@
 export class Document{
   public _id!: string;
   public num_folio!: number;
-  public num_folio_hijo!: number;
+  public num_folio_hijo?: string;
   public num_oficio?: string;
   public ins_juridico?: string;
   public fecha_recepcion: any;

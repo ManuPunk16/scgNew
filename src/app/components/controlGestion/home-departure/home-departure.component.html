@@ -20,9 +20,6 @@
       <button kendoGridExcelCommand type="button" icon="file-excel">
         Exportar a Excel
       </button>
-      <button kendoGridPDFCommand icon="file-pdf">
-        Exportar a PDF
-      </button>
     </ng-template>
 
       <kendo-grid-command-column
@@ -66,7 +63,7 @@
 
         <kendo-grid-column
           field="fecha_recepcion"
-          title="Fecha Recepción"
+          title="Acuse de Recibido"
           [width]="150"
         ></kendo-grid-column>
 
@@ -85,14 +82,14 @@
         ></kendo-grid-column>
 
         <kendo-grid-column
-          field="remitido"
-          title="Remitente"
+          field="dirigido"
+          title="Dirigido a"
           [width]="200"
         ></kendo-grid-column>
 
         <kendo-grid-column
-          field="asignado"
-          title="Asignado"
+          field="anexo"
+          title="Anexos"
           [width]="200"
         ></kendo-grid-column>
 
@@ -103,27 +100,10 @@
         ></kendo-grid-column>
 
         <kendo-grid-column
-          field="estatus"
-          title="Estatus"
+          field="firma_visado"
+          title="Firma y Visado"
           [width]="140"
         >
-          <ng-template kendoGridCellTemplate let-dataItem>
-            <span
-              *ngIf="dataItem.estatus === 'CONCLUIDO'"
-              class="bg-success text-white"
-              >CONCLUIDO</span
-            >
-            <span
-              *ngIf="dataItem.estatus === 'EN TRAMITE'"
-              class="bg-danger text-white"
-              >EN TRAMITE</span
-            >
-            <span
-              *ngIf="dataItem.estatus === 'PARA CONOCIMIENTO'"
-              class="bg-primary text-white"
-              >PARA CONOCIMIENTO</span
-            >
-          </ng-template>
         </kendo-grid-column>
 
         <kendo-grid-column
@@ -193,7 +173,7 @@
               [(ngModel)]="depEdit.fecha_vencimiento" id="fecha_vencimiento">
           </div>
           <div class="col-6">
-            <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
+            <label for="fecha_recepcion" class="form-label">Acuse de Recibido</label>
             <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
               [(ngModel)]="depEdit.fecha_recepcion" id="fecha_recepcion">
           </div>
@@ -209,34 +189,29 @@
             </datalist>
           </div>
           <div class="col-6">
-            <label for="remitido" class="form-label">Remitente</label>
-            <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="depEdit.remitido"
-              id="remitido" autocomplete="off" placeholder="Remitente del Documento">
+            <label for="dirigido" class="form-label">Dirigido a:</label>
+            <input type="text" class="form-control" name="dirigido" #dirigido="ngModel" [(ngModel)]="depEdit.dirigido"
+              id="dirigido" autocomplete="off" placeholder="Nombre de la persona">
+          </div>
+          <div class="col-12">
+            <label for="dependencia" class="form-label">Dependencia</label>
+            <input type="text" class="form-control" name="dependencia" #dependencia="ngModel" [(ngModel)]="depEdit.dependencia"
+              id="dependencia" autocomplete="off" placeholder="Nombre de la Dependencia">
           </div>
           <div class="mb-3">
             <label for="asunto" class="form-label">Asunto</label>
             <textarea name="asunto" #asunto="ngModel" [(ngModel)]="depEdit.asunto" class="form-control" id="asunto"
-              rows="3" autocomplete="off" placeholder="Asunto del Documento"></textarea>
+              rows="3" placeholder="Asunto del Documento"></textarea>
           </div>
           <div class="col-6">
-            <label for="asignado" class="form-label">Asignado</label>
-            <input list="asignados" class="form-control" name="asignado" id="asignado"
-              placeholder="Asignación del Documento" aria-label="Asignación del Documento"
-              aria-describedby="basic-addon1" autocomplete="off" #asignado="ngModel" [(ngModel)]="depEdit.asignado">
-            <datalist id="asignados">
-              <option *ngFor="let asig of asignacion">
-                {{asig.direccion}}
-              </option>
-            </datalist>
+            <label for="anexo" class="form-label">Anexo</label>
+            <input name="anexo" #anexo="ngModel" [(ngModel)]="depEdit.anexo" class="form-control" id="anexo"
+              autocomplete="off" placeholder="Anexo del Documento">
           </div>
-          <div class="col-md-6">
-            <label for="estatus" class="form-label">Estatus</label>
-            <select name="estatus" #estatus="ngModel" [(ngModel)]="depEdit.estatus" id="estatus" class="form-select">
-              <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
-              <option *ngFor="let est of estat" [ngValue]="est.name">
-                {{est.name}}
-              </option>
-            </select>
+          <div class="col-6">
+            <label for="firma_visado" class="form-label">Firma y visado</label>
+            <input name="firma_visado" #firma_visado="ngModel" [(ngModel)]="depEdit.firma_visado" class="form-control" id="firma_visado"
+              autocomplete="off" placeholder="Firma y Visado del Documento">
           </div>
           <div class="mb-3">
             <label for="observacion" class="form-label">Observación</label>
@@ -263,7 +238,7 @@
       <form #deps="ngForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro de Salida</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -271,28 +246,35 @@
               <div class="col-md-6">
                 <label for="num_folio" class="form-label">Num. Folio</label>
                 <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="dep.num_folio"
-                  class="form-control ng-untouched ng-pristine ng-valid" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
-                  <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)" class="alert alert-danger">
+                  class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
+                  <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)"
+                    class="fst-italic" style="color: red;">
                     <div *ngIf="num_folio.errors?.['required']">
-                      Name is required.
-                    </div>
-                    <div *ngIf="num_folio.errors?.['minlength']">
-                      Name must be at least 4 characters long.
-                    </div>
-                    <div *ngIf="num_folio.errors?.['forbiddenName']">
-                      Name cannot be Bob.
+                      Campo Obligatorio.
                     </div>
                   </div>
               </div>
               <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
                 <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="dep.num_oficio"
-                  class="form-control" id="num_oficio" autocomplete="off" placeholder="Numero de Oficio">
+                  class="form-control" id="num_oficio" required autocomplete="off" placeholder="Numero de Oficio">
+                  <div *ngIf="num_oficio.invalid && (num_oficio.dirty || num_oficio.touched)"
+                    class="fst-italic" style="color: red;">
+                    <div *ngIf="num_oficio.errors?.['required']">
+                      Campo Obligatorio.
+                    </div>
+                  </div>
               </div>
               <div class="col-3">
                 <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
                 <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
-                  [(ngModel)]="dep.fecha_oficio" id="fecha_oficio">
+                  [(ngModel)]="dep.fecha_oficio" required id="fecha_oficio">
+                  <div *ngIf="fecha_oficio.invalid && (fecha_oficio.dirty || fecha_oficio.touched)"
+                    class="fst-italic" style="color: red;">
+                    <div *ngIf="fecha_oficio.errors?.['required']">
+                      Campo Obligatorio.
+                    </div>
+                  </div>
               </div>
               <div class="col-3">
                 <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
@@ -300,7 +282,7 @@
                   [(ngModel)]="dep.fecha_vencimiento" id="fecha_vencimiento">
               </div>
               <div class="col-6">
-                <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
+                <label for="fecha_recepcion" class="form-label">Acuse de Recibido</label>
                 <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
                   [(ngModel)]="dep.fecha_recepcion" id="fecha_recepcion">
               </div>
@@ -308,45 +290,63 @@
               <div class="col-md-6">
                 <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
                 <input list="intrumentos" name="ins_juridico" class="form-control" placeholder="Instrumento Jurídico"
-                  aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off"
+                  aria-label="Instrumento Jurídico" aria-describedby="basic-addon1" required autocomplete="off"
                   #ins_juridico="ngModel" [(ngModel)]="dep.ins_juridico">
                 <datalist id="intrumentos">
                   <option *ngFor="let ins of instrumento">
                     {{ins.name}}
                   </option>
                 </datalist>
+                <div *ngIf="ins_juridico.invalid && (ins_juridico.dirty || ins_juridico.touched)"
+                    class="fst-italic" style="color: red;">
+                    <div *ngIf="ins_juridico.errors?.['required']">
+                      Campo Obligatorio.
+                    </div>
+                </div>
               </div>
 
               <div class="col-6">
-                <label for="remitido" class="form-label">Remitente</label>
-                <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="dep.remitido"
-                  id="remitido" autocomplete="off" placeholder="Remitente del Documento">
+                <label for="dirigido" class="form-label">Dirigido a:</label>
+                <input type="text" class="form-control" name="dirigido" #dirigido="ngModel" [(ngModel)]="dep.dirigido"
+                  id="dirigido" required autocomplete="off" placeholder="Nombre de la persona">
+                  <div *ngIf="dirigido.invalid && (dirigido.dirty || dirigido.touched)"
+                    class="fst-italic" style="color: red;">
+                    <div *ngIf="dirigido.errors?.['required']">
+                      Campo Obligatorio.
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12">
+                <label for="dependencia" class="form-label">Dependencia</label>
+                <input type="text" class="form-control" name="dependencia" #dependencia="ngModel" [(ngModel)]="dep.dependencia"
+                  id="dependencia" required autocomplete="off" placeholder="Nombre de la Dependencia">
+                  <div *ngIf="dependencia.invalid && (dependencia.dirty || dependencia.touched)"
+                    class="fst-italic" style="color: red;">
+                    <div *ngIf="dependencia.errors?.['required']">
+                      Campo Obligatorio.
+                    </div>
+                  </div>
               </div>
               <div class="mb-3">
                 <label for="asunto" class="form-label">Asunto</label>
                 <textarea name="asunto" #asunto="ngModel" [(ngModel)]="dep.asunto" class="form-control" id="asunto"
-                  rows="3" placeholder="Asunto del Documento"></textarea>
+                  rows="3" required placeholder="Asunto del Documento"></textarea>
+                  <div *ngIf="asunto.invalid && (asunto.dirty || asunto.touched)"
+                    class="fst-italic" style="color: red;">
+                    <div *ngIf="asunto.errors?.['required']">
+                      Campo Obligatorio.
+                    </div>
+                  </div>
               </div>
               <div class="col-6">
-                <label for="asignado" class="form-label">Asignado</label>
-                <input list="asignados" class="form-control" name="asignado" id="asignado"
-                  placeholder="Asignación del Documento" aria-label="Asignación del Documento"
-                  aria-describedby="basic-addon1" autocomplete="off" #asignado="ngModel" [(ngModel)]="dep.asignado">
-                <datalist id="asignados">
-                  <option *ngFor="let asig of asignacion">
-                    {{asig.direccion}}
-                  </option>
-                </datalist>
+                <label for="anexo" class="form-label">Anexo</label>
+                <input name="anexo" #anexo="ngModel" [(ngModel)]="dep.anexo" class="form-control" id="anexo"
+                  autocomplete="off" placeholder="Anexo del Documento">
               </div>
-
-              <div class="col-md-6">
-                <label for="estatus" class="form-label">Estatus</label>
-                <select name="estatus" #estatus="ngModel" [(ngModel)]="dep.estatus" id="estatus" class="form-select">
-                  <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
-                  <option *ngFor="let est of estat" [ngValue]="est.name">
-                    {{est.name}}
-                  </option>
-                </select>
+              <div class="col-6">
+                <label for="firma_visado" class="form-label">Firma y visado</label>
+                <input name="firma_visado" #firma_visado="ngModel" [(ngModel)]="dep.firma_visado" class="form-control" id="firma_visado"
+                  autocomplete="off" placeholder="Firma y Visado del Documento">
               </div>
 
               <div class="mb-3">

@@ -209,28 +209,36 @@ exports.update = (req, res) => {
         //const validate_num_folio = !validator.isInt(`${params.num_folio}`);
         //convertir a string esta variable en esa misma línea vvvvvvvvv
         const validate_num_folio = !validator.isEmpty('$params.num_folio');
-        const validate_num_folio_hijo = !validator.isEmpty('$params.num_folio_hijo');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
         var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
         var validate_fecha_oficio = !validator.isEmpty(params.fecha_oficio);
-        var validate_fecha_vencimiento = !validator.isEmpty(params.fecha_vencimiento);
         var validate_remitido = !validator.isEmpty(params.remitido);
         var validate_origen = !validator.isEmpty(params.origen);
         var validate_asignado = !validator.isEmpty(params.asignado);
         var validate_asunto = !validator.isEmpty(params.asunto);
         var validate_estatus = !validator.isEmpty(params.estatus);
-        var validate_observacion = !validator.isEmpty(params.observacion);
     } catch (err) {
         // console.log(err);
         //TypeError: Expected a string but received a number
+        console.log(err);
         return res.status(404).send({
             status: 'error',
             message: 'Faltan datos por enviar!'
         });
     }
 
-    if (validate_num_oficio) {
+    if (
+      validate_num_oficio &&
+      validate_ins_juridico &&
+      validate_fecha_recepcion &&
+      validate_fecha_oficio &&
+      validate_remitido &&
+      validate_origen &&
+      validate_asignado &&
+      validate_asunto &&
+      validate_estatus
+    ) {
         //Find and update
         Document.findOneAndUpdate({_id: documentId}, params, {new:true}, (err, documentUpdated) => {
             if (err) {

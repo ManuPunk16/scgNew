@@ -6,10 +6,11 @@ export class Departure{
   public fecha_recepcion: any;
   public fecha_oficio: any;
   public fecha_vencimiento: any;
-  public remitido!: string;
-  public asignado!: string;
+  public dirigido!: string;
+  public dependencia!: string;
+  public anexo!: string;
   public asunto!: string;
-  public estatus!: string;
+  public firma_visado!: string;
   public observacion!: string;
   public pdf_salida!: null;
 }

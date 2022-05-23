@@ -6,7 +6,7 @@ var _date2  = new Date().toLocaleString('en-es', { weekday:"long", year:"numeric
 
 const documentSchema = new Schema({
     num_folio : { type : Number, required: true },
-    num_folio_hijo : { type : Number },
+    num_folio_hijo : { type : String, required: false },
     num_oficio : { type : String, required : true },
     ins_juridico : { type : String, required : true },
     fecha_recepcion : {
@@ -24,9 +24,9 @@ const documentSchema = new Schema({
   },
     remitido : { type : String, required : true },
     origen : { type : String, required : true },
-    asignado : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
-    asunto : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
-    estatus : { type : String, required : true, max : [127, "Max Length is 127 characters"] },
+    asignado : { type : String, required : true },
+    asunto : { type : String, required : true },
+    estatus : { type : String, required : true },
     observacion : { type : String, required : false },
     pdf_entrada : { type: String, required : false }
 },

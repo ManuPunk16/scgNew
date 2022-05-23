@@ -15,8 +15,6 @@ exports.saveDeparture = (req, res) => {
     try {
         var validate_num_folio = !validator.isInt('$params.num_folio');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
-        var validate_asunto = !validator.isEmpty(params.asunto);
-        var validate_estatus = !validator.isEmpty(params.estatus);
     } catch (error) {
         return res.status(200).send({
             status: 'error',
@@ -24,10 +22,10 @@ exports.saveDeparture = (req, res) => {
         });
     }
 
-    if (validate_num_folio &&
-        validate_num_oficio &&
-        validate_estatus &&
-        validate_asunto) {
+    if (
+      validate_num_folio &&
+      validate_num_oficio
+        ) {
 
         //Crear el objeto a guardar
         const departure = new Departure();
@@ -39,11 +37,11 @@ exports.saveDeparture = (req, res) => {
         departure.fecha_recepcion = params.fecha_recepcion;
         departure.fecha_oficio = params.fecha_oficio;
         departure.fecha_vencimiento = params.fecha_vencimiento;
-        departure.remitido = params.remitido;
-        // departure.origen = params.origen;
-        departure.asignado = params.asignado;
+        departure.dirigido = params.dirigido;
+        departure.dependencia = params.dependencia;
+        departure.anexo = params.anexo;
         departure.asunto = params.asunto;
-        departure.estatus = params.estatus;
+        departure.firma_visado = params.firma_visado;
         departure.observacion = params.observacion;
 
         if(params.pdf_salida){
@@ -154,16 +152,6 @@ exports.updateDeparture = (req, res) => {
         //convertir a string esta variable en esa misma línea vvvvvvvvv
         const validate_num_folio = !validator.isEmpty('$params.num_folio');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
-        var validate_fecha_oficio = !validator.isEmpty(params.fecha_oficio);
-        var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
-        var validate_fecha_vencimiento = !validator.isEmpty(params.fecha_vencimiento);
-        var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
-        var validate_remitido = !validator.isEmpty(params.remitido);
-        // var validate_origen = !validator.isEmpty(params.origen);
-        var validate_asignado = !validator.isEmpty(params.asignado);
-        var validate_asunto = !validator.isEmpty(params.asunto);
-        var validate_estatus = !validator.isEmpty(params.estatus);
-        var validate_observacion = !validator.isEmpty(params.observacion);
     } catch (err) {
         // console.log(err);
         //TypeError: Expected a string but received a number
