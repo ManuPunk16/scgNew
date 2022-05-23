@@ -156,16 +156,34 @@
             <label for="num_folio" class="form-label">Num. Folio</label>
             <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="depEdit.num_folio" class="form-control"
               id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
+              <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)"
+                class="fst-italic" style="color: red;">
+                <div *ngIf="num_folio.errors?.['required']">
+                  Campo Obligatorio.
+                </div>
+              </div>
           </div>
           <div class="col-md-6">
             <label for="num_oficio" class="form-label">Num. Oficio</label>
             <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="depEdit.num_oficio"
-              class="form-control" id="num_oficio" autocomplete="off" placeholder="Numero de Oficio">
+              class="form-control" id="num_oficio" required autocomplete="off" placeholder="Numero de Oficio">
+              <div *ngIf="num_oficio.invalid && (num_oficio.dirty || num_oficio.touched)"
+                class="fst-italic" style="color: red;">
+                <div *ngIf="num_oficio.errors?.['required']">
+                  Campo Obligatorio.
+                </div>
+              </div>
           </div>
           <div class="col-3">
             <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
             <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
-              [(ngModel)]="depEdit.fecha_oficio" id="fecha_oficio">
+              [(ngModel)]="depEdit.fecha_oficio" required id="fecha_oficio">
+              <div *ngIf="fecha_oficio.invalid && (fecha_oficio.dirty || fecha_oficio.touched)"
+                class="fst-italic" style="color: red;">
+                <div *ngIf="fecha_oficio.errors?.['required']">
+                  Campo Obligatorio.
+                </div>
+              </div>
           </div>
           <div class="col-3">
             <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
@@ -181,27 +199,51 @@
             <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
             <input list="intrumentos" id="ins_juridico" name="ins_juridico" class="form-control"
               placeholder="Estatus del Documento" aria-label="Estatus del Documento" aria-describedby="basic-addon1"
-              autocomplete="off" #ins_juridico="ngModel" [(ngModel)]="depEdit.ins_juridico">
+              required autocomplete="off" #ins_juridico="ngModel" [(ngModel)]="depEdit.ins_juridico">
             <datalist id="intrumentos">
               <option *ngFor="let ins of instrumento">
                 {{ins.name}}
               </option>
             </datalist>
+            <div *ngIf="ins_juridico.invalid && (ins_juridico.dirty || ins_juridico.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="ins_juridico.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-6">
             <label for="dirigido" class="form-label">Dirigido a:</label>
             <input type="text" class="form-control" name="dirigido" #dirigido="ngModel" [(ngModel)]="depEdit.dirigido"
-              id="dirigido" autocomplete="off" placeholder="Nombre de la persona">
+              id="dirigido" required autocomplete="off" placeholder="Nombre de la persona">
+              <div *ngIf="dirigido.invalid && (dirigido.dirty || dirigido.touched)"
+                class="fst-italic" style="color: red;">
+                <div *ngIf="dirigido.errors?.['required']">
+                  Campo Obligatorio.
+                </div>
+              </div>
           </div>
           <div class="col-12">
             <label for="dependencia" class="form-label">Dependencia</label>
             <input type="text" class="form-control" name="dependencia" #dependencia="ngModel" [(ngModel)]="depEdit.dependencia"
-              id="dependencia" autocomplete="off" placeholder="Nombre de la Dependencia">
+              id="dependencia" required autocomplete="off" placeholder="Nombre de la Dependencia">
+              <div *ngIf="dependencia.invalid && (dependencia.dirty || dependencia.touched)"
+                class="fst-italic" style="color: red;">
+                <div *ngIf="dependencia.errors?.['required']">
+                  Campo Obligatorio.
+                </div>
+              </div>
           </div>
           <div class="mb-3">
             <label for="asunto" class="form-label">Asunto</label>
             <textarea name="asunto" #asunto="ngModel" [(ngModel)]="depEdit.asunto" class="form-control" id="asunto"
               rows="3" placeholder="Asunto del Documento"></textarea>
+              <div *ngIf="asunto.invalid && (asunto.dirty || asunto.touched)"
+                class="fst-italic" style="color: red;">
+                <div *ngIf="asunto.errors?.['required']">
+                  Campo Obligatorio.
+                </div>
+              </div>
           </div>
           <div class="col-6">
             <label for="anexo" class="form-label">Anexo</label>

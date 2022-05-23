@@ -186,24 +186,39 @@
             <label for="num_folio" class="form-label">Num. Folio Padre</label>
             <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="docEdit.num_folio"
               class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio del Documento">
-            <div class="alert alert-danger" role="alert" *ngIf="!num_folio.valid && num_folio.touched">
-              Campo Obligatorio
+            <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="num_folio.errors?.['required']">
+                Campo Obligatorio.
+              </div>
             </div>
           </div>
           <div class="col-md-3">
             <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
             <input type="text" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="docEdit.num_folio_hijo"
-              class="form-control" id="num_folio_hijo" required autocomplete="off" placeholder="Num. de Folio Relacionado">
+              class="form-control" id="num_folio_hijo" autocomplete="off" placeholder="Num. de Folio Relacionado">
           </div>
           <div class="col-md-6">
             <label for="num_oficio" class="form-label">Num. Oficio</label>
             <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="docEdit.num_oficio"
-              class="form-control" id="num_oficio" autocomplete="off" placeholder="Numero de Oficio">
+              class="form-control" id="num_oficio" required autocomplete="off" placeholder="Numero de Oficio">
+            <div *ngIf="num_oficio.invalid && (num_oficio.dirty || num_oficio.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="num_oficio.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-3">
             <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
-            <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
+            <input type="date" class="form-control" required name="fecha_oficio" #fecha_oficio="ngModel"
               [(ngModel)]="docEdit.fecha_oficio" id="fecha_oficio">
+            <div *ngIf="fecha_oficio.invalid && (fecha_oficio.dirty || fecha_oficio.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="fecha_oficio.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-3">
             <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
@@ -213,45 +228,75 @@
           <div class="col-6">
             <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
             <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
-              [(ngModel)]="docEdit.fecha_recepcion" id="fecha_recepcion">
+              [(ngModel)]="docEdit.fecha_recepcion" required id="fecha_recepcion">
+            <div *ngIf="fecha_recepcion.invalid && (fecha_recepcion.dirty || fecha_recepcion.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="fecha_recepcion.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-md-6">
             <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
             <input list="intrumentos" name="ins_juridico" class="form-control" placeholder="Estatus del Documento"
               aria-label="Estatus del Documento" aria-describedby="basic-addon1" autocomplete="off"
-              #ins_juridico="ngModel" [(ngModel)]="docEdit.ins_juridico">
+              #ins_juridico="ngModel" required [(ngModel)]="docEdit.ins_juridico">
             <datalist id="intrumentos">
               <option *ngFor="let ins of instrumento">
                 {{ins.name}}
               </option>
             </datalist>
+            <div *ngIf="ins_juridico.invalid && (ins_juridico.dirty || ins_juridico.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="ins_juridico.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-6">
             <label for="remitido" class="form-label">Remitente</label>
             <input type="text" class="form-control" name="remitido" #remitido="ngModel" [(ngModel)]="docEdit.remitido"
-              id="remitido" autocomplete="off" placeholder="Remitente del Documento">
+              id="remitido" required autocomplete="off" placeholder="Remitente del Documento">
+            <div *ngIf="remitido.invalid && (remitido.dirty || remitido.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="remitido.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-md-12">
             <label for="origen" class="form-label">Institución de Origen</label>
             <input list="instituciones" name="origen" class="form-control" placeholder="Origen del Documento"
               aria-label="Origen del Documento" aria-describedby="basic-addon1" autocomplete="off"
-              #origen="ngModel" [(ngModel)]="docEdit.origen">
+              #origen="ngModel" required [(ngModel)]="docEdit.origen">
             <datalist id="instituciones">
               <option *ngFor="let org of variable">
                 {{org.institucion}}
               </option>
             </datalist>
+            <div *ngIf="origen.invalid && (origen.dirty || origen.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="origen.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="mb-3">
             <label for="asunto" class="form-label">Asunto</label>
             <textarea name="asunto" #asunto="ngModel" [(ngModel)]="docEdit.asunto" class="form-control"
-              id="asunto" rows="3" autocomplete="off" placeholder="Asunto del Documento"></textarea>
+              id="asunto" rows="3" required autocomplete="off" placeholder="Asunto del Documento"></textarea>
+            <div *ngIf="asunto.invalid && (asunto.dirty || asunto.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="asunto.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-6">
             <label for="asignado" class="form-label">Asignado</label>
             <input list="asignados" class="form-control" name="asignado" id="asignado"
               placeholder="Asignación del Documento" aria-label="Asignación del Documento"
-              aria-describedby="basic-addon1" autocomplete="off"
+              aria-describedby="basic-addon1" required autocomplete="off"
               #asignado="ngModel" [(ngModel)]="docEdit.asignado"
               >
             <datalist id="asignados">
@@ -259,15 +304,27 @@
                 {{asig.direccion}}
               </option>
             </datalist>
+            <div *ngIf="asignado.invalid && (asignado.dirty || asignado.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="asignado.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="col-md-6">
             <label for="estatus" class="form-label">Estatus</label>
-            <select name="estatus" #estatus="ngModel" [(ngModel)]="docEdit.estatus" id="estatus" class="form-select">
+            <select name="estatus" #estatus="ngModel" required [(ngModel)]="docEdit.estatus" id="estatus" class="form-select">
               <option [ngValue]="null" selected disabled>Seleccionar Estatus</option>
               <option *ngFor="let est of estat" [ngValue]="est.name">
                 {{est.name}}
               </option>
             </select>
+            <div *ngIf="estatus.invalid && (estatus.dirty || estatus.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="estatus.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
           </div>
           <div class="mb-3">
             <label for="observacion" class="form-label">Observación</label>
