@@ -237,7 +237,7 @@
           <div class="mb-3">
             <label for="asunto" class="form-label">Asunto</label>
             <textarea name="asunto" #asunto="ngModel" [(ngModel)]="depEdit.asunto" class="form-control" id="asunto"
-              rows="3" placeholder="Asunto del Documento"></textarea>
+              rows="3" required placeholder="Asunto del Documento"></textarea>
               <div *ngIf="asunto.invalid && (asunto.dirty || asunto.touched)"
                 class="fst-italic" style="color: red;">
                 <div *ngIf="asunto.errors?.['required']">
