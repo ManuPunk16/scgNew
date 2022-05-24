@@ -116,9 +116,7 @@ exports.save = (req, res) => {
                     message: 'El Documento no se ha guardado!'
                 });
             }
-            console.log("..:Nuevo Registro de Entrada Añadido:..");
-            console.log(moment().format('DD/MM/YYYY hh:mm'));
-            console.log("Numero de Folio: ",document.num_folio, "Numero de Oficio: ",document.num_oficio);
+            console.log("Nuevo Registro de Entrada: Numero de Folio: ",document.num_folio, "Numero de Oficio: ",document.num_oficio);
             //Devolver respuesta
             return res.status(200).send({
                 status: 'Success',
@@ -255,8 +253,7 @@ exports.update = (req, res) => {
                 });
             }
 
-            console.log("..:Nuevo Documento Editado:..");
-            console.log(moment().format('DD/MM/YYYY hh:mm'));
+            console.log("Documento de Entrada Editado: ", documentUpdated._id);
 
             return res.status(200).send({
                 status: 'success',
@@ -291,8 +288,7 @@ exports.delete = (req, res) => {
             });
         }
 
-        console.log("..:Nuevo Registro Eliminado:..");
-        console.log(moment().format('DD/MM/YYYY hh:mm'));
+        console.log("Documento de Entrada Eliminado: ", documentRemoved);
 
         return res.status(200).send({
             status: 'success',

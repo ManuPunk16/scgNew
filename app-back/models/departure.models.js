@@ -11,7 +11,7 @@ const departureSchema = new Schema({
     dirigido : { type : String, required : true },
     dependencia: { type: String, required: true },
     asunto : { type : String, required : true },
-    anexo : { type : String, required : true },
+    anexo : { type : String, required : false },
     firma_visado: { type: String, required : false },
     observacion : { type : String, required : false },
     pdf_salida : { type: String, required : false }

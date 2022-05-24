@@ -20,7 +20,7 @@ const documentSchema = new Schema({
     },
     fecha_vencimiento : {
       type : String,
-      required : true
+      required : false
   },
     remitido : { type : String, required : true },
     origen : { type : String, required : true },

@@ -59,8 +59,7 @@ exports.saveDeparture = (req, res) => {
                     message: 'El Documento de salida no se ha guardado!'
                 });
             }
-            console.log("..:Nuevo Registro de Salida Añadido:..");
-            console.log("Numero de Folio: ",departure.num_folio, "Numero de Oficio: ",departure.num_oficio);
+            console.log("Nuevo registro de salida: ", departureStored._id);
             //Devolver respuesta
             return res.status(200).send({
                 status: 'Success',
@@ -178,6 +177,8 @@ exports.updateDeparture = (req, res) => {
                 });
             }
 
+            console.log("Documento de Salida Editado: ", departureUpdated._id);
+
             return res.status(200).send({
                 status: 'success',
                 departure: departureUpdated
@@ -210,6 +211,8 @@ exports.deleteDeparture = (req, res) => {
                 message: 'No se ha guardado el articulo, no existe!'
             });
         }
+
+        console.log("Documento de Salida Eliminado: ", departureRemoved);
 
         return res.status(200).send({
             status: 'success',

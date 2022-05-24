@@ -242,6 +242,7 @@ export class HomecComponent implements OnInit {
   onEdit(){
     this._documentService.update(this.docEdit._id, this.docEdit).subscribe(
       res => {
+        console.log(res);
         this.showEditSuccess();
         this.modal.dismissAll();
       },
