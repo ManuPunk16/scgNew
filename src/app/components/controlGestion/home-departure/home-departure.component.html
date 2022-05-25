@@ -129,10 +129,6 @@
         ></kendo-pager-page-sizes>
       </ng-template>
 
-      <kendo-grid-pdf
-        fileName="Salidas.pdf"
-        [repeatHeaders]="true"
-      ></kendo-grid-pdf>
       <kendo-grid-excel
         fileName="Salidas.xlsx"
       ></kendo-grid-excel>
@@ -277,7 +273,7 @@
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <!-- Inicio de Formulario -->
-      <form #deps="ngForm" (ngSubmit)="onSubmit()" novalidate>
+      <form [formGroup]="departureInsertData" (ngSubmit)="onSubmit()" novalidate>
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Ingresar Información para Nuevo Registro de Salida</h5>
@@ -287,119 +283,80 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="num_folio" class="form-label">Num. Folio</label>
-                <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="dep.num_folio"
+                <input type="number" name="num_folio" formControlName="num_folio"
                   class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
-                  <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)"
-                    class="fst-italic" style="color: red;">
-                    <div *ngIf="num_folio.errors?.['required']">
-                      Campo Obligatorio.
-                    </div>
-                  </div>
+
               </div>
               <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
-                <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="dep.num_oficio"
+                <input type="text" name="num_oficio" formControlName="num_oficio"
                   class="form-control" id="num_oficio" required autocomplete="off" placeholder="Numero de Oficio">
-                  <div *ngIf="num_oficio.invalid && (num_oficio.dirty || num_oficio.touched)"
-                    class="fst-italic" style="color: red;">
-                    <div *ngIf="num_oficio.errors?.['required']">
-                      Campo Obligatorio.
-                    </div>
-                  </div>
+
               </div>
               <div class="col-3">
                 <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
-                <input type="date" class="form-control" name="fecha_oficio" #fecha_oficio="ngModel"
-                  [(ngModel)]="dep.fecha_oficio" required id="fecha_oficio">
-                  <div *ngIf="fecha_oficio.invalid && (fecha_oficio.dirty || fecha_oficio.touched)"
-                    class="fst-italic" style="color: red;">
-                    <div *ngIf="fecha_oficio.errors?.['required']">
-                      Campo Obligatorio.
-                    </div>
-                  </div>
+                <input type="date" class="form-control" name="fecha_oficio" formControlName="fecha_oficio" required id="fecha_oficio">
+
               </div>
               <div class="col-3">
                 <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
-                <input type="date" class="form-control" name="fecha_vencimiento" #fecha_vencimiento="ngModel"
-                  [(ngModel)]="dep.fecha_vencimiento" id="fecha_vencimiento">
+                <input type="date" class="form-control" name="fecha_vencimiento" formControlName="fecha_vencimiento" id="fecha_vencimiento">
               </div>
               <div class="col-6">
                 <label for="fecha_recepcion" class="form-label">Acuse de Recibido</label>
-                <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
-                  [(ngModel)]="dep.fecha_recepcion" id="fecha_recepcion">
+                <input type="datetime-local" class="form-control" name="fecha_recepcion" formControlName="fecha_recepcion" id="fecha_recepcion">
               </div>
 
               <div class="col-md-6">
                 <label for="ins_juridico" class="form-label">Instrumento Jurídico</label>
                 <input list="intrumentos" name="ins_juridico" class="form-control" placeholder="Instrumento Jurídico"
-                  aria-label="Instrumento Jurídico" aria-describedby="basic-addon1" required autocomplete="off"
-                  #ins_juridico="ngModel" [(ngModel)]="dep.ins_juridico">
+                  aria-label="Instrumento Jurídico" aria-describedby="basic-addon1" required autocomplete="off" formControlName="ins_juridico">
                 <datalist id="intrumentos">
                   <option *ngFor="let ins of instrumento">
                     {{ins.name}}
                   </option>
                 </datalist>
-                <div *ngIf="ins_juridico.invalid && (ins_juridico.dirty || ins_juridico.touched)"
-                    class="fst-italic" style="color: red;">
-                    <div *ngIf="ins_juridico.errors?.['required']">
-                      Campo Obligatorio.
-                    </div>
-                </div>
+
               </div>
 
               <div class="col-6">
                 <label for="dirigido" class="form-label">Dirigido a:</label>
-                <input type="text" class="form-control" name="dirigido" #dirigido="ngModel" [(ngModel)]="dep.dirigido"
-                  id="dirigido" required autocomplete="off" placeholder="Nombre de la persona">
-                  <div *ngIf="dirigido.invalid && (dirigido.dirty || dirigido.touched)"
-                    class="fst-italic" style="color: red;">
-                    <div *ngIf="dirigido.errors?.['required']">
-                      Campo Obligatorio.
-                    </div>
-                  </div>
+                <input type="text" class="form-control" name="dirigido"
+                  id="dirigido" required autocomplete="off" placeholder="Nombre de la persona" formControlName="dirigido">
+
               </div>
               <div class="col-12">
                 <label for="dependencia" class="form-label">Dependencia</label>
-                <input type="text" class="form-control" name="dependencia" #dependencia="ngModel" [(ngModel)]="dep.dependencia"
-                  id="dependencia" required autocomplete="off" placeholder="Nombre de la Dependencia">
-                  <div *ngIf="dependencia.invalid && (dependencia.dirty || dependencia.touched)"
-                    class="fst-italic" style="color: red;">
-                    <div *ngIf="dependencia.errors?.['required']">
-                      Campo Obligatorio.
-                    </div>
-                  </div>
+                <input type="text" class="form-control" name="dependencia"
+                  id="dependencia" required autocomplete="off" placeholder="Nombre de la Dependencia" formControlName="dependencia">
+
               </div>
               <div class="mb-3">
                 <label for="asunto" class="form-label">Asunto</label>
-                <textarea name="asunto" #asunto="ngModel" [(ngModel)]="dep.asunto" class="form-control" id="asunto"
-                  rows="3" required placeholder="Asunto del Documento"></textarea>
-                  <div *ngIf="asunto.invalid && (asunto.dirty || asunto.touched)"
-                    class="fst-italic" style="color: red;">
-                    <div *ngIf="asunto.errors?.['required']">
-                      Campo Obligatorio.
-                    </div>
-                  </div>
+                <textarea name="asunto" class="form-control" id="asunto"
+                  rows="3" required placeholder="Asunto del Documento" formControlName="asunto"></textarea>
+
               </div>
               <div class="col-6">
                 <label for="anexo" class="form-label">Anexo</label>
-                <input name="anexo" #anexo="ngModel" [(ngModel)]="dep.anexo" class="form-control" id="anexo"
+                <input name="anexo" class="form-control" id="anexo"
                   autocomplete="off" placeholder="Anexo del Documento">
               </div>
               <div class="col-6">
                 <label for="firma_visado" class="form-label">Firma y visado</label>
-                <input name="firma_visado" #firma_visado="ngModel" [(ngModel)]="dep.firma_visado" class="form-control" id="firma_visado"
-                  autocomplete="off" placeholder="Firma y Visado del Documento">
+                <input name="firma_visado" class="form-control" id="firma_visado"
+                  autocomplete="off" placeholder="Firma y Visado del Documento" formControlName="firma_visado">
               </div>
 
               <div class="mb-3">
                 <label for="observacion" class="form-label">Observación</label>
-                <textarea name="observacion" #observacion="ngModel" [(ngModel)]="dep.observacion" class="form-control"
-                  id="observacion" rows="3" placeholder="Observaciones del Documento"></textarea>
+                <textarea name="observacion" class="form-control"
+                  id="observacion" rows="3" placeholder="Observaciones del Documento" formControlName="observacion"></textarea>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Aceptar</button>
+            <button type="submit" [disabled]="!departureInsertData.valid" class="btn btn-success">Aceptar</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>

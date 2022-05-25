@@ -14,7 +14,19 @@ const departureSchema = new Schema({
     anexo : { type : String, required : false },
     firma_visado: { type: String, required : false },
     observacion : { type : String, required : false },
-    pdf_salida : { type: String, required : false }
+    pdf_salida : { type: String, required : false },
+    create_user: {
+      id: String,
+      username: String,
+      email: String,
+      accessToken: String,
+    },
+    editor_user: {
+      id: String,
+      username: String,
+      email: String,
+      accessToken: String,
+    }
 },
 {
     timestamps: {

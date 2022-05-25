@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DepartureService } from 'src/app/service/departure.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Departure } from 'src/app/models/departure';
@@ -36,8 +36,6 @@ export class HomeDepartureComponent implements OnInit {
       value: "all",
     },
   ];
-
-  public formGroup!: FormGroup;
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -84,6 +82,22 @@ export class HomeDepartureComponent implements OnInit {
   };
   closeResult!: string;
   getDismissReason: any;
+
+  departureInsertData = new FormGroup({
+    num_folio: new FormControl('', Validators.required),
+    num_oficio: new FormControl('', Validators.required),
+    fecha_oficio: new FormControl('', Validators.required),
+    fecha_vencimiento: new FormControl(''),
+    fecha_recepcion: new FormControl(''),
+    ins_juridico: new FormControl('', Validators.required),
+    dirigido: new FormControl('', Validators.required),
+    dependencia: new FormControl('', Validators.required),
+    asunto: new FormControl('', Validators.required),
+    anexo: new FormControl(''),
+    firma_visado: new FormControl(''),
+    observacion: new FormControl(''),
+    create_user: new FormControl(this.tokenStorageService.getUser())
+  });
 
   constructor(
     public formulario: FormBuilder,
@@ -243,6 +257,7 @@ export class HomeDepartureComponent implements OnInit {
   getDepartureById(dataItem: any): void {
     let departureEdit = dataItem;
     this.depEdit = departureEdit;
+    this.depEdit.editor_user = this.tokenStorageService.getUser();
     console.log(this.depEdit);
   }
 
@@ -267,6 +282,7 @@ export class HomeDepartureComponent implements OnInit {
   onEdit(){
     this._departureService.updateDeparture(this.depEdit._id, this.depEdit).subscribe(
       res => {
+        this.depEdit.editor_user = this.tokenStorageService.getUser();
         this.showEditSuccess();
         this.modal.dismissAll();
       },
@@ -278,15 +294,14 @@ export class HomeDepartureComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.dep);
-    this._departureService.createDeparture(this.dep).subscribe(
+    this._departureService.createDeparture(this.departureInsertData.value).subscribe(
       response => {
         if (response.status === 'Success') {
           this.status = 'success';
-          this.dep = response.dep;
           this.zone.runOutsideAngular(() => {
             location.reload();
           });
+          console.log(this.departureInsertData.value);
         } else {
           this.showSubmitError();
         }

@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DocumentService } from 'src/app/service/document.service';
 import { Router } from '@angular/router';
 import { Document } from 'src/app/models/document';
@@ -91,6 +91,23 @@ export class HomecComponent implements OnInit {
   closeResult!: string;
   getDismissReason: any;
 
+  documentInsertData = new FormGroup({
+    num_folio: new FormControl('', Validators.required),
+    num_folio_hijo: new FormControl(''),
+    num_oficio: new FormControl('', Validators.required),
+    fecha_oficio: new FormControl('', Validators.required),
+    fecha_vencimiento: new FormControl(''),
+    fecha_recepcion: new FormControl('', Validators.required),
+    ins_juridico: new FormControl('', Validators.required),
+    remitido: new FormControl('', Validators.required),
+    origen: new FormControl('', Validators.required),
+    asunto: new FormControl('', Validators.required),
+    asignado: new FormControl('', Validators.required),
+    estatus: new FormControl('', Validators.required),
+    observacion: new FormControl(''),
+    create_user: new FormControl(this.tokenStorageService.getUser())
+  });
+
   constructor(
     public formulario: FormBuilder,
     private _documentService: DocumentService,
@@ -150,30 +167,21 @@ export class HomecComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.doc);
-    this._documentService.create(this.doc).subscribe(
+    this._documentService.create(this.documentInsertData.value).subscribe(
       response => {
-        // console.log(response);
         if (response.status === 'Success') {
           this.status = 'success';
-          this.doc = response.doc;
           this.zone.runOutsideAngular(() => {
             location.reload();
           });
         } else {
           this.showSubmitError();
-          // console.log(response);
-          // this.zone.runOutsideAngular(() => {
-          //   location.reload();
-          // });
         }
       },
       error => {
-        // console.log(error);
         this.status = 'error';
       }
     );
-    // console.log(this.doc);
   }
 
   capturarEntrada(event: any): any {
@@ -218,6 +226,7 @@ export class HomecComponent implements OnInit {
   getDocumentById(dataItem: any): void {
     let documentEdit = dataItem;
     this.docEdit = documentEdit;
+    this.docEdit.editor_user = this.tokenStorageService.getUser();
     console.log(this.docEdit);
   }
 
@@ -242,7 +251,7 @@ export class HomecComponent implements OnInit {
   onEdit(){
     this._documentService.update(this.docEdit._id, this.docEdit).subscribe(
       res => {
-        console.log(res);
+        this.docEdit.editor_user = this.tokenStorageService.getUser();
         this.showEditSuccess();
         this.modal.dismissAll();
       },

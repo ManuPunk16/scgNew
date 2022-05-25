@@ -28,7 +28,19 @@ const documentSchema = new Schema({
     asunto : { type : String, required : true },
     estatus : { type : String, required : true },
     observacion : { type : String, required : false },
-    pdf_entrada : { type: String, required : false }
+    pdf_entrada : { type: String, required : false },
+    create_user: {
+      id: String,
+      username: String,
+      email: String,
+      accessToken: String,
+    },
+    editor_user: {
+      id: String,
+      username: String,
+      email: String,
+      accessToken: String,
+    }
 },
 {
     timestamps: {

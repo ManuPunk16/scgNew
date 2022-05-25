@@ -10,6 +10,7 @@ exports.test = (req, res) => {
 exports.saveDeparture = (req, res) => {
     //Recoger parametros por post
     var params = req.body;
+    console.log(params);
 
     //Validar datos
     try {
@@ -43,6 +44,7 @@ exports.saveDeparture = (req, res) => {
         departure.asunto = params.asunto;
         departure.firma_visado = params.firma_visado;
         departure.observacion = params.observacion;
+        departure.create_user = params.create_user;
 
         if(params.pdf_salida){
             departure.pdf_salida = params.pdf_salida;
@@ -68,7 +70,6 @@ exports.saveDeparture = (req, res) => {
         });
 
     } else {
-        console.log("Tengo un error al guardar una salida: ",err);
         return res.status(424).send({
             status: 'error',
             message: 'Los datos no son validos!!!'
@@ -142,7 +143,7 @@ exports.updateDeparture = (req, res) => {
 
     //Recoger datos que llegan por put
     var params = req.body;
-
+    console.log(params);
     //Validar datos
     try {
         //https://www.npmjs.com/package/validator < libreria

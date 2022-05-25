@@ -14,4 +14,16 @@ export class Document{
   public estatus?: string;
   public observacion?: string;
   public pdf_entrada?: null;
+  public create_user?: {
+    id: String,
+    username: String,
+    email: String,
+    accessToken: String,
+  };
+  public editor_user?: {
+    id: String,
+    username: String,
+    email: String,
+    accessToken: String,
+  }
 }
