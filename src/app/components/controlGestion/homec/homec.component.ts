@@ -105,6 +105,7 @@ export class HomecComponent implements OnInit {
     asignado: new FormControl('', Validators.required),
     estatus: new FormControl('', Validators.required),
     observacion: new FormControl(''),
+    editCount: new FormControl(0),
     create_user: new FormControl(this.tokenStorageService.getUser())
   });
 
@@ -227,6 +228,7 @@ export class HomecComponent implements OnInit {
     let documentEdit = dataItem;
     this.docEdit = documentEdit;
     this.docEdit.editor_user = this.tokenStorageService.getUser();
+    this.docEdit.editCount = dataItem.editCount + 1;
     console.log(this.docEdit);
   }
 
@@ -252,6 +254,7 @@ export class HomecComponent implements OnInit {
     this._documentService.update(this.docEdit._id, this.docEdit).subscribe(
       res => {
         this.docEdit.editor_user = this.tokenStorageService.getUser();
+        this.docEdit.editCount + 1;
         this.showEditSuccess();
         this.modal.dismissAll();
       },

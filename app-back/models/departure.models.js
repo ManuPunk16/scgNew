@@ -15,6 +15,7 @@ const departureSchema = new Schema({
     firma_visado: { type: String, required : false },
     observacion : { type : String, required : false },
     pdf_salida : { type: String, required : false },
+    editCount : { type: Number, required : false },
     create_user: {
       id: String,
       username: String,

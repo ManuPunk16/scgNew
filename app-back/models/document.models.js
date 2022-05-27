@@ -29,6 +29,7 @@ const documentSchema = new Schema({
     estatus : { type : String, required : true },
     observacion : { type : String, required : false },
     pdf_entrada : { type: String, required : false },
+    editCount : { type: Number, required : false},
     create_user: {
       id: String,
       username: String,

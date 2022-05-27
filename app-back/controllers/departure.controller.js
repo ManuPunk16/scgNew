@@ -44,6 +44,7 @@ exports.saveDeparture = (req, res) => {
         departure.asunto = params.asunto;
         departure.firma_visado = params.firma_visado;
         departure.observacion = params.observacion;
+        departure.editCount = params.editCount;
         departure.create_user = params.create_user;
 
         if(params.pdf_salida){

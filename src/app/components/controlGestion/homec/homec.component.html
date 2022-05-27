@@ -120,7 +120,7 @@
           title="Estatus"
           [width]="140"
         >
-          <!-- <ng-template kendoGridCellTemplate let-dataItem>
+          <ng-template kendoGridCellTemplate let-dataItem>
             <span
               *ngIf="dataItem.estatus === 'CONCLUIDO'"
               class="bg-success text-white"
@@ -133,7 +133,20 @@
               *ngIf="dataItem.estatus === 'PARA CONOCIMIENTO'"
               class="bg-primary text-white"
               >PARA CONOCIMIENTO</span>
-          </ng-template> -->
+
+              <span
+              *ngIf="dataItem.estatus === 'Concluido'"
+
+              >Concluido</span>
+            <span
+              *ngIf="dataItem.estatus === 'En Tramite'"
+
+              >En Tramite</span>
+            <span
+              *ngIf="dataItem.estatus === 'Para Conocimiento'"
+
+              >Para Conocimiento</span>
+          </ng-template>
         </kendo-grid-column>
 
         <kendo-grid-column

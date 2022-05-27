@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit {
   public searchString: string = "";
   public currentItem = "Hola Mundo!";
   public route: any = "";
+  public timeLeft: number = 3600;
+  public interval?: any;
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -39,7 +41,19 @@ export class HeaderComponent implements OnInit {
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
+      this.startTimer();
     }
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 3600;
+        this.logout();
+      }
+    },1000)
   }
 
   logout(): void {

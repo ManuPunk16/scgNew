@@ -14,6 +14,7 @@ export class Document{
   public estatus?: string;
   public observacion?: string;
   public pdf_entrada?: null;
+  public editCount!: number;
   public create_user?: {
     id: String,
     username: String,

@@ -94,6 +94,7 @@ exports.save = (req, res) => {
         document.asunto = params.asunto;
         document.estatus = params.estatus;
         document.observacion = params.observacion;
+        document.editCount = params.editCount;
         document.create_user = params.create_user;
 
         if(params.pdf_entrada){

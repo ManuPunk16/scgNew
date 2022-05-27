@@ -96,6 +96,7 @@ export class HomeDepartureComponent implements OnInit {
     anexo: new FormControl(''),
     firma_visado: new FormControl(''),
     observacion: new FormControl(''),
+    editCount: new FormControl(0),
     create_user: new FormControl(this.tokenStorageService.getUser())
   });
 
@@ -258,6 +259,7 @@ export class HomeDepartureComponent implements OnInit {
     let departureEdit = dataItem;
     this.depEdit = departureEdit;
     this.depEdit.editor_user = this.tokenStorageService.getUser();
+    this.depEdit.editCount = dataItem.editCount + 1;
     console.log(this.depEdit);
   }
 
@@ -283,6 +285,7 @@ export class HomeDepartureComponent implements OnInit {
     this._departureService.updateDeparture(this.depEdit._id, this.depEdit).subscribe(
       res => {
         this.depEdit.editor_user = this.tokenStorageService.getUser();
+        this.depEdit.editCount + 1;
         this.showEditSuccess();
         this.modal.dismissAll();
       },
