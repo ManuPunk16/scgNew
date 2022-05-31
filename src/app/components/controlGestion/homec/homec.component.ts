@@ -60,6 +60,7 @@ export class HomecComponent implements OnInit {
   public pdfExit: Array<File> = [];
 
   public doc: Document;
+  public document!: Document;
   public docEdit: Document;
   public docDelete: Document;
   public status: string = "";
@@ -219,13 +220,16 @@ export class HomecComponent implements OnInit {
         this.closeResult = `Closed with: ${result}`;
       },
       reason => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        this.closeResult = `Dismissed ${this.getDismissReason}`;
       }
     );
   }
 
   getDocumentById(dataItem: any): void {
     let documentEdit = dataItem;
+    const object = dataItem;
+    const deepClone = JSON.parse(JSON.stringify(object));
+    this.document = deepClone;
     this.docEdit = documentEdit;
     this.docEdit.editor_user = this.tokenStorageService.getUser();
     this.docEdit.editCount = dataItem.editCount + 1;
@@ -251,18 +255,37 @@ export class HomecComponent implements OnInit {
   }
 
   onEdit(){
-    this._documentService.update(this.docEdit._id, this.docEdit).subscribe(
-      res => {
-        this.docEdit.editor_user = this.tokenStorageService.getUser();
-        this.docEdit.editCount + 1;
-        this.showEditSuccess();
-        this.modal.dismissAll();
-      },
-      error => {
-        console.log(error);
-        this.showEditError();
-      }
-    );
+    if (
+      // (this.depEdit.num_folio !== this.departure.num_folio) ||
+      (this.docEdit.num_folio_hijo !== this.document.num_folio_hijo) ||
+      (this.docEdit.num_oficio !== this.document.num_oficio) ||
+      (this.docEdit.fecha_oficio !== this.document.fecha_oficio) ||
+      (this.docEdit.fecha_vencimiento !== this.document.fecha_vencimiento) ||
+      (this.docEdit.fecha_recepcion !== this.document.fecha_recepcion) ||
+      (this.docEdit.ins_juridico !== this.document.ins_juridico) ||
+      (this.docEdit.remitido !== this.document.remitido) ||
+      (this.docEdit.origen !== this.document.origen) ||
+      (this.docEdit.asunto !== this.document.asunto) ||
+      (this.docEdit.asignado !== this.document.asignado) ||
+      (this.docEdit.estatus !== this.document.estatus) ||
+      (this.docEdit.observacion !== this.document.observacion)
+    ) {
+      this._documentService.update(this.docEdit._id, this.docEdit).subscribe(
+        res => {
+          this.docEdit.editor_user = this.tokenStorageService.getUser();
+          this.docEdit.editCount + 1;
+          this.showEditSuccess();
+          this.modal.dismissAll();
+        },
+        error => {
+          console.log(error);
+          this.showEditError();
+        }
+      );
+    } else {
+      this.showWarningError();
+      this.modal.dismissAll();
+    }
   }
 
   public showSubmitError(): void {
@@ -292,6 +315,16 @@ export class HomecComponent implements OnInit {
       position: { horizontal: "left", vertical: "top" },
       animation: { type: "fade", duration: 700 },
       type: { style: "error", icon: true },
+    });
+  }
+
+  public showWarningError(): void {
+    this.notificationService.show({
+      content: "No se realizo ninguna modificación!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "warning", icon: true },
     });
   }
 

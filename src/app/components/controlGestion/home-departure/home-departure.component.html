@@ -15,6 +15,13 @@
       [columnMenu]="{ filter: true }"
     >
     <ng-template kendoGridToolbarTemplate>
+      <!-- <input
+          [style.width.px]="165"
+          placeholder="Search in all columns..."
+          kendoTextBox
+          (input)="onFilter($event.target.value)"
+        />
+        <kendo-grid-spacer></kendo-grid-spacer> -->
       <button kendoGridAddCommand data-bs-toggle="modal" data-bs-target="#staticBackdrop" *ngIf="showModeratorBoard">Añadir nuevo registro</button>
       <kendo-grid-spacer></kendo-grid-spacer>
       <button kendoGridExcelCommand type="button" icon="file-excel">

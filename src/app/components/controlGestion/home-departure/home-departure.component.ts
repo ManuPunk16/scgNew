@@ -14,6 +14,7 @@ import { Estatus } from 'src/app/models/estatus';
 import { DataBindingDirective, GridComponent } from "@progress/kendo-angular-grid";
 import { PageChangeEvent, PageSizeItem } from "@progress/kendo-angular-grid";
 import { NotificationService } from "@progress/kendo-angular-notification";
+import { process } from "@progress/kendo-data-query";
 
 @Component({
   selector: 'app-home-departure',
@@ -52,6 +53,7 @@ export class HomeDepartureComponent implements OnInit {
   public pdfEntry: Array<File> = [];
   public pdfExit: Array<File> = [];
 
+  public departure!: Departure;
   public dep: Departure;
   public depEdit: Departure;
   public depDelete: Departure;
@@ -144,8 +146,7 @@ export class HomeDepartureComponent implements OnInit {
     }
   }
 
-  // public onFilter(input: Event): void {
-  //   const inputValue = (input.target as HTMLInputElement).value;
+  // public onFilter(inputValue: string): void {
 
   //   this.gridView = process(this.departures, {
   //     filter: {
@@ -237,7 +238,7 @@ export class HomeDepartureComponent implements OnInit {
         this.closeResult = `Closed with: ${result}`;
       },
       reason => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        this.closeResult = `Dismissed ${this.getDismissReason}`;
       }
     );
   }
@@ -257,10 +258,12 @@ export class HomeDepartureComponent implements OnInit {
 
   getDepartureById(dataItem: any): void {
     let departureEdit = dataItem;
+    const object = dataItem;
+    const deepClone = JSON.parse(JSON.stringify(object));
+    this.departure = deepClone;
     this.depEdit = departureEdit;
     this.depEdit.editor_user = this.tokenStorageService.getUser();
     this.depEdit.editCount = dataItem.editCount + 1;
-    console.log(this.depEdit);
   }
 
   deleteDepartureById(dataItem: any): void{
@@ -282,18 +285,36 @@ export class HomeDepartureComponent implements OnInit {
   }
 
   onEdit(){
-    this._departureService.updateDeparture(this.depEdit._id, this.depEdit).subscribe(
-      res => {
-        this.depEdit.editor_user = this.tokenStorageService.getUser();
-        this.depEdit.editCount + 1;
-        this.showEditSuccess();
-        this.modal.dismissAll();
-      },
-      error => {
-        this.showEditError();
-        console.log(error);
-      }
-    );
+    if (
+      // (this.depEdit.num_folio !== this.departure.num_folio) ||
+      (this.depEdit.num_oficio !== this.departure.num_oficio) ||
+      (this.depEdit.fecha_oficio !== this.departure.fecha_oficio) ||
+      (this.depEdit.fecha_vencimiento !== this.departure.fecha_vencimiento) ||
+      (this.depEdit.fecha_recepcion !== this.departure.fecha_recepcion) ||
+      (this.depEdit.ins_juridico !== this.departure.ins_juridico) ||
+      (this.depEdit.dirigido !== this.departure.dirigido) ||
+      (this.depEdit.dependencia !== this.departure.dependencia) ||
+      (this.depEdit.asunto !== this.departure.asunto) ||
+      (this.depEdit.anexo !== this.departure.anexo) ||
+      (this.depEdit.firma_visado !== this.departure.firma_visado) ||
+      (this.depEdit.observacion !== this.departure.observacion)
+    ) {
+      this._departureService.updateDeparture(this.depEdit._id, this.depEdit).subscribe(
+        res => {
+          this.depEdit.editor_user = this.tokenStorageService.getUser();
+          this.depEdit.editCount + 1;
+          this.showEditSuccess();
+          this.modal.dismissAll();
+        },
+        error => {
+          this.showEditError();
+          console.log(error);
+        }
+      );
+    } else {
+      this.modal.dismissAll();
+      this.showWarningError();
+    }
   }
 
   onSubmit() {
@@ -347,6 +368,16 @@ export class HomeDepartureComponent implements OnInit {
       position: { horizontal: "left", vertical: "top" },
       animation: { type: "fade", duration: 700 },
       type: { style: "error", icon: true },
+    });
+  }
+
+  public showWarningError(): void {
+    this.notificationService.show({
+      content: "No se realizo ninguna modificación!",
+      hideAfter: 900,
+      position: { horizontal: "left", vertical: "top" },
+      animation: { type: "fade", duration: 700 },
+      type: { style: "warning", icon: true },
     });
   }
 }

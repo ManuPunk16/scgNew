@@ -13,7 +13,8 @@ export class InfoLexiusComponent implements OnInit {
     84378,
     86929,
     88941,
-    91031
+    91031,
+    93197
   ];
 
   public finalCount: number[] = [
@@ -21,6 +22,7 @@ export class InfoLexiusComponent implements OnInit {
     86929,
     88941,
     91031,
+    93197,
     0
   ];
 
@@ -28,7 +30,8 @@ export class InfoLexiusComponent implements OnInit {
     1875,
     2551,
     2012,
-    2090
+    2090,
+    2166
   ];
 
   constructor() { }

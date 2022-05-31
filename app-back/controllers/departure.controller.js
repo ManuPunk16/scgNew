@@ -144,7 +144,6 @@ exports.updateDeparture = (req, res) => {
 
     //Recoger datos que llegan por put
     var params = req.body;
-    console.log(params);
     //Validar datos
     try {
         //https://www.npmjs.com/package/validator < libreria
@@ -153,6 +152,11 @@ exports.updateDeparture = (req, res) => {
         //convertir a string esta variable en esa misma línea vvvvvvvvv
         const validate_num_folio = !validator.isEmpty('$params.num_folio');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
+        var validate_fecha_oficio = !validator.isEmpty(params.fecha_oficio);
+        var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
+        var validate_dirigido = !validator.isEmpty(params.dirigido);
+        var validate_dependencia = !validator.isEmpty(params.dependencia);
+        var validate_asunto = !validator.isEmpty(params.asunto);
     } catch (err) {
         // console.log(err);
         //TypeError: Expected a string but received a number
@@ -162,7 +166,14 @@ exports.updateDeparture = (req, res) => {
         });
     }
 
-    if (validate_num_oficio) {
+    if (
+      validate_num_oficio &&
+      validate_fecha_oficio &&
+      validate_ins_juridico &&
+      validate_dirigido &&
+      validate_dependencia &&
+      validate_asunto
+    ) {
         //Find and update
         Departure.findOneAndUpdate({_id: departureId}, params, {new:true}, (err, departureUpdated) => {
             if (err) {

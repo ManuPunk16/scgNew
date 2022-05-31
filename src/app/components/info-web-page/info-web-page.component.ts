@@ -13,7 +13,8 @@ export class InfoWebPageComponent implements OnInit {
     29894,
     30549,
     31114,
-    31591
+    31591,
+    32577
   ];
 
   public finalCount: number[] = [
@@ -21,6 +22,7 @@ export class InfoWebPageComponent implements OnInit {
     30549,
     31114,
     31591,
+    32577,
     0
   ];
 
@@ -28,7 +30,8 @@ export class InfoWebPageComponent implements OnInit {
     442,
     655,
     565,
-    477
+    477,
+    986
   ];
 
   constructor() { }
