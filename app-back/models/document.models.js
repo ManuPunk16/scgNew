@@ -6,9 +6,9 @@ var _date2  = new Date().toLocaleString('en-es', { weekday:"long", year:"numeric
 
 const documentSchema = new Schema({
     num_folio : { type : Number, required: true },
-    num_folio_hijo : { type : String, required: false },
-    num_oficio : { type : String, required : true },
-    ins_juridico : { type : String, required : true },
+    num_folio_hijo : { type : String, required: false, uppercase: true },
+    num_oficio : { type : String, required : true, uppercase: true },
+    ins_juridico : { type : String, required : true, uppercase: true },
     fecha_recepcion : {
         type : String,
         required : true,
@@ -22,12 +22,12 @@ const documentSchema = new Schema({
       type : String,
       required : false
   },
-    remitido : { type : String, required : true },
-    origen : { type : String, required : true },
-    asignado : { type : String, required : true },
-    asunto : { type : String, required : true },
-    estatus : { type : String, required : true },
-    observacion : { type : String, required : false },
+    remitido : { type : String, required : true, uppercase: true },
+    origen : { type : String, required : true, uppercase: true },
+    asignado : { type : String, required : true, uppercase: true },
+    asunto : { type : String, required : true, uppercase: true },
+    estatus : { type : String, required : true, uppercase: true },
+    observacion : { type : String, required : false, uppercase: true },
     pdf_entrada : { type: String, required : false },
     editCount : { type: Number, required : false},
     create_user: {

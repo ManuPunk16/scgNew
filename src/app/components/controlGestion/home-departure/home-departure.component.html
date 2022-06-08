@@ -157,7 +157,7 @@
         <div class="row g-3">
           <div class="col-md-6">
             <label for="num_folio" class="form-label">Num. Folio</label>
-            <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="depEdit.num_folio" class="form-control"
+            <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="depEdit.num_folio" class="form-control"
               id="num_folio" required autocomplete="off" placeholder="Num. de Folio Relacionado">
               <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)"
                 class="fst-italic" style="color: red;">
