@@ -197,7 +197,7 @@
         <div class="row g-3">
           <div class="col-md-3">
             <label for="num_folio" class="form-label">Num. Folio Padre</label>
-            <input type="text" name="num_folio" #num_folio="ngModel" [(ngModel)]="docEdit.num_folio"
+            <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="docEdit.num_folio"
               class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio del Documento">
             <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)"
               class="fst-italic" style="color: red;">
@@ -208,7 +208,7 @@
           </div>
           <div class="col-md-3">
             <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
-            <input type="text" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="docEdit.num_folio_hijo"
+            <input type="number" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="docEdit.num_folio_hijo"
               class="form-control" id="num_folio_hijo" autocomplete="off" placeholder="Num. de Folio Relacionado">
           </div>
           <div class="col-md-6">
