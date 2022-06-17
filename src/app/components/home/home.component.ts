@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor() {
 
     let myMoment = moment('2022-05-31 13:20').fromNow();
-    let myMomentCG = moment('2022-06-08 16:44').fromNow();
+    let myMomentCG = moment('2022-06-17 12:48').fromNow();
     let now = moment().format('DD/MM/YYYY hh:mm');
 
     this.title = "Catalogo de Sistemas";

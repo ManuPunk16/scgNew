@@ -2,12 +2,13 @@
   Cargando
 </div>
 
-<div class="card">
+<div class="card animated fadeIn fast">
+  <div class="card-header text-center text-break">
+    <h3>
+      ENTRADAS DE DOCUMENTOS
+    </h3>
+  </div>
   <div class="card-body">
-    <h1 class="display-3">
-      Entradas de Documentos
-    </h1>
-    <br>
     <kendo-grid
       [kendoGridBinding]="documents"
       [pageSize]="pageSize"
@@ -382,7 +383,7 @@
               </div>
               <div class="col-md-3">
                 <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
-                <input type="number" name="num_folio_hijo" formControlName="num_folio_hijo"
+                <input type="text" name="num_folio_hijo" formControlName="num_folio_hijo"
                   class="form-control" id="num_folio_hijo" autocomplete="off" placeholder="Num. de Folio Relacionado">
               </div>
               <div class="col-md-6">
