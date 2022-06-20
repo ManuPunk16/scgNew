@@ -14,5 +14,6 @@ router.put('/salidas/:id', departureController.updateDeparture);
 router.delete('/salidas/:id', departureController.deleteDeparture);
 router.post('/subir-salida/:id', departure_upload, departureController.uploadDeparture);
 router.get('/obtener-salida/:exit', departureController.getPdfDeparture);
+router.get('/lastdeparture', departureController.getLastModifyDoc);
 
 module.exports = router;

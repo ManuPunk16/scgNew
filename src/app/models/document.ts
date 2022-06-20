@@ -27,4 +27,5 @@ export class Document{
     email: String,
     accessToken: String,
   }
+  updatedAt!: Date;
 }

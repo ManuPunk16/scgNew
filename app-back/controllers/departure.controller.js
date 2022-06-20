@@ -109,6 +109,31 @@ exports.getDepartures = (req, res) => {
     });
 },
 
+exports.getLastModifyDoc = (req, res) => {
+  var query = Departure.find({}).sort({updatedAt: -1});
+
+  query.limit(1).exec((err, departure) => {
+    if (err) {
+      return res.status(500).send({
+          status: 'error',
+          message: 'Error al devolver los documentos!'
+      });
+    }
+
+    if (!departure) {
+        return res.status(404).send({
+            status: 'error',
+            message: 'No hay documentos para mostrar!'
+        });
+    }
+
+    return res.status(200).send({
+        status: 'success',
+        departure
+    });
+  });
+},
+
 exports.getDeparture = (req, res) => {
     //Recoger id de url
     var departureId = req.params.id;

@@ -25,5 +25,6 @@ export class Departure{
     username: String,
     email: String,
     accessToken: String,
-  }
+  };
+  updatedAt!: Date;
 }

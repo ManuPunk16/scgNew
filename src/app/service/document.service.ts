@@ -69,6 +69,10 @@ export class DocumentService {
         return this._http.post<File>(this.url + peticion, { headers: headers });
     }
 
+    getLastModify(): Observable<any>{
+      return this._http.get<Document>(this.url + 'lastdocument');
+    }
+
     private parseArrayFilesIntoFormData(file: File) {
         const formData = new FormData();
         formData.append('file', file, file.name);

@@ -55,6 +55,8 @@ export class HomecComponent implements OnInit {
   public variable: Array<any>;
   public ubicacion = InstitucionOrigen.institucion;
   public documents: Document[] = [];
+  public lastDoc: Document[] = [];
+  public ultimaModificacion!: Date;
   public gridView: Document[] = [];
   public pdfEntry: Array<File> = [];
   public pdfExit: Array<File> = [];
@@ -152,6 +154,7 @@ export class HomecComponent implements OnInit {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
     }
+    this.lastModify();
   }
 
   getDocs() {
@@ -182,6 +185,18 @@ export class HomecComponent implements OnInit {
       },
       error => {
         this.status = 'error';
+      }
+    );
+  }
+
+  lastModify(){
+    let test = this._documentService.getLastModify().subscribe(
+      response => {
+        this.lastDoc = response.document;
+        this.ultimaModificacion = this.lastDoc[0].updatedAt;
+      },
+      error => {
+        console.log(error);
       }
     );
   }

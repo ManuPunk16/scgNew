@@ -135,6 +135,31 @@ exports.save = (req, res) => {
     }
 },
 
+exports.getLastModifyDoc = (req, res) => {
+  var query = Document.find({}).sort({updatedAt: -1});
+
+  query.limit(1).exec((err, document) => {
+    if (err) {
+      return res.status(500).send({
+          status: 'error',
+          message: 'Error al devolver los documentos!'
+      });
+    }
+
+    if (!document) {
+        return res.status(404).send({
+            status: 'error',
+            message: 'No hay documentos para mostrar!'
+        });
+    }
+
+    return res.status(200).send({
+        status: 'success',
+        document
+    });
+  });
+},
+
 exports.getDocuments = (req, res) => {
     var query = Document.find({});
     var last = req.params.last;

@@ -50,4 +50,8 @@ export class DepartureService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.post<File>(this.url + peticion, { headers: headers });
     }
+
+    getLastModify(): Observable<any>{
+      return this._http.get<Departure>(this.url + 'lastdeparture');
+    }
 }

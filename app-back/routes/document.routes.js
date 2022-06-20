@@ -21,6 +21,7 @@ router.post('/subir-salida/:id', exit_upload, documentController.uploadExit);
 router.get('/get-entry/:entry', documentController.getPdfEntry);
 router.get('/get-exit/:exit', documentController.getPdfExit);
 router.get('/search/:search', documentController.search);
+router.get('/lastdocument', documentController.getLastModifyDoc);
 
 // INFORMACION GRAFICAS
 router.get('/ConcluidoDSL', documentController.exportCountConcluidoDSL);

@@ -49,6 +49,8 @@ export class HomeDepartureComponent implements OnInit {
   public asignacion = Asignacion.asignacion;
   public estat = Estatus.estatus;
   public departures: Departure[] = [];
+  public lastDep: Departure[] = [];
+  public ultimaModificacion!: Date;
   public gridView: Departure[] = [];
   public pdfEntry: Array<File> = [];
   public pdfExit: Array<File> = [];
@@ -135,6 +137,7 @@ export class HomeDepartureComponent implements OnInit {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
     }
+    this.lastModify();
   }
 
   public async _try(): Promise<void>{
@@ -264,6 +267,18 @@ export class HomeDepartureComponent implements OnInit {
     this.depEdit = departureEdit;
     this.depEdit.editor_user = this.tokenStorageService.getUser();
     this.depEdit.editCount = dataItem.editCount + 1;
+  }
+
+  lastModify(){
+    let test = this._departureService.getLastModify().subscribe(
+      response => {
+        this.lastDep = response.departure;
+        this.ultimaModificacion = this.lastDep[0].updatedAt;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   deleteDepartureById(dataItem: any): void{
