@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { DocumentService } from 'src/app/service/document.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Document } from 'src/app/models/document';
@@ -29,7 +29,7 @@ export class DocumentEditComponent implements OnInit {
   public status: string = "";
 
   constructor(
-    public formulario: FormBuilder,
+    public formulario: UntypedFormBuilder,
     private _documentService: DocumentService,
     private _route: ActivatedRoute,
     private _router: Router,

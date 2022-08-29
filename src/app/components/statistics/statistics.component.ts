@@ -5,7 +5,7 @@ import { saveAs } from "@progress/kendo-file-saver";
 import { SeriesLabels } from "@progress/kendo-angular-charts";
 import { Document } from 'src/app/models/document';
 import { Category } from 'src/app/models/model.chart';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { FormatSettings } from "@progress/kendo-angular-dateinputs";
 import { Asignacion } from 'src/app/models/areas';
 import { NotificationService } from "@progress/kendo-angular-notification";
@@ -37,10 +37,10 @@ export class StatisticsComponent implements OnInit {
     inputFormat: "yyyy/MM/dd",
   };
 
-  dateForm = new FormGroup({
-    minDate1: new FormControl(''),
-    maxDate1: new FormControl(''),
-    optionMenu: new FormControl('')
+  dateForm = new UntypedFormGroup({
+    minDate1: new UntypedFormControl(''),
+    maxDate1: new UntypedFormControl(''),
+    optionMenu: new UntypedFormControl('')
   });
 
   public concluidoPrueba: number[] = [];

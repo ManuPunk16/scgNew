@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { DepartureService } from 'src/app/service/departure.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Departure } from 'src/app/models/departure';
@@ -87,25 +87,25 @@ export class HomeDepartureComponent implements OnInit {
   closeResult!: string;
   getDismissReason: any;
 
-  departureInsertData = new FormGroup({
-    num_folio: new FormControl('', Validators.required),
-    num_oficio: new FormControl('', Validators.required),
-    fecha_oficio: new FormControl('', Validators.required),
-    fecha_vencimiento: new FormControl(''),
-    fecha_recepcion: new FormControl(''),
-    ins_juridico: new FormControl('', Validators.required),
-    dirigido: new FormControl('', Validators.required),
-    dependencia: new FormControl('', Validators.required),
-    asunto: new FormControl('', Validators.required),
-    anexo: new FormControl(''),
-    firma_visado: new FormControl(''),
-    observacion: new FormControl(''),
-    editCount: new FormControl(0),
-    create_user: new FormControl(this.tokenStorageService.getUser())
+  departureInsertData = new UntypedFormGroup({
+    num_folio: new UntypedFormControl('', Validators.required),
+    num_oficio: new UntypedFormControl('', Validators.required),
+    fecha_oficio: new UntypedFormControl('', Validators.required),
+    fecha_vencimiento: new UntypedFormControl(''),
+    fecha_recepcion: new UntypedFormControl(''),
+    ins_juridico: new UntypedFormControl('', Validators.required),
+    dirigido: new UntypedFormControl('', Validators.required),
+    dependencia: new UntypedFormControl('', Validators.required),
+    asunto: new UntypedFormControl('', Validators.required),
+    anexo: new UntypedFormControl(''),
+    firma_visado: new UntypedFormControl(''),
+    observacion: new UntypedFormControl(''),
+    editCount: new UntypedFormControl(0),
+    create_user: new UntypedFormControl(this.tokenStorageService.getUser())
   });
 
   constructor(
-    public formulario: FormBuilder,
+    public formulario: UntypedFormBuilder,
     private _departureService: DepartureService,
     private _route: ActivatedRoute,
     private _router: Router,

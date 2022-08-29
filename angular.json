@@ -111,5 +111,7 @@
       }
     }
   },
-  "defaultProject": "scgNew"
+  "cli": {
+    "analytics": "219b5f76-66d4-4015-9208-477b6cec1afa"
+  }
 }

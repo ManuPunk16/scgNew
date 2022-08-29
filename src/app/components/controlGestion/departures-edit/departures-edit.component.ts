@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { DepartureService } from 'src/app/service/departure.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Departure } from 'src/app/models/departure';
@@ -26,7 +26,7 @@ export class DeparturesEditComponent implements OnInit {
   public status: string = "";
 
   constructor(
-    public formulario: FormBuilder,
+    public formulario: UntypedFormBuilder,
     private _departureService: DepartureService,
     private _route: ActivatedRoute,
     private _router: Router,

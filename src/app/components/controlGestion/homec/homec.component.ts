@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { DocumentService } from 'src/app/service/document.service';
 import { Router } from '@angular/router';
 import { Document } from 'src/app/models/document';
@@ -40,7 +40,7 @@ export class HomecComponent implements OnInit {
     },
   ];
 
-  public formGroup!: FormGroup;
+  public formGroup!: UntypedFormGroup;
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -94,26 +94,26 @@ export class HomecComponent implements OnInit {
   closeResult!: string;
   getDismissReason: any;
 
-  documentInsertData = new FormGroup({
-    num_folio: new FormControl('', Validators.required),
-    num_folio_hijo: new FormControl(''),
-    num_oficio: new FormControl('', Validators.required),
-    fecha_oficio: new FormControl('', Validators.required),
-    fecha_vencimiento: new FormControl(''),
-    fecha_recepcion: new FormControl('', Validators.required),
-    ins_juridico: new FormControl('', Validators.required),
-    remitido: new FormControl('', Validators.required),
-    origen: new FormControl('', Validators.required),
-    asunto: new FormControl('', Validators.required),
-    asignado: new FormControl('', Validators.required),
-    estatus: new FormControl('', Validators.required),
-    observacion: new FormControl(''),
-    editCount: new FormControl(0),
-    create_user: new FormControl(this.tokenStorageService.getUser())
+  documentInsertData = new UntypedFormGroup({
+    num_folio: new UntypedFormControl('', Validators.required),
+    num_folio_hijo: new UntypedFormControl(''),
+    num_oficio: new UntypedFormControl('', Validators.required),
+    fecha_oficio: new UntypedFormControl('', Validators.required),
+    fecha_vencimiento: new UntypedFormControl(''),
+    fecha_recepcion: new UntypedFormControl('', Validators.required),
+    ins_juridico: new UntypedFormControl('', Validators.required),
+    remitido: new UntypedFormControl('', Validators.required),
+    origen: new UntypedFormControl('', Validators.required),
+    asunto: new UntypedFormControl('', Validators.required),
+    asignado: new UntypedFormControl('', Validators.required),
+    estatus: new UntypedFormControl('', Validators.required),
+    observacion: new UntypedFormControl(''),
+    editCount: new UntypedFormControl(0),
+    create_user: new UntypedFormControl(this.tokenStorageService.getUser())
   });
 
   constructor(
-    public formulario: FormBuilder,
+    public formulario: UntypedFormBuilder,
     private _documentService: DocumentService,
     private _router: Router,
     private zone: NgZone,
