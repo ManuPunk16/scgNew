@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set('useFindAndModify', false);
 const Schema = mongoose.Schema;
 // var options = [{day: 'numeric'}, {month: 'short'}, {year: 'numeric'}];
 var _date  = new Date();
