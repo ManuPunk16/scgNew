@@ -8,15 +8,6 @@ export class Estatus {
     },
     {
       name: "PARA CONOCIMIENTO"
-    },
-    {
-      name: "En Tramite"
-    },
-    {
-      name: "Concluido"
-    },
-    {
-      name: "Para Conocimiento"
     }
   ];
 }
