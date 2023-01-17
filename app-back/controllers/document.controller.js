@@ -81,11 +81,12 @@ exports.save = (req, res) => {
         const document = new Document();
 
         //Asignar valores
+        document.anio = params.anio;
         document.num_folio = params.num_folio;
-        document.num_folio_hijo = params.num_folio_hijo;
         document.num_oficio = params.num_oficio;
         document.ins_juridico = params.ins_juridico;
         document.fecha_recepcion = params.fecha_recepcion;
+        document.hora_recepcion = params.hora_recepcion;
         document.fecha_oficio = params.fecha_oficio;
         document.fecha_vencimiento = params.fecha_vencimiento;
         document.remitido = params.remitido;
@@ -233,10 +234,12 @@ exports.update = (req, res) => {
         //validator.isEmpty solo admite strings como parámetros
         //const validate_num_folio = !validator.isInt(`${params.num_folio}`);
         //convertir a string esta variable en esa misma línea vvvvvvvvv
+        var validate_anio = !validator.isEmpty('$params.anio');
         const validate_num_folio = !validator.isEmpty('$params.num_folio');
         var validate_num_oficio = !validator.isEmpty(params.num_oficio);
         var validate_ins_juridico = !validator.isEmpty(params.ins_juridico);
         var validate_fecha_recepcion = !validator.isEmpty(params.fecha_recepcion);
+        var validate_hora_recepcion = !validator.isEmpty(params.hora_recepcion);
         var validate_fecha_oficio = !validator.isEmpty(params.fecha_oficio);
         var validate_remitido = !validator.isEmpty(params.remitido);
         var validate_origen = !validator.isEmpty(params.origen);
@@ -254,9 +257,11 @@ exports.update = (req, res) => {
     }
 
     if (
+      validate_anio &&
       validate_num_oficio &&
       validate_ins_juridico &&
       validate_fecha_recepcion &&
+      validate_hora_recepcion &&
       validate_fecha_oficio &&
       validate_remitido &&
       validate_origen &&
@@ -473,7 +478,6 @@ exports.search = (req, res) => {
     Document.find({ "$or": [
         // { "num_folio": { "$regex": searchInt, "$options": "i"}},
         { "num_oficio": { "$regex": searchString, "$options": "i"}},
-        { "num_folio_hijo": { "$regex": searchString, "$options": "i" }},
         { "ins_juridico": { "$regex": searchString, "$options": "i"}},
         { "fecha_recepcion": { "$regex": searchString, "$options": "i"}},
         { "fecha_oficio": { "$regex": searchString, "$options": "i"}},

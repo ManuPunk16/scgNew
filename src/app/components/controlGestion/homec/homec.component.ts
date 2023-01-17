@@ -95,12 +95,13 @@ export class HomecComponent implements OnInit {
   getDismissReason: any;
 
   documentInsertData = new UntypedFormGroup({
+    anio: new UntypedFormControl('', Validators.required),
     num_folio: new UntypedFormControl('', Validators.required),
-    num_folio_hijo: new UntypedFormControl(''),
     num_oficio: new UntypedFormControl('', Validators.required),
     fecha_oficio: new UntypedFormControl('', Validators.required),
     fecha_vencimiento: new UntypedFormControl(''),
     fecha_recepcion: new UntypedFormControl('', Validators.required),
+    hora_recepcion: new UntypedFormControl('', Validators.required),
     ins_juridico: new UntypedFormControl('', Validators.required),
     remitido: new UntypedFormControl('', Validators.required),
     origen: new UntypedFormControl('', Validators.required),
@@ -270,13 +271,16 @@ export class HomecComponent implements OnInit {
   }
 
   onEdit(){
+    console.log(this.docEdit);
     if (
-      // (this.depEdit.num_folio !== this.departure.num_folio) ||
-      (this.docEdit.num_folio_hijo !== this.document.num_folio_hijo) ||
+      (this.docEdit.anio !== this.document.anio) ||
+      (this.docEdit.num_folio !== this.document.num_folio) ||
+      // (this.docEdit.num_folio_hijo !== this.document.num_folio_hijo) ||
       (this.docEdit.num_oficio !== this.document.num_oficio) ||
       (this.docEdit.fecha_oficio !== this.document.fecha_oficio) ||
       (this.docEdit.fecha_vencimiento !== this.document.fecha_vencimiento) ||
       (this.docEdit.fecha_recepcion !== this.document.fecha_recepcion) ||
+      (this.docEdit.hora_recepcion !== this.document.hora_recepcion) ||
       (this.docEdit.ins_juridico !== this.document.ins_juridico) ||
       (this.docEdit.remitido !== this.document.remitido) ||
       (this.docEdit.origen !== this.document.origen) ||

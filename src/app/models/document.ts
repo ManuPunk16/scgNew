@@ -1,10 +1,12 @@
 export class Document{
   public _id!: string;
+  public anio!: number;
   public num_folio!: number;
   public num_folio_hijo?: string;
   public num_oficio?: string;
   public ins_juridico?: string;
   public fecha_recepcion: any;
+  public hora_recepcion: any;
   public fecha_oficio?: string;
   public fecha_vencimiento?: string;
   public remitido?: string;

@@ -2,18 +2,22 @@ const mongoose = require("mongoose");
 mongoose.set('useFindAndModify', false);
 const Schema = mongoose.Schema;
 // var options = [{day: 'numeric'}, {month: 'short'}, {year: 'numeric'}];
-var _date  = new Date();
+var _date  = new Date().toLocaleDateString();
 var _date2  = new Date().toLocaleString('en-es', { weekday:"long", year:"numeric", month:"short", day:"numeric"});
 
 const documentSchema = new Schema({
+    anio : { type : Number, required : true },
     num_folio : { type : Number, required: true },
-    num_folio_hijo : { type : String, required: false, uppercase: true },
     num_oficio : { type : String, required : true, uppercase: true },
     ins_juridico : { type : String, required : true, uppercase: true },
     fecha_recepcion : {
         type : String,
         required : true,
         default : _date2
+    },
+    hora_recepcion : {
+      type : String,
+      required : true
     },
     fecha_oficio : {
         type : String,

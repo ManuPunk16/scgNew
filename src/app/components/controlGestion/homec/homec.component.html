@@ -45,16 +45,16 @@
       </ng-template>
       </kendo-grid-command-column>
 
+      <kendo-grid-column
+          field="anio"
+          title="Año"
+          [width]="75"
+        ></kendo-grid-column>
+
       <kendo-grid-column-group title="Folios del Documento" [columnMenu]="false">
         <kendo-grid-column
           field="num_folio"
-          title="Num. Folio Padre"
-          [width]="120"
-        ></kendo-grid-column>
-
-        <kendo-grid-column
-          field="num_folio_hijo"
-          title="Num. Folio Hijo"
+          title="Folio"
           [width]="120"
         ></kendo-grid-column>
 
@@ -75,6 +75,12 @@
         <kendo-grid-column
           field="fecha_recepcion"
           title="Fecha Recepción"
+          [width]="150"
+        ></kendo-grid-column>
+
+        <kendo-grid-column
+          field="hora_recepcion"
+          title="Hora Recepción"
           [width]="150"
         ></kendo-grid-column>
 
@@ -200,7 +206,18 @@
       <div class="modal-body">
         <div class="row g-3">
           <div class="col-md-3">
-            <label for="num_folio" class="form-label">Num. Folio Padre</label>
+            <label for="anio" class="form-label">Año</label>
+            <input type="number" name="anio" #anio="ngModel" [(ngModel)]="docEdit.anio"
+              class="form-control" id="anio" required autocomplete="off" placeholder="Año">
+            <div *ngIf="anio.invalid && (anio.dirty || anio.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="anio.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="num_folio" class="form-label">Folio</label>
             <input type="number" name="num_folio" #num_folio="ngModel" [(ngModel)]="docEdit.num_folio"
               class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio del Documento">
             <div *ngIf="num_folio.invalid && (num_folio.dirty || num_folio.touched)"
@@ -210,11 +227,11 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <!-- <div class="col-md-3">
             <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
             <input type="number" name="num_folio_hijo" #num_folio_hijo="ngModel" [(ngModel)]="docEdit.num_folio_hijo"
               class="form-control" id="num_folio_hijo" autocomplete="off" placeholder="Num. de Folio Relacionado">
-          </div>
+          </div> -->
           <div class="col-md-6">
             <label for="num_oficio" class="form-label">Num. Oficio</label>
             <input type="text" name="num_oficio" #num_oficio="ngModel" [(ngModel)]="docEdit.num_oficio"
@@ -228,7 +245,8 @@
           </div>
           <div class="col-3">
             <label for="fecha_oficio" class="form-label">Fecha Oficio</label>
-            <input type="date" class="form-control" required name="fecha_oficio" #fecha_oficio="ngModel"
+            <input type="date" min="1997-01-01" max="2030-12-31"
+            class="form-control" required name="fecha_oficio" #fecha_oficio="ngModel"
               [(ngModel)]="docEdit.fecha_oficio" id="fecha_oficio">
             <div *ngIf="fecha_oficio.invalid && (fecha_oficio.dirty || fecha_oficio.touched)"
               class="fst-italic" style="color: red;">
@@ -242,13 +260,24 @@
             <input type="date" class="form-control" name="fecha_vencimiento" #fecha_vencimiento="ngModel"
               [(ngModel)]="docEdit.fecha_vencimiento" id="fecha_vencimiento">
           </div>
-          <div class="col-6">
+          <div class="col-3">
             <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
-            <input type="datetime-local" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
+            <input type="date" class="form-control" name="fecha_recepcion" #fecha_recepcion="ngModel"
               [(ngModel)]="docEdit.fecha_recepcion" required id="fecha_recepcion">
             <div *ngIf="fecha_recepcion.invalid && (fecha_recepcion.dirty || fecha_recepcion.touched)"
               class="fst-italic" style="color: red;">
               <div *ngIf="fecha_recepcion.errors?.['required']">
+                Campo Obligatorio.
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <label for="hora_recepcion" class="form-label">Hora Recepción</label>
+            <input type="time" class="form-control" name="hora_recepcion" #hora_recepcion="ngModel"
+              [(ngModel)]="docEdit.hora_recepcion" required id="hora_recepcion">
+            <div *ngIf="hora_recepcion.invalid && (hora_recepcion.dirty || hora_recepcion.touched)"
+              class="fst-italic" style="color: red;">
+              <div *ngIf="hora_recepcion.errors?.['required']">
                 Campo Obligatorio.
               </div>
             </div>
@@ -380,15 +409,20 @@
           <div class="modal-body">
             <div class="row g-3">
               <div class="col-md-3">
-                <label for="num_folio" class="form-label">Num. Folio Padre</label>
-                <input type="number" name="num_folio" formControlName="num_folio"
-                  class="form-control" id="num_folio" required autocomplete="off" placeholder="Num. de Folio Padre del Documento">
+                <label for="anio" class="form-label">Año</label>
+                <input type="number" name="anio" value="2023" formControlName="anio"
+                  class="form-control" id="anio" required autocomplete="off" placeholder="Año">
               </div>
               <div class="col-md-3">
+                <label for="num_folio" class="form-label">Folio</label>
+                <input type="number" name="num_folio" formControlName="num_folio"
+                  class="form-control" id="num_folio" required autocomplete="off" placeholder="Folio">
+              </div>
+              <!-- <div class="col-md-3">
                 <label for="num_folio_hijo" class="form-label">Num. Folio Hijo</label>
                 <input type="text" name="num_folio_hijo" formControlName="num_folio_hijo"
                   class="form-control" id="num_folio_hijo" autocomplete="off" placeholder="Num. de Folio Relacionado">
-              </div>
+              </div> -->
               <div class="col-md-6">
                 <label for="num_oficio" class="form-label">Num. Oficio</label>
                 <input type="text" name="num_oficio" formControlName="num_oficio"
@@ -404,10 +438,15 @@
                 <input type="date" class="form-control" name="fecha_vencimiento" formControlName="fecha_vencimiento"
                  id="fecha_vencimiento">
               </div>
-              <div class="col-6">
+              <div class="col-3">
                 <label for="fecha_recepcion" class="form-label">Fecha Recepción</label>
-                <input type="datetime-local" class="form-control" name="fecha_recepcion" formControlName="fecha_recepcion"
+                <input type="date" class="form-control" name="fecha_recepcion" formControlName="fecha_recepcion"
                  id="fecha_recepcion" required>
+              </div>
+              <div class="col-3">
+                <label for="hora_recepcion" class="form-label">Hora Recepción</label>
+                <input type="time" class="form-control" name="hora_recepcion" formControlName="hora_recepcion"
+                 id="hora_recepcion" required>
               </div>
 
               <div class="col-md-6">
